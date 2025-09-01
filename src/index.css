@@ -1,0 +1,180 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* RTL Support */
+.rtl {
+  direction: rtl;
+}
+
+.ltr {
+  direction: ltr;
+}
+
+/* RTL-specific spacing adjustments */
+.rtl .space-x-reverse > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 1;
+}
+
+.rtl .flex-row-reverse {
+  flex-direction: row-reverse;
+}
+
+/* RTL text alignment */
+.rtl .text-left {
+  text-align: right;
+}
+
+.rtl .text-right {
+  text-align: left;
+}
+
+/* RTL margin and padding adjustments */
+.rtl .mr-2 {
+  margin-right: 0;
+  margin-left: 0.5rem;
+}
+
+.rtl .ml-2 {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+.rtl .mr-3 {
+  margin-right: 0;
+  margin-left: 0.75rem;
+}
+
+.rtl .ml-3 {
+  margin-left: 0;
+  margin-right: 0.75rem;
+}
+
+.rtl .pr-3 {
+  padding-right: 0;
+  padding-left: 0.75rem;
+}
+
+.rtl .pl-3 {
+  padding-left: 0;
+  padding-right: 0.75rem;
+}
+
+.rtl .pr-4 {
+  padding-right: 0;
+  padding-left: 1rem;
+}
+
+.rtl .pl-4 {
+  padding-left: 0;
+  padding-right: 1rem;
+}
+
+.rtl .pr-10 {
+  padding-right: 0;
+  padding-left: 2.5rem;
+}
+
+.rtl .pl-10 {
+  padding-left: 0;
+  padding-right: 2.5rem;
+}
+
+/* RTL positioning adjustments */
+.rtl .left-3 {
+  left: auto;
+  right: 0.75rem;
+}
+
+.rtl .right-3 {
+  right: auto;
+  left: 0.75rem;
+}
+
+.rtl .left-4 {
+  left: auto;
+  right: 1rem;
+}
+
+.rtl .right-4 {
+  right: auto;
+  left: 1rem;
+}
+
+/* Optimize font loading */
+@layer base {
+  html {
+    font-display: swap;
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-synthesis: none;
+    text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Improve focus visibility */
+@layer utilities {
+  .focus-visible:focus-visible {
+    @apply outline-2 outline-offset-2 outline-blue-600;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+/* Optimize images */
+img {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 400px;
+}
+
+/* Reduce layout shift */
+.hero-container {
+  min-height: 100vh;
+  contain: layout style paint;
+}
+
+/* Optimize animations */
+@media (prefers-reduced-motion: no-preference) {
+  .smooth-transform {
+    will-change: transform;
+    transform: translateZ(0);
+  }
+}
+
+/* Hide scrollbar */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}

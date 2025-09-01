@@ -1,0 +1,339 @@
+{
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "about": "About",
+    "contact": "Contact",
+    "getQuote": "Get Quote"
+  },
+  "hero": {
+    "title1": "Next-Generation Drone Technology",
+    "subtitle1": "Advanced autonomous flight systems for professional applications",
+    "title2": "Precision Engineering Meets Innovation",
+    "subtitle2": "Cutting-edge electronics and drone technology solutions",
+    "title3": "Transforming Industries Worldwide",
+    "subtitle3": "Reliable drone solutions for commercial and industrial use",
+    "watchDemo": "Watch Demo"
+  },
+  "bestSales": {
+    "title": "Best Selling Products",
+    "subtitle": "Discover our most popular drone solutions trusted by professionals worldwide.",
+    "availableNow": "Available Now",
+    "viewAll": "View All Products"
+  },
+  "projects": {
+    "title": "Featured Projects",
+    "subtitle": "Discover how our drone technology is transforming industries and solving real-world challenges.",
+    "readyTitle": "Ready to Start Your Project?",
+    "readySubtitle": "Join industry leaders who trust our technology for their most critical missions. Let's discuss how we can transform your operations.",
+    "startProject": "Start Your Project",
+    "viewCaseStudies": "View Case Studies",
+    "swipeMore": "Swipe to see more projects →"
+  },
+  "projectsDetails":{
+    "main":{
+      "title": "Featured Projects",
+      "description": "Discover how our cutting-edge drone technology is transforming industries and solving complex challenges around the world."
+    },
+    "button":"View All Projects",
+    "smartCitySurveillance": {
+      "title": "Smart City Surveillance Network",
+      "location": "Dubai, UAE",
+      "description": "Deployed 500+ autonomous drones for comprehensive city-wide monitoring and traffic management.",
+      "tags": ["Security", "AI", "Urban Planning"]
+    },
+    "agriculturalPrecisionFarming": {
+      "title": "Agricultural Precision Farming",
+      "location": "California, USA",
+      "description": "Revolutionized crop monitoring across 10,000 acres with AI-powered agricultural drones.",
+      "tags": ["Agriculture", "IoT", "Sustainability"]
+    },
+    "disasterResponseInitiative": {
+      "title": "Disaster Response Initiative",
+      "location": "Tokyo, Japan",
+      "description": "Emergency response fleet providing real-time disaster assessment and rescue coordination.",
+      "tags": ["Emergency", "Rescue", "Government"]
+    },
+    "offshoreWindFarmInspection": {
+      "title": "Offshore Wind Farm Inspection",
+      "location": "North Sea, Europe",
+      "description": "Automated inspection system for 200+ wind turbines using advanced sensor technology.",
+      "tags": ["Energy", "Inspection", "Renewable"]
+    },
+    "arcticResearchExpedition": {
+      "title": "Arctic Research Expedition",
+      "location": "Greenland",
+      "description": "Climate monitoring drones collecting critical data on ice sheet changes and wildlife patterns.",
+      "tags": ["Research", "Climate", "Arctic"]
+    },
+    "forestFirePrevention": {
+      "title": "Forest Fire Prevention",
+      "location": "Australia",
+      "description": "AI-powered early detection system preventing catastrophic wildfires across national parks.",
+      "tags": ["Prevention", "AI", "Environment"]
+    }
+  },
+  "useCases":{
+    "main":{
+      "title": "Versatile Applications",
+      "description": "Our drone solutions are engineered to excel across diverse industries, delivering precision, reliability, and innovation where it matters most."
+    },
+    "camera":{
+      "title":"Photography & Cinematography",
+      "description":"Professional-grade imaging solutions for film, real estate, and marketing with 4K+ resolution capabilities."
+    },
+    "shield":{
+      "title":"Security & Surveillance",
+      "description":"Advanced monitoring systems for perimeter security, crowd control, and emergency response operations."
+    },
+    "truck":{
+      "title":"Delivery & Logistics",
+      "description":"Autonomous delivery solutions for last-mile logistics, medical supplies, and emergency cargo transport."
+    },
+    "zap":{
+      "title":"Infrastructure Inspection",
+      "description":"Detailed inspection of power lines, bridges, and industrial facilities with precision sensors."
+    },
+    "mapPin":{
+      "title":"Mapping & Surveying",
+      "description":"High-precision topographical mapping and land surveying for construction and agriculture."
+    },
+    "wrench":{
+      "title":"Search & Rescue",
+      "description":"Life-saving rescues with thermal vision and seamless comms"
+    }
+  },
+  "achievements": {
+    "title": "Our Achievements",
+    "subtitle": "Leading the industry with cutting-edge technology, global reach, and unmatched production capabilities.",
+    "stats": {
+      "dronesProduced": "Drones Produced",
+      "countriesServed": "Countries Served",
+      "maximumRange": "Maximum Range",
+      "rdEngineers": "R&D Engineers",
+      "industryAwards": "Industry Awards",
+      "reliabilityRate": "Reliability Rate"
+    },
+    "descriptions": {
+      "annualProduction": "Annual production capacity",
+      "globalPresence": "Global market presence",
+      "extendedFlight": "Extended flight capability",
+      "innovationWorkforce": "Innovation workforce",
+      "recognitionExcellence": "Recognition & excellence",
+      "missionSuccess": "Mission success rate"
+    },
+    "capabilities": {
+      "research": "Research & Development",
+      "production": "Production Capacity",
+      "global": "Global Reach",
+      "technical": "Technical Specifications"
+    },
+    "readyTitle": "Ready to Experience the Future?",
+    "readySubtitle": "Join industry leaders who trust our technology for their most critical missions.",
+    "requestDemo": "Request Demo",
+    "downloadBrochure": "Download Brochure"
+  },
+  "offices": {
+    "title": "Our Global Team",
+    "subtitle": "Connect with our experts worldwide",
+    "team": {
+      "john": {
+        "name": "John",
+        "position": "Cofounder, Director of Trade",
+        "languages": "English, Chinese"
+      },
+      "tim": {
+        "name": "Tim",
+        "position": "Head Sales in Europe, South America, Middle East",
+        "languages": "English, Russian"
+      },
+      "ali": {
+        "name": "Ali",
+        "position": "Sales in Middle East",
+        "languages": "English, Russian, Persian(Farsi), Arabic"
+      },
+      "jack": {
+        "name": "Jack",
+        "position": "International Sales",
+        "languages": "English, Chinese"
+      },
+      "diamond": {
+        "name": "Diamond",
+        "position": "International Sales",
+        "languages": "English, Chinese"
+      },
+      "ray": {
+        "name": "Ray",
+        "position": "International Sales",
+        "languages": "English, Chinese"
+      }
+    },
+    "labels": {
+      "phone": "Phone",
+      "email": "Email",
+      "whatsapp": "WhatsApp",
+      "languages": "Languages"
+    }
+  },
+  "footer": {
+    "description": "Leading the future of autonomous flight with cutting-edge electronics and drone technology for professional and commercial applications worldwide.",
+    "useCases": "Use Cases",
+    "contact": "Contact",
+    "address": "123 Innovation Drive\nTech Valley, CA 94025\nUnited States",
+    "phone": "+1 (555) 123-4567",
+    "email": "info@skyelectronica.com",
+    "copyright": "© 2024 SkyElectronica. All rights reserved.",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "cookiePolicy": "Cookie Policy",
+    "noUseCases": "No use cases available"
+  },
+  "products": {
+    "searchPlaceholder": "Search products...",
+    "sortBy": "Sort by: Featured",
+    "newest": "Newest First",
+    "oldest": "Oldest First",
+    "nameAZ": "Name A-Z",
+    "nameZA": "Name Z-A",
+    "showing": "Showing",
+    "of": "of",
+    "products": "products",
+    "for": "for",
+    "noProducts": "No products found matching your criteria.",
+    "clearFilters": "Clear all filters",
+    "categories": "Categories",
+    "features": "Features",
+    "allProducts": "All Products",
+    "previous": "Previous",
+    "next": "Next",
+    "loading": "Loading products...",
+    "retry": "Retry"
+  },
+  "productDetail": {
+    "backToProducts": "Back to Products",
+    "requestQuote": "Request Quote",
+    "whatsIncluded": "What's Included",
+    "overview": "Overview",
+    "specifications": "Specifications",
+    "keyFeature": "Key Feature",
+    "linkCopied": "Link copied successfully!",
+    "loading": "Loading product details...",
+    "notFound": "Product not found"
+  },
+  "about": {
+    "title": "About SkyElectronica",
+    "subtitle": "We're pioneering the future of autonomous flight technology, creating innovative electronics and drone solutions that transform industries and improve lives worldwide.",
+    "capability": "Fulfilment and Production Capabilities",
+    "capabilityText": "We can deliver up to 10.000 DJI and Autel drones a month. Same for FPV, and small drones from AGR. Also production for VTOLs IS  about 100 UAVs a month .",
+    "logistics": "Logistics Capability and Delivery Time",
+    "logisticsText": "Any order can be shipped within 45 days. 45 days include Manufacture, licence approval and logistics.",
+    "story": "Our Story",
+    "storyText":"SkyElectronica was founded in 2018 by a team of aerospace engineers and electronics specialists, born from a shared vision to revolutionize how we think about autonomous flight and electronics technology. Starting from a small garage in Silicon Valley, our founders recognized the untapped potential of integrating advanced electronics with precision engineering to create drone systems that could truly transform industries. Today, we are proud to serve over 85 countries worldwide, where our drones are used in everything from disaster response and agricultural monitoring to infrastructure inspection and environmental research. Our commitment to innovation, quality, and sustainability continues to drive us forward as we shape the future of autonomous flight technology.",
+    "values": "Our Values",
+    "valuesSubtitle": "The principles that guide everything we do and shape our company culture.",
+    "leadership": "Leadership Team",
+    "leadershipSubtitle": "Meet the visionaries and experts driving AeroDyne's mission forward.",
+    "innovation": "Innovation",
+    "innovationDesc": "Pushing the boundaries of drone technology with cutting-edge research and development.",
+    "reliability": "Reliability",
+    "reliabilityDesc": "Building robust, dependable systems that perform flawlessly in critical missions.",
+    "sustainability": "Sustainability",
+    "sustainabilityDesc": "Committed to environmentally responsible practices and sustainable technology solutions.",
+    "globalImpact": "Global Impact",
+    "globalImpactDesc": "Creating positive change worldwide through accessible and transformative drone technology."
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "Ready to transform your operations with cutting-edge drone technology? Our experts are here to help you find the perfect solution.",
+    "howCanHelp": "How Can We Help?",
+    "howCanHelpSubtitle": "Choose the best way to reach us based on your needs and preferences.",
+    "phoneSupport": "Phone Support",
+    "phoneSupportDesc": "Speak directly with our experts",
+    "emailSupport": "Email Support",
+    "emailSupportDesc": "Get detailed assistance via email",
+    "liveChat": "Live Chat",
+    "liveChatDesc": "Instant help from our team",
+    "salesTeam": "Sales Team",
+    "salesTeamDesc": "Discuss custom solutions",
+    "sendMessage": "Send us a Message",
+    "contactInfo": "Contact Information",
+    "headquarters": "Headquarters",
+    "businessHours": "Business Hours",
+    "globalOffices": "Global Offices",
+    "globalOfficesSubtitle": "We're here to serve you with local expertise and global reach.",
+    "fullName": "Full Name",
+    "emailAddress": "Email Address",
+    "company": "Company",
+    "subject": "Subject",
+    "message": "Message",
+    "phone": "Phone Number",
+    "projectType": "Project Type",
+    "budget": "Budget Range",
+    "timeline": "Project Timeline",
+    "projectDetails": "Project Details",
+    "send": "Send Message",
+    "cancel": "Cancel",
+    "required": "*",
+    "selectSubject": "Select a subject",
+    "selectProjectType": "Select project type",
+    "selectBudget": "Select budget range",
+    "selectTimeline": "Select timeline",
+    "projectDetailsPlaceholder": "Tell us about your project or inquiry...",
+    "responseTime": "We'll respond within 24 hours with a detailed quote."
+  },
+  "quote": {
+    "title": "Get a Quote",
+    "subtitle": "Tell us about your project and we'll provide a custom solution.",
+    "sendRequest": "Send Quote Request",
+    "projectDetailsPlaceholder": "Please describe your project requirements, specific needs, and any technical specifications..."
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Retry",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "viewAll": "View All",
+    "readMore": "Read More",
+    "learnMore": "Learn More",
+    "getStarted": "Get Started",
+    "contactUs": "Contact Us",
+    "home": "Home",
+    "backToProducts": "Back to Products",
+    "product": "Product",
+    "allProducts": "All Products",
+    "noUseCasesAvailable": "No use cases available",
+    "swipeMore": "Swipe to see more projects →",
+    "annualProductionCapacity": "Annual production capacity",
+    "globalMarketPresence": "Global market presence",
+    "extendedFlightCapability": "Extended flight capability",
+    "innovationWorkforce": "Innovation workforce",
+    "recognitionExcellence": "Recognition & excellence",
+    "missionSuccessRate": "Mission success rate",
+    "advancedAiMachineLearning": "Advanced AI & Machine Learning",
+    "autonomousFlightSystems": "Autonomous Flight Systems",
+    "sensorIntegrationTechnology": "Sensor Integration Technology",
+    "batteryPowerManagement": "Battery & Power Management",
+    "unitsPerYear": "units per year",
+    "manufacturingOperations": "manufacturing operations",
+    "qualityAssuranceTesting": "Quality assurance testing",
+    "customConfigurationOptions": "Custom configuration options",
+    "countriesWorldwide": "countries worldwide",
+    "regionalServiceCenters": "Regional service centers",
+    "localPartnershipNetwork": "Local partnership network",
+    "multilingualSupport": "Multilingual support",
+    "flightRangeUpTo": "Flight range up to",
+    "payloadCapacity": "Payload capacity",
+    "operatingAltitude": "Operating altitude",
+    "allWeatherCapability": "All-weather capability",
+    "researchDevelopment": "Research & Development",
+    "productionCapacity": "Production Capacity",
+    "globalReach": "Global Reach",
+    "technicalSpecifications": "Technical Specifications"
+  }
+}
