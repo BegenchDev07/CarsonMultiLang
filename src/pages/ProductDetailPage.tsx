@@ -270,10 +270,17 @@ const ProductDetailPage = () => {
                 {!isMobile ? (
                   <div className="h-[43rem] rounded-b-lg">
                   <iframe
-                    src={'https://api.skyelectronica.com' + product?.presentation.url}
+                    src={
+                      product?.presentation?.url
+                      ?
+                      'https://api.skyelectronica.com' + product?.presentation?.url
+                      :
+                      'https://www.youtube.com/embed/dQw4w9WgXcQ'
+                    }
                     sandbox="allow-same-origin allow-scripts allow-popups"
                     style={{height: "100%", width: "100%"}}
                     title={t('productDetail.presentation', 'Product Presentation')}
+                    aria-placeholder='Currently No Presentation Available'
                   />
                   </div>
                 ) : (

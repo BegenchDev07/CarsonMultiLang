@@ -104,7 +104,10 @@ const API_BASE_URL = 'https://api.skyelectronica.com/api';
 
 // Get current language for API calls
 const getCurrentLocale = () => {
-  return localStorage.getItem('i18nextLng') || 'en';
+  const regex = /en-[A-Z]{2}/g
+  const locale = localStorage.getItem('i18nextLng') || 'en';
+  return regex.test(locale) ? 'en' : locale;
+  // return localStorage.getItem('i18nextLng') || 'en';
 };
 
 // Helper function to fetch data with error handling
@@ -113,7 +116,7 @@ async function fetchData<T>(url: string, addLocale: boolean = false, populate: b
   const params = new URLSearchParams();
 
   if (addLocale) {
-    const locale = getCurrentLocale();
+    const locale = getCurrentLocale();    
     params.append('locale', locale);
   }
   if (populate) {
@@ -121,7 +124,7 @@ async function fetchData<T>(url: string, addLocale: boolean = false, populate: b
   }
 
   const queryString = params.toString();
-  if (queryString) {
+  if (queryString) {    
     finalUrl = `${url}${url.includes('?') ? '&' : '?'}${queryString}`;
   }
   

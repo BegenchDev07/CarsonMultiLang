@@ -8,16 +8,17 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
-  const location = useLocation();
+  const locationHook = useLocation();
   const { t, i18n } = useTranslation();
 
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path: string) => locationHook.pathname === path;
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
     setIsLanguageOpen(false);
     document.documentElement.lang = lng;
     document.documentElement.dir = lng === 'ar' ? 'rtl' : 'ltr';
+    location.reload()
   };
 
   return (
