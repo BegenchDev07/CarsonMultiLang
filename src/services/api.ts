@@ -106,8 +106,7 @@ const API_BASE_URL = 'https://api.skyelectronica.com/api';
 const getCurrentLocale = () => {
   const regex = /en-[A-Z]{2}/g
   const locale = localStorage.getItem('i18nextLng') || 'en';
-  return regex.test(locale) ? 'en' : locale;
-  // return localStorage.getItem('i18nextLng') || 'en';
+  return regex.test(locale) ? 'en' : locale;  
 };
 
 // Helper function to fetch data with error handling
