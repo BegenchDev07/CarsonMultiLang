@@ -1,7 +1,0 @@
-name = "skyelectronica"
-main = "worker.js"
-compatibility_date = "2025-09-04"
-
-[[kv_namespaces]]
-binding = "skyelectronica"
-id = "57357c6e0c694c74aa2272cd9fc26259"
