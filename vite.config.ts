@@ -12,7 +12,7 @@ const addCloudflareRedirects = (): Plugin => ({
   closeBundle() {
     const outDir = resolve(__dirname, 'dist')
     const redirectsFile = join(outDir, '_redirects')
-    const content = '/* /index.html 200\n'
+    const content = '/* /index.html 200!\n'
 
     if (!existsSync(outDir)) {
       mkdirSync(outDir, { recursive: true })
