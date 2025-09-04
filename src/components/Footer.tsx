@@ -81,20 +81,7 @@ const Footer = () => {
                       {item.hasOwnProperty('cateogry_name') ? (item as Category).cateogry_name : (item as Feature).feature_name}
                     </a>
                   </li>
-                ))}
-                {[...categories.slice(0, 3), ...features.slice(0, 2)].filter(item => item != null).map((item, index) => (
-                  <li key={`${item.id}-${index}`}>
-                    <a 
-                      href={`/products?${item.hasOwnProperty('cateogry_name') ? 'category' : 'feature'}=${item.hasOwnProperty('cateogry_name') ? (item as Category).cateogry_name.toLowerCase() : (item as Feature).feature_name.toLowerCase()}`} 
-                      className="text-gray-400 hover:text-white transition-colors duration-300 capitalize"
-                    >
-                      {item.hasOwnProperty('cateogry_name') ? (item as Category).cateogry_name : (item as Feature).feature_name}
-                    </a>
-                  </li>
-                ))}
-                {categories.length === 0 && features.length === 0 && !loading && (
-                  <li className="text-gray-500 text-sm">{t('footer.noUseCases')}</li>
-                )}
+                ))}                
               </ul>
             )}
           </div>
@@ -102,24 +89,9 @@ const Footer = () => {
           {/* Contact */}
           <div className="lg:col-span-2">
             <h3 className="text-lg font-semibold mb-6">{t('footer.contact')}</h3>
-            {/* <div className="space-y-4">
-              <div className={`flex items-start ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'}`}>
-                <MapPin className={`h-5 w-5 text-blue-400 mt-1 flex-shrink-0 ${isRTL ? 'ml-3' : 'mr-3'}`} />
-                <div className="text-gray-400">
-                  {t('footer.address').split('\n').map((line, index) => (
-                    <p key={index}>{line}</p>
-                  ))}
-                </div>
-              </div>
-              <div className={`flex items-center ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'}`}>
-                <Phone className={`h-5 w-5 text-blue-400 flex-shrink-0 ${isRTL ? 'ml-3' : 'mr-3'}`} />
-                <span className="text-gray-400">{t('footer.phone')}</span>
-              </div>
-              <div className={`flex items-center ${isRTL ? 'space-x-reverse space-x-3' : 'space-x-3'}`}>
-                <Mail className={`h-5 w-5 text-blue-400 flex-shrink-0 ${isRTL ? 'ml-3' : 'mr-3'}`} />
-                <span className="text-gray-400">{t('footer.email')}</span>
-              </div>
-            </div> */}
+            <button className='w-2/3 px-3 py-2 text-xl font-semibold bg-blue-600 rounded-lg'>
+              {t('footerContact.button')}
+            </button>
           </div>
         </div>
 

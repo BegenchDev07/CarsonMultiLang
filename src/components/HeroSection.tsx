@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Play } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import GetQuoteModal from './GetQuoteModal';
+import { useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -9,6 +10,7 @@ const HeroSection = () => {
   const [imagesLoaded, setImagesLoaded] = useState(false);  
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === 'ar';
+  const navigator = useNavigate()
   const slides = [
     {
       title: t('hero.title1'),
@@ -108,11 +110,10 @@ const HeroSection = () => {
                   {slide.subtitle}
                 </p>
                 <button 
-                  onClick={() => setIsQuoteModalOpen(true)}
+                  onClick={() => navigator('/products')}
                   className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 flex items-center justify-center focus:outline-none focus:ring-4 focus:ring-white/50"
                   aria-label="Watch product demonstration video"
-                >
-                  <Play className="mr-2 h-5 w-5" />
+                >                  
                   {t('hero.watchDemo')}
                 </button>
               </div>

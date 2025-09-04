@@ -14,7 +14,7 @@ const BestSalesSection = () => {
     const fetchBestSellers = async () => {
       try {
         setLoading(true);
-        const bestSellers = await productsApi.getBestSellerProducts();                
+        const bestSellers = await productsApi.getBestSellerProducts();                        
         setProducts(bestSellers);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to fetch best sellers');

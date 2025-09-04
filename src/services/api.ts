@@ -256,7 +256,7 @@ export const productsApi = {
   async getBestSellerProducts(): Promise<Product[]> {
     // Return first two products as best sellers
     const products = await this.getProducts();    
-    return products.filter(product => product && product.product_name).slice(0, 2);
+    return products.filter(product => product && product.product_name).slice(0, 4);
   },
 
   async getProjects(): Promise<Project[]> {

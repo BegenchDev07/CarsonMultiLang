@@ -16,15 +16,14 @@ i18n
       ar: {
         translation: ar
       }
-    },
-    lng:'en',
+    },    
     fallbackLng: 'en',
     debug: false,
     interpolation: {
       escapeValue: false
     },
     detection: {
-      order: ['localStorage', 'navigator', 'htmlTag'],
+      order: ['localStorage'],
       caches: ['localStorage']
     }
   });

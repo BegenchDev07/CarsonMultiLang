@@ -182,7 +182,7 @@
     "address": "123 طريق الابتكار\nوادي التكنولوجيا، كاليفورنيا 94025\nالولايات المتحدة",
     "phone": "+1 (555) 123-4567",
     "email": "info@skyelectronica.com",
-    "copyright": "© 2024 سكاي إلكترونيكا. جميع الحقوق محفوظة.",
+    "copyright": "© 2025 سكاي إلكترونيكا. جميع الحقوق محفوظة.",
     "privacyPolicy": "سياسة الخصوصية",
     "termsOfService": "شروط الخدمة",
     "cookiePolicy": "سياسة ملفات تعريف الارتباط",
@@ -336,5 +336,8 @@
     "productionCapacity": "القدرة الإنتاجية",
     "globalReach": "الانتشار العالمي",
     "technicalSpecifications": "المواصفات التقنية"
+  },
+  "footerContact":{
+    "button":"اتصل بنا"
   }
 }

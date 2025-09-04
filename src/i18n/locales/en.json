@@ -13,7 +13,7 @@
     "subtitle2": "Cutting-edge electronics and drone technology solutions",
     "title3": "Transforming Industries Worldwide",
     "subtitle3": "Reliable drone solutions for commercial and industrial use",
-    "watchDemo": "Watch Demo"
+    "watchDemo": "See more products"
   },
   "bestSales": {
     "title": "Best Selling Products",
@@ -182,7 +182,7 @@
     "address": "123 Innovation Drive\nTech Valley, CA 94025\nUnited States",
     "phone": "+1 (555) 123-4567",
     "email": "info@skyelectronica.com",
-    "copyright": "© 2024 SkyElectronica. All rights reserved.",
+    "copyright": "© 2025 SkyElectronica. All rights reserved.",
     "privacyPolicy": "Privacy Policy",
     "termsOfService": "Terms of Service",
     "cookiePolicy": "Cookie Policy",
@@ -335,5 +335,8 @@
     "productionCapacity": "Production Capacity",
     "globalReach": "Global Reach",
     "technicalSpecifications": "Technical Specifications"
+  },
+  "footerContact":{
+    "button":"Contact Us"
   }
 }
