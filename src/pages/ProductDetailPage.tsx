@@ -272,10 +272,8 @@ const ProductDetailPage = () => {
                   <iframe
                     src={
                       product?.presentation?.url
-                      ?
-                      'https://api.skyelectronica.com' + product?.presentation?.url
-                      :
-                      'https://www.youtube.com/embed/dQw4w9WgXcQ'
+                      &&
+                      'https://api.skyelectronica.com' + product?.presentation?.url                      
                     }
                     sandbox="allow-same-origin allow-scripts allow-popups"
                     style={{height: "100%", width: "100%"}}
