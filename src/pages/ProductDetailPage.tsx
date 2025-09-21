@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { ArrowLeft, Share2, CheckCircle, Loader } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import remarkYoutube from 'remark-youtube';
 import GetQuoteModal from '../components/GetQuoteModal';
 import ProductDetailModal from '../components/ProductDetailModal';
 import { productsApi, Product, getImageUrl } from '../services/api';
@@ -304,24 +305,92 @@ const ProductDetailPage = () => {
             {selectedTab === 'specifications' && (
               <div className="prose prose-lg max-w-none text-gray-600 leading-relaxed">
                 <ReactMarkdown
-                  remarkPlugins={[remarkGfm]} // Enables GFM, including table support
-                  components={{
-                    h1: ({children}) => <h2 className="text-xl font-bold text-gray-900 mb-3">{children}</h2>,
-                    h2: ({children}) => <h3 className="text-lg font-semibold text-gray-900 mb-2">{children}</h3>,
-                    h3: ({children}) => <h4 className="text-base font-semibold text-gray-900 mb-2">{children}</h4>,
-                    p: ({children}) => <p className="text-gray-600 leading-relaxed mb-3">{children}</p>,
-                    ul: ({children}) => <ul className={`list-disc mb-3 space-y-1 text-gray-600 ${isRTL ? 'list-inside' : 'list-inside'}`}>{children}</ul>,
-                    li: ({children}) => <li className="text-gray-600">{children}</li>,
-                    strong: ({children}) => <strong className="font-semibold text-gray-900">{children}</strong>,
-                    em: ({children}) => <em className="italic text-gray-700">{children}</em>,
-                    blockquote: ({children}) => <blockquote className={`border-blue-500 italic text-gray-700 bg-blue-50 p-3 rounded-lg my-3 ${isRTL ? 'border-r-4 pr-3' : 'border-l-4 pl-3'}`}>{children}</blockquote>,
-                    table: ({children}) => <table className="table-auto w-full text-gray-600 border-collapse">{children}</table>,
-                    th: ({children}) => <th className="px-4 py-2 border-b">{children}</th>,
-                    td: ({children}) => <td className="px-4 py-2 border-b">{children}</td>,
-                  }}
-                >
-                  {product.specification}
-                </ReactMarkdown>
+              remarkPlugins={[remarkGfm,remarkYoutube]} // Enables GFM, including table support
+              components={{
+                h1: ({ children }) => (
+                  <h2 className="text-xl font-bold text-gray-900 mb-3">{children}</h2>
+                ),
+                h2: ({ children }) => (
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{children}</h3>
+                ),
+                h3: ({ children }) => (
+                  <h3 className="text-base font-semibold text-gray-900 my-4">{children}</h3>
+                ),                
+                p: ({ children }) => (
+                  <p className="text-gray-600 leading-relaxed mb-3">{children}</p>
+                ),
+                ul: ({ children }) => (
+                  <ul
+                    className={`list-disc mb-3 space-y-1 text-gray-600 ${
+                      isRTL ? "list-inside" : "list-inside"
+                    }`}
+                  >
+                    {children}
+                  </ul>
+                ),
+                li: ({ children }) => <li className="text-gray-600">{children}</li>,
+                strong: ({ children }) => (
+                  <strong className="font-semibold text-gray-900">{children}</strong>
+                ),
+                em: ({ children }) => <em className="italic text-gray-700">{children}</em>,
+                blockquote: ({ children }) => (
+                  <blockquote
+                    className={`border-blue-500 italic text-gray-700 bg-blue-50 p-3 rounded-lg my-3 ${
+                      isRTL ? "border-r-4 pr-3" : "border-l-4 pl-3"
+                    }`}
+                  >
+                    {children}
+                  </blockquote>
+                ),
+                table: ({ children }) => (
+                  <table className="table-fixed w-full text-gray-600 border-collapse text-center">
+                    {children}
+                  </table>
+                ),
+                th: ({ children }) => <th className="px-4 py-2 border-b">{children}</th>,
+                td: ({ children }) => <td className="px-4 py-2 border-b">{children}</td>,
+
+                // ✅ Custom YouTube handler
+                // a: ({ href, children }:any) => {
+                //   if (
+                //     href &&
+                //     children &&
+                //     typeof children[0] === "string" &&
+                //     children[0].toLowerCase() === "youtube"
+                //   ) {
+                //     const videoId = new URL(href).searchParams.get("v");
+                //     if (videoId) {
+                //       return (
+                //         <div className="aspect-w-16 aspect-h-9 my-4">
+                //           <iframe
+                //             src={`https://www.youtube.com/embed/${videoId}`}
+                //             title="YouTube video"
+                //             frameBorder="0"
+                //             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                //             allowFullScreen
+                //             className="w-full h-full rounded-lg"
+                //           />
+                //         </div>
+                //       );
+                //     }
+                //   }
+                //   // Fallback to normal link
+                //   return (
+                //     <a
+                //       href={href}
+                //       target="_blank"
+                //       rel="noopener noreferrer"
+                //       className="text-blue-600 underline"
+                //     >
+                //       {children}
+                //     </a>
+                //   );
+                // },
+              }}
+            >
+              {product.specification}
+            </ReactMarkdown>
+
               </div>
             )}
           </div>

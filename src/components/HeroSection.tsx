@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight, Play } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import GetQuoteModal from './GetQuoteModal';
 import { useNavigate } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -11,23 +12,24 @@ const HeroSection = () => {
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === 'ar';
   const navigator = useNavigate()
+  const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
   const slides = [
     {
       title: t('hero.title1'),
       subtitle: t('hero.subtitle1'),
-      image: "https://images.pexels.com/photos/442587/pexels-photo-442587.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1",
+      image: "https://api.skyelectronica.com/uploads/9fd837ba1575a32f77dc6ee9ec9fd299_19fafc5279.jpeg",
       cta: t('common.learnMore')
     },
     {
       title: t('hero.title2'),
       subtitle: t('hero.subtitle2'),
-      image: "https://images.pexels.com/photos/724921/pexels-photo-724921.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1",
+      image: "https://api.skyelectronica.com/uploads/Wechat_IMG_1408_7837fd2e19.jpg",
       cta: t('common.learnMore')
     },
     {
       title: t('hero.title3'),
       subtitle: t('hero.subtitle3'),
-      image: "https://images.pexels.com/photos/1034662/pexels-photo-1034662.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1",
+      image: "https://api.skyelectronica.com/uploads/fba6f6bcb9e32cea4675be0e07093e94_0fe121ad93.jpeg",
       cta: t('common.getStarted')
     }
   ];
@@ -96,22 +98,22 @@ const HeroSection = () => {
             decoding="async"
             width="800"
             height="600"
-            className="w-full h-full object-cover"
+            className={ isMobile ? ' w-full h-full bg-white object-scale-down' : ' w-full h-full object-cover'}
             fetchPriority={index === 0 ? "high" : "low"}
             style={{ contentVisibility: index === currentSlide ? 'visible' : 'hidden' }}
           />
           <div className="absolute inset-0 z-20 flex items-center">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-end pb-16">
               <div className="max-w-3xl">
-                <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+                <h1 className="text-3xl md:text-7xl font-bold text-white mb-6 leading-tight">
                   {slide.title}
                 </h1>
-                <p className="text-xl md:text-2xl text-blue-200 mb-8 leading-relaxed">
+                {/* <p className="text-xl md:text-2xl text-blue-200 mb-8 leading-relaxed">
                   {slide.subtitle}
-                </p>
+                </p> */}
                 <button 
                   onClick={() => navigator('/products')}
-                  className="border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 flex items-center justify-center focus:outline-none focus:ring-4 focus:ring-white/50"
+                  className="w-auto h-auto border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 flex items-center justify-center focus:outline-none focus:ring-4 focus:ring-white/50"
                   aria-label="Watch product demonstration video"
                 >                  
                   {t('hero.watchDemo')}
