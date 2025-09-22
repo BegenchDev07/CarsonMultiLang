@@ -113,7 +113,7 @@ const RadioJam = () => {
 
             {/* Results Count */}
             <p className="text-gray-600 mb-6">
-              {t('products.showing')} {currentProducts.length} {t('products.of')} {filteredProducts.length} {t('products.products')}
+            {t('products.showing')} { totalPages !== currentPage ? currentProducts.length * currentPage : jammers.length} {t('products.of')} {filteredProducts.length} {t('products.products')}
               {searchTerm && ` ${t('products.for')} "${searchTerm}"`}
             </p>
 
