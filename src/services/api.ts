@@ -94,6 +94,15 @@ interface ApiProduct {
   feature?: ApiFeature | null ;
 }
 
+interface RadioJammer {
+  documentId: string;
+  product_name: string;
+  product_description: string;
+  display_image?: {data: ApiImage | null};
+  secondary_images?: Array<any> | [];
+  specification?: string; 
+}
+
 interface ApiResponse<T> {
   data: T | T[];
   meta?: any; // For pagination, etc.
@@ -195,6 +204,17 @@ const mapApiProductToProduct = (apiProduct: ApiProduct): Product => {
   };
 };
 
+const mapApiRadioJammerToJammer = (apiProduct: ApiProduct): RadioJammer => {
+  return {
+    documentId: apiProduct.documentId.toString(),
+    product_name: apiProduct.product_name,
+    product_description: apiProduct.product_description,
+    display_image: apiProduct.display_image,
+    secondary_images: apiProduct.secondary_images,
+    specification: apiProduct.specification
+  }
+}
+
 // API service methods
 export const productsApi = {
   async getProducts(): Promise<Product[]> {
@@ -281,6 +301,30 @@ export const productsApi = {
       console.warn("Error fetching projects, returning empty array:", error);
       return [];
     }
+  },
+
+  async getRadioJammers(): Promise<RadioJammer[]> {
+    const url = `${API_BASE_URL}/radio-jammings`;
+    const response = await fetchData<ApiResponse<ApiProduct>>(url, true, true); // addLocale=true, populate=true
+    if (Array.isArray(response.data)) {      
+      return response.data
+        .filter(item => item && item.product_name)
+        .map(mapApiRadioJammerToJammer);
+    }
+    return []; // Should return an array for getProducts
+  },
+
+  async getRadioJammer(id: string): Promise<RadioJammer | null> {
+    const url = `${API_BASE_URL}/radio-jammings/${id}`;
+    try {
+      const response = await fetchData<ApiResponse<ApiProduct>>(url, true, true); // addLocale=true, populate=true
+      if (response.data && !Array.isArray(response.data) && response.data.product_name) {
+        return mapApiRadioJammerToJammer(response.data);
+      }
+    } catch (error) {
+      console.error(`Error fetching jammer ${id}:`, error);
+    }
+    return null;
   },
 };
 

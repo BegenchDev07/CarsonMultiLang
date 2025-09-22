@@ -10,9 +10,7 @@ const RadioJam = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
-  const [products, setProducts] = useState<Product[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [features, setFeatures] = useState<Feature[]>([]);
+  const [jammers, setJammers] = useState<Product[]>([]);  
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -28,14 +26,8 @@ const RadioJam = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const [productsData, categoriesData, featuresData] = await Promise.all([
-          productsApi.getProducts(),
-          productsApi.getCategories(),
-          productsApi.getFeatures(),
-        ]);
-        setProducts(productsData);
-        setCategories(categoriesData);
-        setFeatures(featuresData);
+        const jammersData:any = await Promise.resolve(productsApi.getRadioJammers()).then((result) => {return result}) || null;
+        setJammers(jammersData);        
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to fetch data');
       } finally {
@@ -55,7 +47,7 @@ const RadioJam = () => {
     setCurrentPage(1); // reset page when filtering
   };
 
-  const filteredProducts = products.filter(product => {
+  const filteredProducts = jammers.filter(product => {
     const matchesSearch =
       product.product_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       product.product_description.toLowerCase().includes(searchTerm.toLowerCase());
@@ -74,24 +66,13 @@ const RadioJam = () => {
   // Pagination logic
   const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
   const startIdx = (currentPage - 1) * itemsPerPage;
-  const currentProducts = filteredProducts.slice(startIdx, startIdx + itemsPerPage);
+  const currentProducts: any = filteredProducts.slice(startIdx, startIdx + itemsPerPage);
 
   // Reset to first page when filters/search change
   useEffect(() => {
     setCurrentPage(1);
   }, [searchTerm, selectedCategory, selectedFeatures, isMobile]);
 
-  // Category counts
-  const categoryCounts = [
-    { id: 'all', name: t('products.allProducts'), count: products.length },
-    ...categories.map(category => ({
-      id: category.cateogry_name.toLowerCase(),
-      name: category.cateogry_name,
-      count: products.filter(product =>
-        product.category && product.category.cateogry_name.toLowerCase() === category.cateogry_name.toLowerCase()
-      ).length,
-    })),
-  ];
 
   if (loading) {
     return (
@@ -124,83 +105,11 @@ const RadioJam = () => {
     <div className={`pt-20 min-h-screen bg-gray-50 ${isRTL ? 'rtl' : 'ltr'}`}>
       <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 ${isRTL ? 'text-right' : 'text-left'}`}>
         <div className="flex flex-col lg:flex-row gap-8">
-          {/* Sidebar */}
-          <div className="lg:w-64 flex-shrink-0">
-            <div className="bg-white rounded-2xl p-6 shadow-lg">
-              {/* Categories */}
-              <div className="mb-8">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('products.categories')}</h3>
-                <ul className="space-y-2">
-                  {categoryCounts.map(category => (
-                    <li key={category.id}>
-                      <button
-                        onClick={() => setSelectedCategory(category.id)}
-                        className={`w-full text-left px-3 py-2 rounded-lg transition-colors duration-300 flex justify-between items-center ${
-                          selectedCategory === category.id
-                            ? 'bg-blue-100 text-blue-600'
-                            : 'text-gray-600 hover:bg-gray-100'
-                        }`}
-                      >
-                        <span>{category.name}</span>
-                        <span className="text-sm text-gray-400">({category.count})</span>
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Features */}
-              <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('products.features')}</h3>
-                <div className="space-y-3">
-                  {features.map(feature => (
-                    <label key={feature.id} className="flex items-center">
-                      <input
-                        type="checkbox"
-                        className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                        checked={selectedFeatures.includes(feature.feature_name)}
-                        onChange={() => handleFeatureToggle(feature.feature_name)}
-                      />
-                      <span className="ml-2 text-gray-600 capitalize">{feature.feature_name}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
+          {/* Sidebar */}          
 
           {/* Main */}
-          <div className="flex-1">
-            {/* Search + View Mode */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg mb-8">
-              <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-                <div className="relative flex-1 max-w-md">
-                  <Search className={`absolute top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5 ${isRTL ? 'right-3' : 'left-3'}`} />
-                  <input
-                    type="text"
-                    placeholder={t('products.searchPlaceholder')}
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className={`w-full py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${isRTL ? 'pr-10 pl-4' : 'pl-10 pr-4'}`}
-                  />
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={() => setViewMode('grid')}
-                    className={`p-2 rounded-lg ${viewMode === 'grid' ? 'bg-blue-100 text-blue-600' : 'text-gray-400 hover:text-gray-600'}`}
-                  >
-                    <Grid className="h-5 w-5" />
-                  </button>
-                  <button
-                    onClick={() => setViewMode('list')}
-                    className={`p-2 rounded-lg ${viewMode === 'list' ? 'bg-blue-100 text-blue-600' : 'text-gray-400 hover:text-gray-600'}`}
-                  >
-                    <List className="h-5 w-5" />
-                  </button>
-                </div>
-              </div>
-            </div>
+          <div className="flex-1">            
+            
 
             {/* Results Count */}
             <p className="text-gray-600 mb-6">
@@ -229,10 +138,10 @@ const RadioJam = () => {
                   ? isMobile ? 'grid-cols-2' : 'grid-cols-3'
                   : 'grid-cols-1'
               }`}>
-                {currentProducts.map(product => (
+                {currentProducts.map((product:any) => (
                   <Link
                     key={product.documentId}
-                    to={`/product/${product.documentId}`}
+                    to={`/radio-jam/${product.documentId}`}
                     className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group hover:-translate-y-2"
                   >
                     <div className="relative overflow-hidden">

@@ -30,7 +30,7 @@ const Navbar = () => {
             <span className="text-xl font-bold text-gray-900">SkyElectronica</span>
           </Link>
 
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center gap-8">
             <Link
               to="/"
               className={`text-sm font-medium transition-colors ${
@@ -38,6 +38,14 @@ const Navbar = () => {
               }`}
             >
               {t('nav.home')}
+            </Link>
+            <Link
+              to="/radio-jam"
+              className={`text-sm font-medium transition-colors ${
+                isActive('/radio-jam') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
+              }`}
+            >
+              {t('nav.radio-jam')}
             </Link>
             <Link
               to="/products"
@@ -96,13 +104,13 @@ const Navbar = () => {
               )}
             </div>
             
-            <button 
+            {/* <button 
               onClick={() => setIsQuoteModalOpen(true)}
               aria-label="Get a quote for drone services"
               className="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
             >
               {t('nav.getQuote')}
-            </button>
+            </button> */}
           </div>
 
           <button
@@ -116,7 +124,7 @@ const Navbar = () => {
 
         {isOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-100 rounded-b-2xl">
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-transparent border-t border-gray-100 rounded-b-2xl">
               <Link
                 to="/"
                 className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600"
@@ -124,6 +132,12 @@ const Navbar = () => {
               >
                 {t('nav.home')}
               </Link>
+              <Link
+              to="/radio-jam"
+              className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600"
+            >
+              {t('nav.radio-jam')}
+            </Link>
               <Link
                 to="/products"
                 className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600"
@@ -174,7 +188,7 @@ const Navbar = () => {
                 </div>
               </div>
               
-              <button 
+              {/* <button 
                 onClick={() => {
                   setIsOpen(false);
                   setIsQuoteModalOpen(true);
@@ -182,7 +196,7 @@ const Navbar = () => {
                 className="w-full text-left bg-blue-600 text-white px-3 py-2 rounded-lg text-base font-medium hover:bg-blue-700 transition-colors"
               >
                 {t('nav.getQuote')}
-              </button>
+              </button> */}
             </div>
           </div>
         )}

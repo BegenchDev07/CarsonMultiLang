@@ -10,7 +10,7 @@ import ProductDetailModal from '../components/ProductDetailModal';
 import { productsApi, Product, getImageUrl } from '../services/api';
 import { useMediaQuery } from 'react-responsive'; // For mobile responsiveness
 
-const ProductDetailPage = () => {
+const RadioJamDetail = () => {
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === 'ar';
   const { id } = useParams<{ id: string }>();
@@ -35,7 +35,7 @@ const ProductDetailPage = () => {
 
       try {
         setLoading(true);
-        const productData = await productsApi.getProduct(id);        
+        const productData:any = await productsApi.getRadioJammer(id);        
         setProduct(productData);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to fetch product');
@@ -126,7 +126,7 @@ const ProductDetailPage = () => {
 
         {/* Back Button */}
         <Link
-          to="/products"
+          to="/radio-jam"
           className={`inline-flex items-center text-blue-600 hover:text-blue-700 transition-colors duration-300 mb-8 ${isRTL ? 'flex-row-reverse' : ''}`}
         >
           <ArrowLeft className={`h-5 w-5 ${isRTL ? 'ml-2 rotate-180' : 'mr-2'}`} />
@@ -204,8 +204,8 @@ const ProductDetailPage = () => {
                   {product.product_name}
                 </h1>
 
-                <div className="text-gray-600 mb-6 leading-relaxed">
-                  <ReactMarkdown                    
+                <div className="text-gray-600 mb-6 leading-relaxed ">
+                  <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
                     components={{
                       h1: ({children}) => <h2 className="text-xl font-bold text-gray-900 mb-3">{children}</h2>,
@@ -303,7 +303,7 @@ const ProductDetailPage = () => {
               </div>            
             )}
             {selectedTab === 'specifications' && (
-              <div className="prose prose-lg w-full text-gray-600 leading-relaxed overflow-x-auto">
+              <div className="prose prose-lg max-w-none text-gray-600 leading-relaxed">
                 <ReactMarkdown
               remarkPlugins={[remarkGfm,remarkYoutube]} // Enables GFM, including table support
               components={{
@@ -343,49 +343,12 @@ const ProductDetailPage = () => {
                   </blockquote>
                 ),
                 table: ({ children }) => (
-                  <table className="table-fixed min-w-max sm:w-full text-gray-600 border-collapse text-center">
+                  <table className="table-fixed w-full text-gray-600 border-collapse text-center">
                     {children}
                   </table>
                 ),
                 th: ({ children }) => <th className="px-4 py-2 border-b">{children}</th>,
-                td: ({ children }) => <td className="px-4 py-2 border-b">{children}</td>,
-
-                // ✅ Custom YouTube handler
-                // a: ({ href, children }:any) => {
-                //   if (
-                //     href &&
-                //     children &&
-                //     typeof children[0] === "string" &&
-                //     children[0].toLowerCase() === "youtube"
-                //   ) {
-                //     const videoId = new URL(href).searchParams.get("v");
-                //     if (videoId) {
-                //       return (
-                //         <div className="aspect-w-16 aspect-h-9 my-4">
-                //           <iframe
-                //             src={`https://www.youtube.com/embed/${videoId}`}
-                //             title="YouTube video"
-                //             frameBorder="0"
-                //             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                //             allowFullScreen
-                //             className="w-full h-full rounded-lg"
-                //           />
-                //         </div>
-                //       );
-                //     }
-                //   }
-                //   // Fallback to normal link
-                //   return (
-                //     <a
-                //       href={href}
-                //       target="_blank"
-                //       rel="noopener noreferrer"
-                //       className="text-blue-600 underline"
-                //     >
-                //       {children}
-                //     </a>
-                //   );
-                // },
+                td: ({ children }) => <td className="px-4 py-2 border-b">{children}</td>,                
               }}
             >
               {product.specification}
@@ -413,4 +376,4 @@ const ProductDetailPage = () => {
   );
 };
 
-export default ProductDetailPage;
+export default RadioJamDetail;
