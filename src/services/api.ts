@@ -40,6 +40,7 @@ export interface Product {
   createdAt: string;
   updatedAt: string;
   presentation: any;
+  link:string;
 }
 
 export interface Project {
@@ -92,6 +93,7 @@ interface ApiProduct {
   secondary_images?: Array<any> | [] ;
   category?: ApiCategory | null ;
   feature?: ApiFeature | null ;
+  link?: string;
 }
 
 interface RadioJammer {
@@ -200,7 +202,8 @@ const mapApiProductToProduct = (apiProduct: ApiProduct): Product => {
     secondary_images: apiProduct?.secondary_images?.map(mapApiImageToImage).filter((img:any): img is Image => img !== undefined) || [],
     category: mapApiCategoryToCategory(apiProduct?.category || null),
     feature: mapApiFeatureToFeature(apiProduct?.feature || null),
-    presentation: apiProduct.presentation
+    presentation: apiProduct.presentation,
+    link: apiProduct.link || '',
   };
 };
 

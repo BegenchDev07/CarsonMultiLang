@@ -23,7 +23,7 @@ const HeroSection = () => {
     {
       title: t('hero.title2'),
       subtitle: t('hero.subtitle2'),
-      image: "https://api.skyelectronica.com/uploads/Wechat_IMG_1408_7837fd2e19.jpg",
+      image: "https://api.skyelectronica.com/uploads/Wechat_IMG_363_a2cfa30146.jpg",
       cta: t('common.learnMore')
     },
     {
@@ -66,7 +66,13 @@ const HeroSection = () => {
 
   return (
     <>
-    <section className="relative h-[35rem] overflow-hidden bg-gray-900" role="banner" aria-label="Hero carousel">
+ <section
+  className="relative h-[35rem] 2xl:h-[50rem] overflow-hidden bg-gray-900"
+  role="banner"
+  aria-label="Hero carousel"
+>
+
+
       {/* Skeleton loader while images load */}
       {!imagesLoaded && (
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900">
@@ -98,7 +104,7 @@ const HeroSection = () => {
             decoding="async"
             width="800"
             height="600"
-            className={ isMobile ? ' w-full h-full bg-white object-scale-down' : ' w-full h-full object-cover'}
+            className={ isMobile ? ' w-full h-full bg-white object-cover' : ' w-full h-full object-cover'}
             fetchPriority={index === 0 ? "high" : "low"}
             style={{ contentVisibility: index === currentSlide ? 'visible' : 'hidden' }}
           />

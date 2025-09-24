@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { Search, Grid, List, ArrowRight, Loader } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -131,8 +131,8 @@ const ProductsPage = () => {
               <div className="mb-8">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('products.categories')}</h3>
                 <ul className="space-y-2">
-                  {categoryCounts.map(category => (
-                    <li key={category.id}>
+                  {categoryCounts.map((category, index) => (
+                    <li key={index}>
                       <button
                         onClick={() => setSelectedCategory(category.id)}
                         className={`w-full text-left px-3 py-2 rounded-lg transition-colors duration-300 flex justify-between items-center ${
@@ -153,8 +153,8 @@ const ProductsPage = () => {
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('products.features')}</h3>
                 <div className="space-y-3">
-                  {features.map(feature => (
-                    <label key={feature.id} className="flex items-center">
+                  {features.map((feature,index) => (
+                    <label key={index} className="flex items-center">
                       <input
                         type="checkbox"
                         className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
@@ -229,40 +229,42 @@ const ProductsPage = () => {
                   ? isMobile ? 'grid-cols-2' : 'grid-cols-3'
                   : 'grid-cols-1'
               }`}>
-                {currentProducts.map(product => (
-                  <Link
-                    key={product.documentId}
-                    to={`/product/${product.documentId}`}
-                    className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group hover:-translate-y-2"
-                  >
-                    <div className="relative overflow-hidden">
-                      {product.display_image ? (
-                        <img
-                          src={getImageUrl(product.display_image, true)}
-                          alt={product.product_name}
-                          className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-                        />
-                      ) : (
-                        <div className="w-full h-48 bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
-                          <span className="text-blue-600 font-semibold text-lg">{product.product_name}</span>
+                {currentProducts.map((product,index) => (
+                  <Fragment key={index}>
+                    <Link
+                      key={product.documentId}
+                      to={`/product/${product.documentId}`}
+                      className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group hover:-translate-y-2"
+                    >
+                      <div className="relative overflow-hidden">
+                        {product.display_image ? (
+                          <img
+                            src={getImageUrl(product.display_image, true)}
+                            alt={product.product_name}
+                            className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                          />
+                        ) : (
+                          <div className="w-full h-48 bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
+                            <span className="text-blue-600 font-semibold text-lg">{product.product_name}</span>
+                          </div>
+                        )}
+                        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-4 flex items-end justify-between">
+                          <h3 className="text-xl font-bold text-white">{product.product_name}</h3>
+                          <div className="bg-white/20 p-2 rounded-full text-white group-hover:bg-white/30 transition">
+                            <ArrowRight className="h-5 w-5" />
+                          </div>
+                        </div>
+                      </div>
+
+                      {viewMode === 'list' && (
+                        <div className="p-6">
+                          <p className="text-gray-600 text-sm line-clamp-3">
+                            {product.product_description.replace(/[#*]/g, '').substring(0, 150)}...
+                          </p>
                         </div>
                       )}
-                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-4 flex items-end justify-between">
-                        <h3 className="text-xl font-bold text-white">{product.product_name}</h3>
-                        <div className="bg-white/20 p-2 rounded-full text-white group-hover:bg-white/30 transition">
-                          <ArrowRight className="h-5 w-5" />
-                        </div>
-                      </div>
-                    </div>
-
-                    {viewMode === 'list' && (
-                      <div className="p-6">
-                        <p className="text-gray-600 text-sm line-clamp-3">
-                          {product.product_description.replace(/[#*]/g, '').substring(0, 150)}...
-                        </p>
-                      </div>
-                    )}
-                  </Link>
+                    </Link>
+                  </Fragment>
                 ))}
               </div>
             )}

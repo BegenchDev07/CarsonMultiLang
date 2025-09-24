@@ -1,7 +1,7 @@
 {
   "nav": {
     "home": "الرئيسية",
-    "products": "المنتجات",
+    "products": "الدرونز",
     "about": "من نحن",
     "contact": "اتصل بنا",
     "getQuote": "احصل على عرض سعر",
@@ -17,10 +17,10 @@
     "watchDemo": "شاهد العرض التوضيحي"
   },
   "bestSales": {
-    "title": "المنتجات الأكثر مبيعاً",
+    "title": "الدرونز الأكثر مبيعاً",
     "subtitle": "اكتشف حلول الطائرات المسيرة الأكثر شعبية والموثوقة من قبل المحترفين حول العالم.",
     "availableNow": "متوفر الآن",
-    "viewAll": "عرض جميع المنتجات"
+    "viewAll": "عرض جميع الدرونز"
   },
   "projects": {
     "title": "المشاريع المميزة",
@@ -190,7 +190,7 @@
     "noUseCases": "لا توجد حالات استخدام متاحة"
   },
   "products": {
-    "searchPlaceholder": "البحث في المنتجات...",
+    "searchPlaceholder": "البحث في الدرونز...",
     "sortBy": "ترتيب حسب: المميز",
     "newest": "الأحدث أولاً",
     "oldest": "الأقدم أولاً",
@@ -204,14 +204,14 @@
     "clearFilters": "مسح جميع المرشحات",
     "categories": "الفئات",
     "features": "الميزات",
-    "allProducts": "جميع المنتجات",
+    "allProducts": "جميع الدرونز",
     "previous": "السابق",
     "next": "التالي",
-    "loading": "جاري تحميل المنتجات...",
+    "loading": "جاري تحميل الدرونز...",
     "retry": "إعادة المحاولة"
   },
   "productDetail": {
-    "backToProducts": "العودة إلى المنتجات",
+    "backToProducts": "العودة إلى الدرونز",
     "requestQuote": "طلب عرض سعر",
     "whatsIncluded": "ما هو مشمول",
     "overview": "نظرة عامة",
@@ -306,9 +306,9 @@
     "getStarted": "ابدأ",
     "contactUs": "اتصل بنا",
     "home": "الرئيسية",
-    "backToProducts": "العودة إلى المنتجات",
+    "backToProducts": "العودة إلى الدرونز",
     "product": "منتج",
-    "allProducts": "جميع المنتجات",
+    "allProducts": "جميع الدرونز",
     "noUseCasesAvailable": "لا توجد حالات استخدام متاحة",
     "swipeMore": "اسحب لرؤية المزيد من المشاريع ←",
     "annualProductionCapacity": "القدرة الإنتاجية السنوية",

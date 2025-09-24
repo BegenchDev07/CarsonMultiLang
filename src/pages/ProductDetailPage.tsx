@@ -243,7 +243,19 @@ const ProductDetailPage = () => {
           </div>
           }
         </div>
-
+        <div className="w-full h-auto flex items-center justify-center bg-white rounded-xl mb-16 drop-shadow-xl"> 
+          <div className="p-8">
+            <div className="w-full h-full">
+              <iframe className='sm:w-[44rem] sm:h-[28rem] w-[22rem] h-[16rem] rounded-xl' 
+              src={product.link} 
+              title="YouTube video player" frameBorder={0} 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              referrerPolicy="strict-origin-when-cross-origin" 
+              allowFullScreen={true}
+              />
+            </div>
+          </div>
+        </div>
         {/* Product Details Tabs */}
         <div className="bg-white rounded-2xl shadow-lg">
           <div className="border-b border-gray-200">
@@ -262,44 +274,16 @@ const ProductDetailPage = () => {
                 </button>
               ))}
             </nav>
-          </div>
-
+          </div>          
           <div className='p-8'>          
             {selectedTab === 'overview' && (
-              <div className="space-y-8">
-                {/* Show iframe on desktop */}
-                {!isMobile ? (
-                  <div className="h-[43rem] rounded-b-lg">
-                  <iframe
-                    src={
-                      product?.presentation?.url
-                      &&
-                      'https://api.skyelectronica.com' + product?.presentation?.url                      
-                    }
-                    sandbox="allow-same-origin allow-scripts allow-popups"
-                    style={{height: "100%", width: "100%"}}
-                    title={t('productDetail.presentation', 'Product Presentation')}
-                    aria-placeholder='Currently No Presentation Available'
-                  />
-                  </div>
-                ) : (
-                  // On mobile show button and modal
-                  <>
-                    <button
-                      onClick={() => setIsModalOpen(true)}
-                      className="w-full h-16 bg-blue-600 text-white rounded-lg"
-                    >
-                      {t('productDetail.viewPresentation', 'View Presentation')}
-                    </button>
-                    {/* Modal */}
-                    {isModalOpen && (                      
-                      <>
-                        <ProductDetailModal product={product} setIsModalOpen={setIsModalOpen}/>
-                      </>            
-                    )}
-
-                  </>
-                )}
+              <div className="space-y-8 flex items-center justify-center ">
+                <button
+                  onClick={() => window.open(`https://api.skyelectronica.com/`+product?.presentation?.url, '_blank')}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg"
+                >
+                  Open Brochure
+                </button>
               </div>            
             )}
             {selectedTab === 'specifications' && (
@@ -353,7 +337,7 @@ const ProductDetailPage = () => {
               }}
             >
               {product.specification}
-            </ReactMarkdown>
+                </ReactMarkdown>
 
               </div>
             )}

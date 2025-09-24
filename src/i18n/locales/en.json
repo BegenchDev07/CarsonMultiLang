@@ -1,11 +1,11 @@
 {
   "nav": {
     "home": "Home",
-    "products": "Products",
+    "products": "Drones",
     "about": "About",
     "contact": "Contact",
     "getQuote": "Get Quote",
-    "radio-jam":"Jammers"
+    "radio-jam":"Radio Jamming"
   },
   "hero": {
     "title1": "Fixed Wing and VTOL Series",
@@ -17,10 +17,10 @@
     "watchDemo": "See more products"
   },
   "bestSales": {
-    "title": "Best Selling Products",
+    "title": "Best Selling Drones",
     "subtitle": "Discover our most popular drone solutions trusted by professionals worldwide.",
     "availableNow": "Available Now",
-    "viewAll": "View All Products"
+    "viewAll": "View All Drones"
   },
   "projects": {
     "title": "Featured Projects",
@@ -204,14 +204,14 @@
     "clearFilters": "Clear all filters",
     "categories": "Categories",
     "features": "Features",
-    "allProducts": "All Products",
+    "allProducts": "All Drones",
     "previous": "Previous",
     "next": "Next",
     "loading": "Loading products...",
     "retry": "Retry"
   },
   "productDetail": {
-    "backToProducts": "Back to Products",
+    "backToProducts": "Back to Drones",
     "requestQuote": "Request Quote",
     "whatsIncluded": "What's Included",
     "overview": "Overview",
@@ -305,9 +305,9 @@
     "getStarted": "Get Started",
     "contactUs": "Contact Us",
     "home": "Home",
-    "backToProducts": "Back to Products",
+    "backToProducts": "Back to Drones",
     "product": "Product",
-    "allProducts": "All Products",
+    "allProducts": "All Drones",
     "noUseCasesAvailable": "No use cases available",
     "swipeMore": "Swipe to see more projects →",
     "annualProductionCapacity": "Annual production capacity",
