@@ -243,19 +243,22 @@ const ProductDetailPage = () => {
           </div>
           }
         </div>
-        <div className="w-full h-auto flex items-center justify-center bg-white rounded-xl mb-16 drop-shadow-xl"> 
-          <div className="p-8">
-            <div className="w-full h-full">
-              <iframe className='sm:w-[44rem] sm:h-[28rem] w-[22rem] h-[16rem] rounded-xl' 
-              src={product.link} 
-              title="YouTube video player" frameBorder={0} 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-              referrerPolicy="strict-origin-when-cross-origin" 
-              allowFullScreen={true}
-              />
+        {
+          product.link &&
+          <div className="w-full h-auto flex items-center justify-center bg-white rounded-xl mb-16 drop-shadow-xl"> 
+            <div className="p-4 h-[50vh] w-full">
+              <div className="w-full h-full flex items-center justify-center">                            
+                <iframe className='h-full w-full rounded-xl' 
+                src={product.link} 
+                title="YouTube video player" frameBorder={0} 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerPolicy="strict-origin-when-cross-origin" 
+                allowFullScreen={true}
+                />
+              </div>
             </div>
           </div>
-        </div>
+        }
         {/* Product Details Tabs */}
         <div className="bg-white rounded-2xl shadow-lg">
           <div className="border-b border-gray-200">

@@ -23,13 +23,13 @@ const HeroSection = () => {
     {
       title: t('hero.title2'),
       subtitle: t('hero.subtitle2'),
-      image: "https://api.skyelectronica.com/uploads/Wechat_IMG_363_a2cfa30146.jpg",
+      image: "https://api.skyelectronica.com/uploads/Wechat_IMG_1408_7837fd2e19.jpg",
       cta: t('common.learnMore')
     },
     {
       title: t('hero.title3'),
       subtitle: t('hero.subtitle3'),
-      image: "https://api.skyelectronica.com/uploads/fba6f6bcb9e32cea4675be0e07093e94_0fe121ad93.jpeg",
+      image: "https://api.skyelectronica.com/uploads/7_c28da0890d.png",
       cta: t('common.getStarted')
     }
   ];
@@ -104,8 +104,7 @@ const HeroSection = () => {
             decoding="async"
             width="800"
             height="600"
-            className={ isMobile ? ' w-full h-full bg-white object-cover' : ' w-full h-full object-cover'}
-            fetchPriority={index === 0 ? "high" : "low"}
+            className={ isMobile ? ' w-full h-full bg-white object-cover' : ' w-full h-full object-cover'}            
             style={{ contentVisibility: index === currentSlide ? 'visible' : 'hidden' }}
           />
           <div className="absolute inset-0 z-20 flex items-center">

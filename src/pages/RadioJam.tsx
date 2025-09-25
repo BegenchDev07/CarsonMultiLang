@@ -20,7 +20,7 @@ const RadioJam = () => {
 
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = isMobile ? 4 : 9;
+  const itemsPerPage = isMobile ? 10 : 9;
 
   useEffect(() => {
     const fetchData = async () => {

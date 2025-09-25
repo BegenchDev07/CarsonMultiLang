@@ -3,7 +3,7 @@ import HeroSection from '../components/HeroSection';
 import BestSalesSection from '../components/BestSalesSection';
 // import UseCasesSection from '../components/UseCasesSection';
 // import ProjectsSection from '../components/ProjectsSection';
-import AchievementsSection from '../components/AchievementsSection';
+// import AchievementsSection from '../components/AchievementsSection';
 import Footer from '../components/Footer';
 
 const LandingPage = () => {
@@ -13,7 +13,7 @@ const LandingPage = () => {
       <BestSalesSection />
       {/* <UseCasesSection /> */}
       {/* <ProjectsSection /> */}
-      <AchievementsSection />
+      {/* <AchievementsSection /> */}
       <Footer />
     </div>
   );

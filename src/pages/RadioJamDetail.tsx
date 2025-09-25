@@ -6,7 +6,6 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import remarkYoutube from 'remark-youtube';
 import GetQuoteModal from '../components/GetQuoteModal';
-import ProductDetailModal from '../components/ProductDetailModal';
 import { productsApi, Product, getImageUrl } from '../services/api';
 import { useMediaQuery } from 'react-responsive'; // For mobile responsiveness
 
@@ -20,8 +19,7 @@ const RadioJamDetail = () => {
   const [showCopyNotification, setShowCopyNotification] = useState(false);
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false); // To control modal state
+  const [error, setError] = useState<string | null>(null);  
 
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
@@ -35,7 +33,7 @@ const RadioJamDetail = () => {
 
       try {
         setLoading(true);
-        const productData:any = await productsApi.getRadioJammer(id);        
+        const productData:any = await productsApi.getRadioJammer(id);                
         setProduct(productData);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to fetch product');
@@ -243,7 +241,22 @@ const RadioJamDetail = () => {
           </div>
           }
         </div>
-
+        {
+          product.link &&
+          <div className="w-full h-auto flex items-center justify-center bg-white rounded-xl mb-16 drop-shadow-xl"> 
+            <div className="p-4 h-[50vh] w-full">
+              <div className="w-full h-full flex items-center justify-center">                            
+                <iframe className='h-full w-full rounded-xl' 
+                src={product.link} 
+                title="YouTube video player" frameBorder={0} 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerPolicy="strict-origin-when-cross-origin" 
+                allowFullScreen={true}
+                />
+              </div>
+            </div>
+          </div>
+        }
         {/* Product Details Tabs */}
         <div className="bg-white rounded-2xl shadow-lg">
           <div className="border-b border-gray-200">
@@ -266,44 +279,17 @@ const RadioJamDetail = () => {
 
           <div className='p-8'>          
             {selectedTab === 'overview' && (
-              <div className="space-y-8">
-                {/* Show iframe on desktop */}
-                {!isMobile ? (
-                  <div className="h-[43rem] rounded-b-lg">
-                  <iframe
-                    src={
-                      product?.presentation?.url
-                      &&
-                      'https://api.skyelectronica.com' + product?.presentation?.url                      
-                    }
-                    sandbox="allow-same-origin allow-scripts allow-popups"
-                    style={{height: "100%", width: "100%"}}
-                    title={t('productDetail.presentation', 'Product Presentation')}
-                    aria-placeholder='Currently No Presentation Available'
-                  />
-                  </div>
-                ) : (
-                  // On mobile show button and modal
-                  <>
-                    <button
-                      onClick={() => setIsModalOpen(true)}
-                      className="w-full h-16 bg-blue-600 text-white rounded-lg"
-                    >
-                      {t('productDetail.viewPresentation', 'View Presentation')}
-                    </button>
-                    {/* Modal */}
-                    {isModalOpen && (                      
-                      <>
-                        <ProductDetailModal product={product} setIsModalOpen={setIsModalOpen}/>
-                      </>            
-                    )}
-
-                  </>
-                )}
+              <div className="space-y-8 flex items-center justify-center">
+                <button
+                  onClick={() => window.open(`https://api.skyelectronica.com/`+product?.presentation?.url, '_blank')}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg"
+                >
+                  Open Brochure
+                </button>
               </div>            
             )}
             {selectedTab === 'specifications' && (
-              <div className="prose prose-lg max-w-none text-gray-600 leading-relaxed">
+              <div className="prose prose-lg w-full text-gray-600 leading-relaxed overflow-x-auto">
                 <ReactMarkdown
               remarkPlugins={[remarkGfm,remarkYoutube]} // Enables GFM, including table support
               components={{
