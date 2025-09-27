@@ -17,7 +17,7 @@ const HeroSection = () => {
     {
       title: t('hero.title1'),
       subtitle: t('hero.subtitle1'),
-      image: "https://api.skyelectronica.com/uploads/9fd837ba1575a32f77dc6ee9ec9fd299_19fafc5279.jpeg",
+      image: "https://api.skyelectronica.com/uploads/y70_69183041d9.png",
       cta: t('common.learnMore')
     },
     {
