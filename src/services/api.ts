@@ -222,6 +222,19 @@ const mapApiRadioJammerToJammer = (apiProduct: ApiProduct): RadioJammer => {
 
 // API service methods
 export const productsApi = {
+  async getBestSellers(): Promise<Product[]> {
+    const url = `${API_BASE_URL}/products?filters=\[is_best_seller\]\[$eq\]=true&filters\[is_best_seller\]\[$notNull\]=true`;
+    const response = await fetchData<ApiResponse<ApiProduct>>(url, true, true); // addLocale=true, populate=true
+    if (Array.isArray(response.data)) {      
+      return response.data
+        .filter(item => item && item.product_name)
+        .map(mapApiProductToProduct);
+    }
+    return []; // Should return an array for getProducts
+  },
+
+
+
   async getProducts(): Promise<Product[]> {
     const url = `${API_BASE_URL}/products`;
     const response = await fetchData<ApiResponse<ApiProduct>>(url, true, true); // addLocale=true, populate=true
@@ -280,7 +293,7 @@ export const productsApi = {
 
   async getBestSellerProducts(): Promise<Product[]> {
     // Return first two products as best sellers
-    const products = await this.getProducts();    
+    const products = await this.getBestSellers();     
     return products.filter(product => product && product.product_name).slice(0, 4);
   },
 

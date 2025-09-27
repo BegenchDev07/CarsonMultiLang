@@ -103,7 +103,7 @@ const RadioJamDetail = () => {
             to="/products"
             className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
           >
-            {t('productDetail.backToProducts')}
+            {t('productDetail.backToJammers')}
           </Link>
         </div>
       </div>
@@ -128,7 +128,7 @@ const RadioJamDetail = () => {
           className={`inline-flex items-center text-blue-600 hover:text-blue-700 transition-colors duration-300 mb-8 ${isRTL ? 'flex-row-reverse' : ''}`}
         >
           <ArrowLeft className={`h-5 w-5 ${isRTL ? 'ml-2 rotate-180' : 'mr-2'}`} />
-          {t('productDetail.backToProducts')}
+          {t('productDetail.backToJammers')}
         </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">

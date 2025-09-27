@@ -212,6 +212,7 @@
   },
   "productDetail": {
     "backToProducts": "Back to Drones",
+    "backToJammers": "Back to Radio Jammers",
     "requestQuote": "Request Quote",
     "whatsIncluded": "What's Included",
     "overview": "Overview",
@@ -306,6 +307,7 @@
     "contactUs": "Contact Us",
     "home": "Home",
     "backToProducts": "Back to Drones",
+    "backToJammers": "Back to Radio Jammers",
     "product": "Product",
     "allProducts": "All Drones",
     "noUseCasesAvailable": "No use cases available",
