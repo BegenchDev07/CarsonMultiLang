@@ -104,6 +104,7 @@ interface RadioJammer {
   secondary_images?: Array<any> | [];
   specification?: string;
   link?: string; 
+  presentation: string;
 }
 
 interface ApiResponse<T> {
@@ -217,6 +218,7 @@ const mapApiRadioJammerToJammer = (apiProduct: ApiProduct): RadioJammer => {
     secondary_images: apiProduct.secondary_images,
     specification: apiProduct.specification,
     link: apiProduct.link || '',
+    presentation: apiProduct.presentation,
   }
 }
 

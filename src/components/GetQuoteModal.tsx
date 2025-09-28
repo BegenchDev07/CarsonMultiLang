@@ -13,12 +13,8 @@ const GetQuoteModal: React.FC<GetQuoteModalProps> = ({ isOpen, onClose }) => {
 
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
-    company: '',
-    phone: '',
-    projectType: '',
-    budget: '',
-    timeline: '',
+    email: '',    
+    phone: '',    
     message: ''
   });
 
@@ -32,16 +28,23 @@ const GetQuoteModal: React.FC<GetQuoteModalProps> = ({ isOpen, onClose }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission
-    console.log('Quote request submitted:', formData);
+    const form = new FormData();    
+    Object.entries(formData).forEach(([key, value]) => {
+      form.append(key, value);
+    });
+    fetch('https://script.google.com/macros/s/AKfycbxfpDP9Gi6T11i-LFU2rQZccrRIjl-6WVSh0EDvZd5mbS-so7Ml1DBJGaAkZyAEU3LEcQ/exec',{
+      method: 'POST',
+      body: form
+    })    
+    .catch((err) => {
+      console.error(err)
+    })            
+    console.log('Quote request submitted');
     // Reset form and close modal
     setFormData({
       name: '',
-      email: '',
-      company: '',
-      phone: '',
-      projectType: '',
-      budget: '',
-      timeline: '',
+      email: '',    
+      phone: '',    
       message: ''
     });
     onClose();
@@ -68,7 +71,10 @@ const GetQuoteModal: React.FC<GetQuoteModalProps> = ({ isOpen, onClose }) => {
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className={`p-8 space-y-6 ${isRTL ? 'text-right' : 'text-left'}`}>
+        <form 
+        method='POST'        
+        onSubmit={handleSubmit}
+         className={`p-8 space-y-6 ${isRTL ? 'text-right' : 'text-left'}`}>
           {/* Personal Information */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -103,33 +109,16 @@ const GetQuoteModal: React.FC<GetQuoteModalProps> = ({ isOpen, onClose }) => {
                 placeholder={t('contact.emailAddress')}
               />
             </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label htmlFor="company" className={`block text-sm font-medium text-gray-700 mb-2 ${isRTL ? 'text-right' : 'text-left'}`}>
-                <Building className={`h-4 w-4 inline ${isRTL ? 'ml-2' : 'mr-2'}`} />
-                {t('contact.company')}
-              </label>
-              <input
-                type="text"
-                id="company"
-                name="company"
-                value={formData.company}
-                onChange={handleInputChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder={t('contact.company')}
-              />
-            </div>
             <div>
               <label htmlFor="phone" className={`block text-sm font-medium text-gray-700 mb-2 ${isRTL ? 'text-right' : 'text-left'}`}>
                 <Phone className={`h-4 w-4 inline ${isRTL ? 'ml-2' : 'mr-2'}`} />
-                {t('contact.phone')}
+                {t('contact.phone')} {t('contact.required')}
               </label>
               <input
-                type="tel"
+                type="number"
                 id="phone"
                 name="phone"
+                required
                 value={formData.phone}
                 onChange={handleInputChange}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -137,72 +126,8 @@ const GetQuoteModal: React.FC<GetQuoteModalProps> = ({ isOpen, onClose }) => {
               />
             </div>
           </div>
-
-          {/* Project Details */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label htmlFor="projectType" className={`block text-sm font-medium text-gray-700 mb-2 ${isRTL ? 'text-right' : 'text-left'}`}>
-                {t('contact.projectType')} {t('contact.required')}
-              </label>
-              <select
-                id="projectType"
-                name="projectType"
-                required
-                value={formData.projectType}
-                onChange={handleInputChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              >
-                <option value="">{t('contact.selectProjectType')}</option>
-                <option value="commercial">التصوير التجاري</option>
-                <option value="industrial">الفحص الصناعي</option>
-                <option value="agricultural">المراقبة الزراعية</option>
-                <option value="surveillance">الأمن والمراقبة</option>
-                <option value="mapping">رسم الخرائط والمسح</option>
-                <option value="delivery">التوصيل واللوجستيات</option>
-                <option value="research">البحث والتطوير</option>
-                <option value="custom">حل مخصص</option>
-              </select>
-            </div>
-            <div>
-              <label htmlFor="budget" className={`block text-sm font-medium text-gray-700 mb-2 ${isRTL ? 'text-right' : 'text-left'}`}>
-                {t('contact.budget')}
-              </label>
-              <select
-                id="budget"
-                name="budget"
-                value={formData.budget}
-                onChange={handleInputChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              >
-                <option value="">{t('contact.selectBudget')}</option>
-                <option value="under-10k">أقل من $10,000</option>
-                <option value="10k-50k">$10,000 - $50,000</option>
-                <option value="50k-100k">$50,000 - $100,000</option>
-                <option value="100k-500k">$100,000 - $500,000</option>
-                <option value="over-500k">أكثر من $500,000</option>
-              </select>
-            </div>
-          </div>
-
-          <div>
-            <label htmlFor="timeline" className={`block text-sm font-medium text-gray-700 mb-2 ${isRTL ? 'text-right' : 'text-left'}`}>
-              {t('contact.timeline')}
-            </label>
-            <select
-              id="timeline"
-              name="timeline"
-              value={formData.timeline}
-              onChange={handleInputChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            >
-              <option value="">{t('contact.selectTimeline')}</option>
-              <option value="asap">في أسرع وقت ممكن</option>
-              <option value="1-month">خلال شهر واحد</option>
-              <option value="3-months">خلال 3 أشهر</option>
-              <option value="6-months">خلال 6 أشهر</option>
-              <option value="flexible">مرن</option>
-            </select>
-          </div>
+                    
+          
 
           <div>
             <label htmlFor="message" className={`block text-sm font-medium text-gray-700 mb-2 ${isRTL ? 'text-right' : 'text-left'}`}>
@@ -222,10 +147,7 @@ const GetQuoteModal: React.FC<GetQuoteModalProps> = ({ isOpen, onClose }) => {
           </div>
 
           {/* Submit Button */}
-          <div className="flex items-center justify-between pt-6 border-t border-gray-200">
-            <p className="text-sm text-gray-500">
-              {t('contact.responseTime')}
-            </p>
+          <div className="flex items-center justify-between pt-6 border-t border-gray-200">            
             <div className="flex space-x-4">
               <button
                 type="button"

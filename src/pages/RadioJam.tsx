@@ -138,9 +138,9 @@ const RadioJam = () => {
                   ? isMobile ? 'grid-cols-2' : 'grid-cols-3'
                   : 'grid-cols-1'
               }`}>
-                {currentProducts.map((product:any) => (
+                {currentProducts.map((product:any,index:number) => (
                   <Link
-                    key={product.documentId}
+                    key={index}
                     to={`/radio-jam/${product.documentId}`}
                     className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group hover:-translate-y-2"
                   >

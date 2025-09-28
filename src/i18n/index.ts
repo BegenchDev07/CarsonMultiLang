@@ -17,6 +17,7 @@ i18n
         translation: ar
       }
     },    
+    supportedLngs: ['en', 'ar'],   // ✅ allow only these languages
     fallbackLng: 'en',
     debug: false,
     interpolation: {

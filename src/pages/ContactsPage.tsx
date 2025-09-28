@@ -35,7 +35,7 @@ const offices = [
     position: t('offices.team.john.position'),
     languages: t('offices.team.john.languages'),
     phone: "+85261545880",
-    email: "chenrucheng@qifeizn.com",
+    email: "john@skyelectronicshk.com",
     whatsapp: "wa.link/9sgo22",
   },
   {
@@ -46,16 +46,7 @@ const offices = [
     phone: "+77479888860",
     email: "timagr@skyelectronicshk.com",
     whatsapp: "https://wa.link/z4a4wh",
-  },
-  {
-    id: "ali",
-    name: t('offices.team.ali.name'),
-    position: t('offices.team.ali.position'),
-    languages: t('offices.team.ali.languages'),
-    phone: "+852 62320524",
-    email: null,
-    whatsapp: "https://wa.link/057ddc"
-  },
+  },  
   {
     id: "jack",
     name: t('offices.team.jack.name'),
@@ -72,16 +63,16 @@ const offices = [
     languages: t('offices.team.diamond.languages'),
     phone: "+85261574997",
     email: "diamond@skyelectronicshk.com",
-    whatsapp: null
+    whatsapp: "https://wa.link/9dh2wp"
   },
   {
     id: "ray",
     name: t('offices.team.ray.name'),
     position: t('offices.team.ray.position'),
     languages: t('offices.team.ray.languages'),
-    phone: null,
+    phone: "+85261545880",
     email: "ray@skyelectronicshk.com",
-    whatsapp: null
+    whatsapp: "https://wa.link/9dh2wp"
   }
 ];
 
@@ -171,11 +162,10 @@ const offices = [
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   >
                     <option value="">{t('contact.selectSubject')}</option>
-                    <option value="sales">استفسار مبيعات</option>
-                    <option value="support">دعم تقني</option>
-                    <option value="partnership">شراكة</option>
-                    <option value="media">إعلام وصحافة</option>
-                    <option value="other">أخرى</option>
+                    <option value="sales">{isRTL ? 'استفسار مبيعات' : 'Sales Inquiry'}</option>
+                    <option value="support">{isRTL ? 'دعم تقني':'Technical Support'}</option>
+                    <option value="partnership">{isRTL ? 'شراكة' : 'Partnership'}</option>
+                    <option value="media">{isRTL ? 'إعلام وصحافة':'Media and Press'}</option>                    
                   </select>
                 </div>
                 
@@ -237,11 +227,14 @@ const offices = [
                     </div>
                   }
                   {
-                    office.phone !== null
+                    (office.phone !== null && office.whatsapp)
                     &&
                   <div className="flex items-center">
-                    <Phone className="h-4 w-4 text-blue-600 mr-2 flex-shrink-0" />
-                    <span>{office.phone}</span>
+                    <div className='flex items-center justify-center'>
+                      <Phone className="h-4 w-4 text-blue-600 mr-2 flex-shrink-0" />                      
+                      <MessageCircle className="h-4 w-4 text-blue-600 mr-2 flex-shrink-0" />
+                    </div>
+                    <a className='underline' href={office.whatsapp}>{office.phone}</a>
                   </div>
                   }
                   {
@@ -251,15 +244,7 @@ const offices = [
                       <Mail className="h-4 w-4 text-blue-600 mr-2 flex-shrink-0" />
                       <span>{office.email}</span>
                     </div>
-                  }
-                  {
-                    office.whatsapp !== null
-                    &&
-                    <div className="flex items-center">
-                      <MessageCircle className="h-4 w-4 text-blue-600 mr-2 flex-shrink-0" />
-                      <a className='underline' href={office.whatsapp}>{isRTL ? 'دردشة' : 'Chat'}</a>
-                    </div>
-                  }
+                  }                  
                 </div>
               </div>
             ))}
