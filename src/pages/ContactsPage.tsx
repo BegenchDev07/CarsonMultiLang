@@ -36,7 +36,7 @@ const offices = [
     languages: t('offices.team.john.languages'),
     phone: "+85261545880",
     email: "john@skyelectronicshk.com",
-    whatsapp: "wa.link/9sgo22",
+    whatsapp: "https://wa.link/9sgo22",
   },
   {
     id: "tim",
