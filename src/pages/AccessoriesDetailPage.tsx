@@ -10,7 +10,7 @@ import ScaledModal from '../components/ScaledModal';
 import { productsApi, Product, getImageUrl } from '../services/api';
 import { useMediaQuery } from 'react-responsive'; // For mobile responsiveness
 
-const RadioJamDetail = () => {
+const AccessoriesDetailPage = () => {
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === 'ar';
   const { id } = useParams<{ id: string }>();
@@ -35,7 +35,7 @@ const RadioJamDetail = () => {
 
       try {
         setLoading(true);
-        const productData:any = await productsApi.getRadioJammer(id);                            
+        const productData:any = await productsApi.getAccessory(id);                            
         setProduct(productData);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to fetch product');
@@ -102,7 +102,7 @@ const RadioJamDetail = () => {
         <div className="text-center">
           <p className="text-red-600 mb-4">{t('common.error')}: {error || t('productDetail.notFound')}</p>
           <Link 
-            to="/radio-jam"
+            to="/accessories"
             className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
           >
             {t('productDetail.backToJammers')}
@@ -142,18 +142,18 @@ const RadioJamDetail = () => {
           <div className={`flex items-center text-sm text-gray-500 mb-8 ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
             <Link to="/" className="hover:text-blue-600 transition-colors duration-300">{t('common.home')}</Link>
             <span>/</span>
-            <Link to="/radio-jam" className="hover:text-blue-600 transition-colors duration-300">{t('nav.radio-jam')}</Link>
+            <Link to="/accessories" className="hover:text-blue-600 transition-colors duration-300">{t('nav.accessories-gimbals')}</Link>
             <span>/</span>
             <span className="text-gray-900">{product.product_name}</span>
           </div>
 
           {/* Back Button */}
           <Link
-            to="/radio-jam"
+            to="/accessories"
             className={`inline-flex items-center text-blue-600 hover:text-blue-700 transition-colors duration-300 mb-8 ${isRTL ? 'flex-row-reverse' : ''}`}
           >
             <ArrowLeft className={`h-5 w-5 ${isRTL ? 'ml-2 rotate-180' : 'mr-2'}`} />
-            {t('productDetail.backToJammers')}
+            {t('productDetail.backToAccessories')}
           </Link>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
@@ -327,7 +327,7 @@ const RadioJamDetail = () => {
                     onClick={() => window.open(`https://api.skyelectronica.com/`+product?.presentation?.url, '_blank')}
                     className="px-4 py-2 bg-blue-600 text-white rounded-lg"
                   >
-                    Open Brochure
+                    {t('productDetail.openBrochure')}
                   </button>
                 </div>            
               )}
@@ -407,4 +407,4 @@ const RadioJamDetail = () => {
   );
 };
 
-export default RadioJamDetail;
+export default AccessoriesDetailPage;

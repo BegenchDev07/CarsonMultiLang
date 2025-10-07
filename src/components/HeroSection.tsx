@@ -31,7 +31,13 @@ const HeroSection = () => {
       subtitle: t('hero.subtitle3'),
       image: "https://api.skyelectronica.com/uploads/7_c28da0890d.png",
       cta: t('common.getStarted')
-    }
+    },
+    {
+      title: t('hero.title4'),
+      subtitle: t('hero.subtitle4'),
+      image: 'https://www.autelrobotics.com/wp-content/uploads/2024/10/EVO-Lite-PC-banner.webp',
+      cta: t('common.getStarted')
+    },    
   ];
 
   useEffect(() => {

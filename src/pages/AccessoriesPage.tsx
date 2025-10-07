@@ -2,15 +2,15 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { ArrowRight, Loader } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { productsApi, Feature, getImageUrl, JammerCategory, RadioJammer } from '../services/api';
+import { productsApi, Feature, getImageUrl, JammerCategory, AccessoriesType } from '../services/api';
 import { useMediaQuery } from 'react-responsive';
 
-const RadioJam = () => {
+const Accessories = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedFeatures, setSelectedFeatures] = useState<string[]>([]);
-  const [jammers, setJammers] = useState<RadioJammer[]>([]);
+  const [jammers, setJammers] = useState<AccessoriesType[]>([]);
   const [categories, setCategories] = useState<JammerCategory[]>([]);
   const [features, setFeatures] = useState<Feature[]>([]);
   const [loading, setLoading] = useState(true);
@@ -29,9 +29,9 @@ const RadioJam = () => {
       try {
         setLoading(true);
         const [jammersData, categoriesData, featuresData]:any = await Promise.all([
-          productsApi.getRadioJammers(),
-          productsApi.getJammerCategories(),
-          productsApi.getJammerFeatures(),
+          productsApi.getAccessories(),
+          productsApi.getAccessoryCategories(),
+          productsApi.getAccessoryFeatures(),
         ]);
         setJammers(jammersData);
         setCategories(categoriesData);
@@ -61,10 +61,10 @@ const RadioJam = () => {
       product.product_description.toLowerCase().includes(searchTerm.toLowerCase());    
     const matchesCategory =
       selectedCategory === 'all' ||
-      (product.jammer_category && product.jammer_category.category_name.toLowerCase() === selectedCategory.toLowerCase());    
+      (product.accessory_category && product.accessory_category.category_name.toLowerCase() === selectedCategory.toLowerCase());    
     const matchesFeatures =
       selectedFeatures.length === 0 ||
-      (product.jammer_feature && selectedFeatures.includes(product.jammer_feature.feature_name));
+      (product.accessory_feature && selectedFeatures.includes(product.accessory_feature.feature_name));
 
     return matchesSearch && matchesCategory && matchesFeatures;
   });
@@ -86,7 +86,7 @@ const RadioJam = () => {
       id: category.category_name.toLowerCase(),
       name: category.category_name,
       count: jammers.filter(product =>
-        product.jammer_category && product.jammer_category.category_name.toLowerCase() === category.category_name.toLowerCase()
+        product.accessory_category && product.accessory_category.category_name.toLowerCase() === category.category_name.toLowerCase()
       ).length,
     })),
   ];
@@ -202,7 +202,7 @@ const RadioJam = () => {
                   <Fragment key={index}>
                     <Link
                       key={product.documentId}
-                      to={`/radio-jam/${product.documentId}`}
+                      to={`/accessories/${product.documentId}`}
                       className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group hover:-translate-y-2"
                     >
                       <div className="relative overflow-hidden">
@@ -287,4 +287,4 @@ const RadioJam = () => {
   );
 };
 
-export default RadioJam;
+export default Accessories;

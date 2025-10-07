@@ -12,6 +12,10 @@ const AboutPage = lazy(() => import('./pages/AboutPage'));
 const ContactsPage = lazy(() => import('./pages/ContactsPage'));
 const RadioJam = lazy(() => import('./pages/RadioJam'));
 const RadioJamDetail = lazy(() => import('./pages/RadioJamDetail'))
+const AccessoriesPage = lazy(() => import('./pages/AccessoriesPage'))
+const AccessorieDetailPage = lazy(() => import('./pages/AccessoriesDetailPage'))
+const BlogPage = lazy(()=> import('./pages/BlogPage'))
+const BlogDetailPage = lazy(() => import('./pages/BlogDetailPage'))
 
 // Error Boundary
 class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
@@ -63,12 +67,16 @@ function App() {
               <Suspense fallback={<div className="text-center mt-10">Loading...</div>}>
                 <Routes>
                   <Route path="/" element={<LandingPage />} />
-                  <Route path="/products" element={<ProductsPage />} />
-                  <Route path="/product/:id" element={<ProductDetailPage />} />
+                  <Route path="/drones" element={<ProductsPage />} />
+                  <Route path="/drone/:id" element={<ProductDetailPage />} />
                   <Route path="/about" element={<AboutPage />} />
                   <Route path="/contacts" element={<ContactsPage />} />
                   <Route path="/radio-jam" element={<RadioJam />} />
                   <Route path="/radio-jam/:id" element={<RadioJamDetail />} />
+                  <Route path="/accessories" element={<AccessoriesPage />} />
+                  <Route path="/accessories/:id" element={<AccessorieDetailPage />} />
+                  <Route path="/blog" element={<BlogPage />} />
+                  <Route path="/blog/:id" element={<BlogDetailPage />} />
                 </Routes>
               </Suspense>
             </main>

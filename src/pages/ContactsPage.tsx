@@ -57,21 +57,21 @@ const offices = [
     whatsapp: "https://wa.link/htnjz9"
   },
   {
-    id: "diamond",
+    id: "David",
     name: t('offices.team.diamond.name'),
     position: t('offices.team.diamond.position'),
     languages: t('offices.team.diamond.languages'),
     phone: "+85261574997",
-    email: "diamond@skyelectronicshk.com",
+    email: "david@skyelectronicshk.com",
     whatsapp: "https://wa.link/9dh2wp"
   },
   {
-    id: "ray",
+    id: "Frank",
     name: t('offices.team.ray.name'),
     position: t('offices.team.ray.position'),
     languages: t('offices.team.ray.languages'),
     phone: "+85261545880",
-    email: "ray@skyelectronicshk.com",
+    email: "frank@skyelectronicshk.com",
     whatsapp: "https://wa.link/9dh2wp"
   }
 ];
@@ -232,7 +232,7 @@ const offices = [
                   <div className="flex items-center">
                     <div className='flex items-center justify-center'>
                       <Phone className="h-4 w-4 text-blue-600 mr-2 flex-shrink-0" />                      
-                      <MessageCircle className="h-4 w-4 text-blue-600 mr-2 flex-shrink-0" />
+                      <h1 className='pr-2'>WA:</h1>
                     </div>
                     <a className='underline' href={office.whatsapp}>{office.phone}</a>
                   </div>

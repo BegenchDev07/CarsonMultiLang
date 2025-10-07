@@ -1,11 +1,14 @@
 {
   "nav": {
     "home": "Home",
-    "products": "Drones",
+    "products": "Drones",    
     "about": "About",
     "contact": "Contact",
     "getQuote": "Get Quote",
-    "radio-jam":"Radio Jamming"
+    "radio-jam":"Radio Jamming",
+    "accessories-gimbals":"Accessories & Gimbals",
+    "blog":"Blog",
+    "all": "All"
   },
   "hero": {
     "title1": "Fixed Wing and VTOL Series",
@@ -14,6 +17,8 @@
     "subtitle2": "Cutting-edge electronics and drone technology solutions",
     "title3": "FPV 10-15 inch and Fiber Optic",    
     "subtitle3": "Reliable drone solutions for commercial and industrial use",
+    "title4": "All Autel Models",    
+    "subtitle4": "Reliable drone solutions for commercial and industrial use",
     "watchDemo": "See more products"
   },
   "bestSales": {
@@ -213,6 +218,7 @@
   "productDetail": {
     "backToProducts": "Back to Drones",
     "backToJammers": "Back to Radio Jammers",
+    "backToAccessories": "Back to Accessories & Gimbals",
     "requestQuote": "Request Quote",
     "whatsIncluded": "What's Included",
     "overview": "Overview",
@@ -220,7 +226,9 @@
     "keyFeature": "Key Feature",
     "linkCopied": "Link copied successfully!",
     "loading": "Loading product details...",
-    "notFound": "Product not found"
+    "notFound": "Product not found",
+    "openBrochure": "Open Brochure"
+
   },
   "about": {
     "title": "About SkyElectronica",

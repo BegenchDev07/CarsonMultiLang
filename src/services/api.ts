@@ -20,6 +20,14 @@ export interface Category {
   updatedAt: string;
 }
 
+export interface JammerCategory {
+  id: number;
+  category_name: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+
 export interface Feature {
   id: number;
   feature_name: string;
@@ -72,6 +80,13 @@ interface ApiCategory {
   updatedAt: string;
 }
 
+interface ApiNewCategory {
+  id: number;
+  category_name: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 interface ApiFeature {
   id: number;
   feature_name: string;
@@ -96,7 +111,49 @@ interface ApiProduct {
   link?: string;
 }
 
-interface RadioJammer {
+interface ApiJammer {
+  documentId: number;
+  product_name: string;
+  product_description: string;
+  specification?: string;
+  included?: string;
+  createdAt: string;
+  updatedAt: string;
+  presentation: string;
+  // Relationships will be nested under 'data'
+  display_image?: { data: ApiImage | null };
+  secondary_images?: Array<any> | [] ;
+  jammer_category?: JammerCategory | null ;
+  jammer_feature?: ApiFeature | null ;
+  link?: string;
+}
+
+interface ApiAccessories {
+  documentId: number;
+  product_name: string;
+  product_description: string;
+  specification?: string;
+  included?: string;
+  createdAt: string;
+  updatedAt: string;
+  presentation: string;
+  // Relationships will be nested under 'data'
+  display_image?: { data: ApiImage | null };
+  secondary_images?: Array<any> | [] ;
+  accessory_category?: JammerCategory | null ;
+  accessory_feature?: ApiFeature | null ;
+  link?: string;
+}
+
+interface ApiBlog {
+  documentId:string;
+  blog_title: string;
+  content: string;
+  createdAt: string;
+  display_image?: {data: ApiImage | null};
+}
+
+export interface RadioJammer {
   documentId: string;
   product_name: string;
   product_description: string;
@@ -105,6 +162,29 @@ interface RadioJammer {
   specification?: string;
   link?: string; 
   presentation: string;
+  jammer_category?: JammerCategory | null ;
+  jammer_feature?: ApiFeature | null ;
+}
+
+export interface AccessoriesType {
+  documentId: string;
+  product_name: string;
+  product_description: string;
+  display_image?: {data: ApiImage | null};
+  secondary_images?: Array<any> | [];
+  specification?: string;
+  link?: string; 
+  presentation: string;
+  accessory_category?: JammerCategory | null ;
+  accessory_feature?: ApiFeature | null ;
+}
+
+export interface BlogType {
+  documentId:string,
+  blog_title: string;
+  content: string;
+  createdAt: string;
+  display_image?:{data: ApiImage | null}; 
 }
 
 interface ApiResponse<T> {
@@ -209,16 +289,44 @@ const mapApiProductToProduct = (apiProduct: ApiProduct): Product => {
   };
 };
 
-const mapApiRadioJammerToJammer = (apiProduct: ApiProduct): RadioJammer => {
+const mapApiRadioJammerToJammer = (apiJammer: ApiJammer): RadioJammer => {    
   return {
-    documentId: apiProduct.documentId.toString(),
-    product_name: apiProduct.product_name,
-    product_description: apiProduct.product_description,
-    display_image: apiProduct.display_image,
-    secondary_images: apiProduct.secondary_images,
-    specification: apiProduct.specification,
-    link: apiProduct.link || '',
-    presentation: apiProduct.presentation,
+    documentId: apiJammer.documentId.toString(),
+    product_name: apiJammer.product_name,
+    product_description: apiJammer.product_description,
+    display_image: apiJammer.display_image,
+    secondary_images: apiJammer.secondary_images,
+    specification: apiJammer.specification,
+    link: apiJammer.link || '',
+    presentation: apiJammer.presentation,
+    jammer_category: apiJammer.jammer_category,
+    jammer_feature: apiJammer.jammer_feature,
+  }
+}
+
+const mapApiAccessoriesToAccessories = (apiAccessories: ApiAccessories): AccessoriesType => {    
+  debugger;
+  return {
+    documentId: apiAccessories.documentId.toString(),
+    product_name: apiAccessories.product_name,
+    product_description: apiAccessories.product_description,
+    display_image: apiAccessories.display_image,
+    secondary_images: apiAccessories.secondary_images,
+    specification: apiAccessories.specification,
+    link: apiAccessories.link || '',
+    presentation: apiAccessories.presentation,
+    accessory_category: apiAccessories.accessory_category,
+    accessory_feature: apiAccessories.accessory_feature,
+  }
+}
+
+const mapApiBlogsToBlogs = (apiBlogs: ApiBlog): BlogType => {
+  return {
+    documentId: apiBlogs.documentId,
+    blog_title: apiBlogs.blog_title,
+    content: apiBlogs.content,
+    createdAt: apiBlogs.createdAt,
+    display_image: apiBlogs.display_image
   }
 }
 
@@ -239,7 +347,7 @@ export const productsApi = {
 
   async getProducts(): Promise<Product[]> {
     const url = `${API_BASE_URL}/products`;
-    const response = await fetchData<ApiResponse<ApiProduct>>(url, true, true); // addLocale=true, populate=true
+    const response = await fetchData<ApiResponse<ApiProduct>>(url, true, true); // addLocale=true, populate=true    
     if (Array.isArray(response.data)) {      
       return response.data
         .filter(item => item && item.product_name)
@@ -343,6 +451,119 @@ export const productsApi = {
       }
     } catch (error) {
       console.error(`Error fetching jammer ${id}:`, error);
+    }
+    return null;
+  },
+
+  async getAccessoryCategories(): Promise<JammerCategory[] | null>{
+    const url = `${API_BASE_URL}/acessory-categories`;
+    const response = await fetchData<ApiResponse<JammerCategory>>(url, true); // addLocale=true
+    if (Array.isArray(response.data)) {
+      return response.data
+        .filter(item => item && item.category_name)
+        .map(item => ({
+          id: item.id,
+          category_name: item.category_name,
+          createdAt: item.createdAt,
+          updatedAt: item.updatedAt
+        }));
+    }
+    return [];
+  },
+
+  async getAccessoryFeatures(): Promise<Feature[]> {
+    const url = `${API_BASE_URL}/accessory-features`;
+    const response = await fetchData<ApiResponse<ApiFeature>>(url, true); // addLocale=true
+    if (Array.isArray(response.data)) {
+      return response.data
+        .filter(item => item && item.feature_name)
+        .map(item => ({
+          id: item.id,
+          feature_name: item.feature_name,
+          createdAt: item.createdAt,
+          updatedAt: item.updatedAt
+        }));
+    }
+    return [];
+  },
+
+  async getAccessory(id: string): Promise<RadioJammer | null> {
+    const url = `${API_BASE_URL}/gimbals-acessories/${id}`;
+    try {
+      const response = await fetchData<ApiResponse<ApiProduct>>(url, true, true); // addLocale=true, populate=true
+      if (response.data && !Array.isArray(response.data) && response.data.product_name) {
+        return mapApiAccessoriesToAccessories(response.data);
+      }
+    } catch (error) {
+      console.error(`Error fetching jammer ${id}:`, error);
+    }
+    return null;
+  },
+
+  async getJammerCategories(): Promise<JammerCategory[] | null>{
+    const url = `${API_BASE_URL}/jammer-categories`;
+    const response = await fetchData<ApiResponse<ApiNewCategory>>(url, true); // addLocale=true
+    if (Array.isArray(response.data)) {         
+      return response.data
+        .filter(item => item && item.category_name)
+        .map(item => ({
+          id: item.id,
+          category_name: item.category_name,
+          createdAt: item.createdAt,
+          updatedAt: item.updatedAt
+        }));
+    }
+    return [];
+  },
+
+  async getJammerFeatures(): Promise<Feature[]> {
+    const url = `${API_BASE_URL}/jammer-features`;
+    const response = await fetchData<ApiResponse<ApiFeature>>(url, true); // addLocale=true
+    if (Array.isArray(response.data)) {
+      return response.data
+        .filter(item => item && item.feature_name)
+        .map(item => ({
+          id: item.id,
+          feature_name: item.feature_name,
+          createdAt: item.createdAt,
+          updatedAt: item.updatedAt
+        }));
+    }
+    return [];
+  },
+
+  async getAccessories(): Promise<AccessoriesType[]> {
+    const url = `${API_BASE_URL}/gimbals-acessories`;
+    const response = await fetchData<ApiResponse<ApiAccessories>>(url, true, true); // addLocale=true, populate=true
+    if (Array.isArray(response.data)) {      
+      return response.data
+        .filter(item => item && item.product_name)
+        .map(mapApiAccessoriesToAccessories);
+    }
+    return []; // Should return an array for getProducts
+  },
+
+  async getBlogs(): Promise<BlogType[]> {
+    const url = `${API_BASE_URL}/blogs`;
+    const response = await fetchData<ApiResponse<ApiBlog>>(url, true, true); // addLocale=true, populate=true
+    if (Array.isArray(response.data)) {      
+      return response.data
+        .filter(item => item && item.blog_title)
+        .map(mapApiBlogsToBlogs);
+    }
+    return []; // Should return an array for getProducts
+  },
+
+  async getBlog(id: string): Promise<BlogType | null> {
+    const url = `${API_BASE_URL}/blogs/${id}`;
+    try {
+      const response = await fetchData<ApiResponse<ApiBlog>>(url, true, true); // addLocale=true, populate=true
+      if (response.data && !Array.isArray(response.data) && response.data.blog_title) {
+        debugger;
+        return mapApiBlogsToBlogs(response.data);
+      }
+    } catch (error) {
+      console.error(`Error fetching article ${id}:`, error);
     }
     return null;
   },

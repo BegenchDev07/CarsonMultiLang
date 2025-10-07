@@ -48,12 +48,20 @@ const Navbar = () => {
               {t('nav.radio-jam')}
             </Link>
             <Link
-              to="/products"
+              to="/drones"
               className={`text-sm font-medium transition-colors ${
                 isActive('/products') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
               }`}
             >
               {t('nav.products')}
+            </Link>
+            <Link
+              to="/accessories"
+              className={`text-sm font-medium transition-colors ${
+                isActive('/accessories') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
+              }`}
+            >
+              {t('nav.accessories-gimbals')}
             </Link>
             <Link
               to="/about"
@@ -70,6 +78,14 @@ const Navbar = () => {
               }`}
             >
               {t('nav.contact')}
+            </Link>
+            <Link
+              to="/blog"
+              className={`text-sm font-medium transition-colors ${
+                isActive('/contacts') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
+              }`}
+            >
+              {t('nav.blog')}
             </Link>
             
             {/* Language Switcher */}
@@ -138,13 +154,20 @@ const Navbar = () => {
             >
               {t('nav.radio-jam')}
             </Link>
-              <Link
-                to="/products"
-                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600"
-                onClick={() => setIsOpen(false)}
-              >
-                {t('nav.products')}
-              </Link>
+            <Link
+              to="/products"
+              className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600"
+              onClick={() => setIsOpen(false)}
+            >
+              {t('nav.products')}
+            </Link>
+            <Link
+            to="/accessories"
+            className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600"
+            onClick={() => setIsOpen(false)}
+            >
+              {t('nav.accessories-gimbals')}
+            </Link>
               <Link
                 to="/about"
                 className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600"
@@ -158,6 +181,13 @@ const Navbar = () => {
                 onClick={() => setIsOpen(false)}
               >
                 {t('nav.contact')}
+              </Link>
+              <Link
+                to="/blog"
+                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600"
+                onClick={() => setIsOpen(false)}
+              >
+                {t('nav.blog')}
               </Link>
               
               {/* Mobile Language Switcher */}
