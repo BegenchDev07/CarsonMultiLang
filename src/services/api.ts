@@ -304,8 +304,7 @@ const mapApiRadioJammerToJammer = (apiJammer: ApiJammer): RadioJammer => {
   }
 }
 
-const mapApiAccessoriesToAccessories = (apiAccessories: ApiAccessories): AccessoriesType => {    
-  debugger;
+const mapApiAccessoriesToAccessories = (apiAccessories: ApiAccessories): AccessoriesType => {      
   return {
     documentId: apiAccessories.documentId.toString(),
     product_name: apiAccessories.product_name,

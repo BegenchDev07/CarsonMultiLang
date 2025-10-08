@@ -233,7 +233,7 @@ const ProductsPage = () => {
                   <Fragment key={index}>
                     <Link
                       key={product.documentId}
-                      to={`/product/${product.documentId}`}
+                      to={`/drones/${product.documentId}`}
                       className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group hover:-translate-y-2"
                     >
                       <div className="relative overflow-hidden">

@@ -68,7 +68,7 @@ function App() {
                 <Routes>
                   <Route path="/" element={<LandingPage />} />
                   <Route path="/drones" element={<ProductsPage />} />
-                  <Route path="/drone/:id" element={<ProductDetailPage />} />
+                  <Route path="/drones/:id" element={<ProductDetailPage />} />
                   <Route path="/about" element={<AboutPage />} />
                   <Route path="/contacts" element={<ContactsPage />} />
                   <Route path="/radio-jam" element={<RadioJam />} />
