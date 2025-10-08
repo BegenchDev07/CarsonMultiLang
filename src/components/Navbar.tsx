@@ -155,7 +155,7 @@ const Navbar = () => {
               {t('nav.radio-jam')}
             </Link>
             <Link
-              to="/products"
+              to="/drones"
               className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600"
               onClick={() => setIsOpen(false)}
             >
