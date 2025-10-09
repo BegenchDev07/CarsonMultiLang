@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowLeft, Share2, CheckCircle, Loader } from 'lucide-react';
+import { ArrowLeft, Share2, CheckCircle, Loader, Copy } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import remarkYoutube from 'remark-youtube';
@@ -139,6 +139,35 @@ const ProductDetailPage = () => {
     }
   }
 
+  const copySpecs = () => {
+    const text = markdownToText(product?.specification);
+    Promise.resolve(navigator.clipboard.writeText(text))
+    .then(_ => {
+      setShowCopyNotification(!showCopyNotification)
+      setTimeout(() => setShowCopyNotification(false), 2000);
+    })
+    .catch((err) => {
+      console.error(err)
+    })
+    
+
+  }
+
+  function markdownToText(markdown:any) {
+    return markdown
+      .replace(/```[\s\S]*?```/g, '')              // remove code blocks
+      .replace(/`([^`]*)`/g, '$1')                 // inline code
+      .replace(/!\[.*?\]\(.*?\)/g, '')             // images
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')     // links
+      .replace(/^\s*>+\s?/gm, '')                  // blockquotes
+      .replace(/^#{1,6}\s*/gm, '')                 // headings
+      .replace(/[*_~]/g, '')                       // emphasis/bold/strike
+      .replace(/^(-\s?){3,}$/gm, '')               // horizontal rules
+      .replace(/[\/|]+/g, ' ')                     // remove /, |, ||
+      .replace(/\n{2,}/g, '\n')                    // collapse extra newlines
+      .trim();
+  }
+
   const tabs = [
     { id: 'overview', name: t('productDetail.overview') },
     { id: 'specifications', name: t('productDetail.specifications') }
@@ -196,9 +225,9 @@ const ProductDetailPage = () => {
             <ScaledModal link={getImageUrl(allImages[selectedImage])}/>
           </div>
         }
-        <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 ${isRTL ? 'text-right' : 'text-left'}`}>
+        <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mb-20 ${isRTL ? 'text-right' : 'text-left'}`}>
           {/* Breadcrumb */}
-          <div className={`flex items-center text-sm text-gray-500 mb-8 ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
+          <div className={`flex items-center text-sm text-gray-500 mb-4 ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
             <Link to="/" className="hover:text-blue-600 transition-colors duration-300">{t('common.home')}</Link>
             <span>/</span>
             <Link to="/products" className="hover:text-blue-600 transition-colors duration-300">{t('nav.products')}</Link>
@@ -209,7 +238,7 @@ const ProductDetailPage = () => {
           {/* Back Button */}
           <Link
             to="/products"
-            className={`inline-flex items-center text-blue-600 hover:text-blue-700 transition-colors duration-300 mb-8 ${isRTL ? 'flex-row-reverse' : ''}`}
+            className={`inline-flex items-center text-blue-600 hover:text-blue-700 transition-colors duration-300 mb-4 ${isRTL ? 'flex-row-reverse' : ''}`}
           >
             <ArrowLeft className={`h-5 w-5 ${isRTL ? 'ml-2 rotate-180' : 'mr-2'}`} />
             {t('productDetail.backToProducts')}
@@ -307,7 +336,7 @@ const ProductDetailPage = () => {
                 </div>            
             </div>
             :
-            <div className="fixed bottom-0 left-0 flex items-center justify-center gap-3 bg-white w-full p-4">
+            <div className="fixed bottom-0 left-0 flex items-center justify-center gap-3 bg-white w-full p-4 z-50">
               <button 
                 onClick={() => setIsQuoteModalOpen(true)}
                 className="w-full h-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-lg font-semibold text-lg transition-colors duration-300 flex items-center justify-center"
@@ -360,7 +389,7 @@ const ProductDetailPage = () => {
                 ))}
               </nav>
             </div>          
-            <div className='p-8'>          
+            <div className='p-8'>       
               {selectedTab === 'overview' && (
                 <div className="space-y-8 flex items-center justify-center ">
                   <button
@@ -372,59 +401,67 @@ const ProductDetailPage = () => {
                 </div>            
               )}
               {selectedTab === 'specifications' && (
-                <div className="prose prose-lg w-full text-gray-600 leading-relaxed overflow-x-auto">
-                  <ReactMarkdown
-                remarkPlugins={[remarkGfm,remarkYoutube]} // Enables GFM, including table support
-                components={{
-                  h1: ({ children }) => (
-                    <h2 className={ isRTL ? `w-full text-start text-xl font-bold text-gray-900 mb-3` : `text-xl font-bold text-gray-900 mb-3`}>{children}</h2>
-                  ),
-                  h2: ({ children }) => (
-                    <h3 className={ isRTL ? `w-full text-start text-lg font-bold text-gray-900 mb-3` : `text-xl font-bold text-gray-900 mb-3`}>{children}</h3>
-                  ),
-                  h3: ({ children }) => (
-                    <h3 className={ isRTL ? `w-full text-start text-base font-bold text-gray-900 mb-3` : `text-xl font-bold text-gray-900 mb-3`}>{children}</h3>
-                  ),                
-                  p: ({ children }) => (
-                    <p className="text-gray-600 leading-relaxed mb-3">{children}</p>
-                  ),
-                  ul: ({ children }) => (
-                    <ul
-                      className={`list-disc mb-3 space-y-1 text-gray-600 ${
-                        isRTL ? "list-inside w-full text-start" : "list-inside"
-                      }`}
-                    >
-                      {children}
-                    </ul>
-                  ),
-                  li: ({ children }) => <li className="text-gray-600">{children}</li>,
-                  strong: ({ children }) => (
-                    <strong className="font-semibold text-gray-900">{children}</strong>
-                  ),
-                  em: ({ children }) => <em className="italic text-gray-700">{children}</em>,
-                  blockquote: ({ children }) => (
-                    <blockquote
-                      className={`border-blue-500 italic text-gray-700 bg-blue-50 p-3 rounded-lg my-3 ${
-                        isRTL ? "border-r-4 pr-3" : "border-l-4 pl-3"
-                      }`}
-                    >
-                      {children}
-                    </blockquote>
-                  ),
-                  table: ({ children }) => (
-                    <table className="table-fixed min-w-max sm:w-full text-gray-600 border-collapse text-center">
-                      {children}
-                    </table>
-                  ),
-                  th: ({ children }) => <th className="px-4 py-2 border-b">{children}</th>,
-                  td: ({ children }) => <td className="px-4 py-2 border-b">{children}</td>,
-                  
-                }}
-              >
-                {product.specification}
-                  </ReactMarkdown>
+                <>
+                  <button
+                   className='w-full flex items-center justify-end p-4'
+                   onClick={copySpecs}
+                   >
+                    <Copy />
+                  </button>   
+                  <div className="prose prose-lg w-full text-gray-600 leading-relaxed overflow-x-auto">
+                    <ReactMarkdown
+                  remarkPlugins={[remarkGfm,remarkYoutube]} // Enables GFM, including table support
+                  components={{
+                    h1: ({ children }) => (
+                      <h2 className={ isRTL ? `w-full text-start text-xl font-bold text-gray-900 mb-3` : `text-xl font-bold text-gray-900 mb-3`}>{children}</h2>
+                    ),
+                    h2: ({ children }) => (
+                      <h3 className={ isRTL ? `w-full text-start text-lg font-bold text-gray-900 mb-3` : `text-xl font-bold text-gray-900 mb-3`}>{children}</h3>
+                    ),
+                    h3: ({ children }) => (
+                      <h3 className={ isRTL ? `w-full text-start text-base font-bold text-gray-900 mb-3` : `text-xl font-bold text-gray-900 mb-3`}>{children}</h3>
+                    ),                
+                    p: ({ children }) => (
+                      <p className="text-gray-600 leading-relaxed mb-3">{children}</p>
+                    ),
+                    ul: ({ children }) => (
+                      <ul
+                        className={`list-disc mb-3 space-y-1 text-gray-600 ${
+                          isRTL ? "list-inside w-full text-start" : "list-inside"
+                        }`}
+                      >
+                        {children}
+                      </ul>
+                    ),
+                    li: ({ children }) => <li className="text-gray-600">{children}</li>,
+                    strong: ({ children }) => (
+                      <strong className="font-semibold text-gray-900">{children}</strong>
+                    ),
+                    em: ({ children }) => <em className="italic text-gray-700">{children}</em>,
+                    blockquote: ({ children }) => (
+                      <blockquote
+                        className={`border-blue-500 italic text-gray-700 bg-blue-50 p-3 rounded-lg my-3 ${
+                          isRTL ? "border-r-4 pr-3" : "border-l-4 pl-3"
+                        }`}
+                      >
+                        {children}
+                      </blockquote>
+                    ),
+                    table: ({ children }) => (
+                      <table className="table-fixed min-w-max sm:w-full text-gray-600 border-collapse text-center">
+                        {children}
+                      </table>
+                    ),
+                    th: ({ children }) => <th className="px-4 py-2 border-b">{children}</th>,
+                    td: ({ children }) => <td className="px-4 py-2 border-b">{children}</td>,
+                    
+                  }}
+                >
+                  {product.specification}
+                    </ReactMarkdown>
 
-                </div>
+                  </div>
+                </>
               )}
             </div>
           </div>
