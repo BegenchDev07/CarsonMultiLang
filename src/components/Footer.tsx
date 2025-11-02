@@ -67,7 +67,7 @@ const Footer = () => {
 
           {/* Use Cases */}
           <div>
-            <h3 className="text-lg font-semibold mb-6">{t('footer.useCases')}</h3>
+            <h3 className="text-lg font-semibold mb-6">{t('products.categories')}</h3>
             {loading ? (
               <div className="space-y-3">
               </div>
