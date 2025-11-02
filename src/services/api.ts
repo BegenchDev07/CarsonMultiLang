@@ -27,6 +27,15 @@ export interface JammerCategory {
   updatedAt: string;
 }
 
+export interface ServiceCategory {
+  id: number;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+
+
 
 export interface Feature {
   id: number;
@@ -153,6 +162,15 @@ interface ApiBlog {
   display_image?: {data: ApiImage | null};
 }
 
+interface ApiService {
+  documentId:string;
+  name: string;
+  description: string;
+  createdAt: string;
+  display_image?: {data: ApiImage | null};
+  service_cateogry: ServiceCategory | null;
+}
+
 export interface RadioJammer {
   documentId: string;
   product_name: string;
@@ -185,6 +203,15 @@ export interface BlogType {
   content: string;
   createdAt: string;
   display_image?:{data: ApiImage | null}; 
+}
+
+export interface ServiceType {
+  documentId:string,
+  name: string;
+  description: string;
+  createdAt: string;
+  display_image?:{data: ApiImage | null}; 
+  service_cateogry?: ServiceCategory | null;
 }
 
 interface ApiResponse<T> {
@@ -326,6 +353,17 @@ const mapApiBlogsToBlogs = (apiBlogs: ApiBlog): BlogType => {
     content: apiBlogs.content,
     createdAt: apiBlogs.createdAt,
     display_image: apiBlogs.display_image
+  }
+}
+
+const mapServicesToServices = (apiService: ApiService): ServiceType => {
+  return {
+    documentId: apiService.documentId,
+    name: apiService.name,
+    description: apiService.description,
+    createdAt: apiService.createdAt,
+    display_image: apiService.display_image,
+    service_cateogry: apiService.service_cateogry,
   }
 }
 
@@ -565,6 +603,49 @@ export const productsApi = {
       console.error(`Error fetching article ${id}:`, error);
     }
     return null;
+  },
+
+  async getServices(): Promise<ServiceType[]> {    
+    const url = `${API_BASE_URL}/services`;
+    const response = await fetchData<ApiResponse<ApiService>>(url, true, true); // addLocale=true, populate=true
+    if (Array.isArray(response.data)) {      
+      return response.data
+        .filter(item => item && item.name)
+        .map(mapServicesToServices);
+    }
+    return []; // Should return an array for getProducts
+  },
+
+
+  async getService(id: string): Promise<ServiceType | null> {
+    const url = `${API_BASE_URL}/services/${id}`;
+    try {
+      const response = await fetchData<ApiResponse<ApiService>>(url, true, true); // addLocale=true, populate=true
+      if (response.data && !Array.isArray(response.data) && response.data.name) {
+        debugger;
+        return mapServicesToServices(response.data);
+      }
+    } catch (error) {
+      console.error(`Error fetching service ${id}:`, error);
+    }
+    return null;
+  },
+
+
+  async getServiceCategories(): Promise<ServiceCategory[] | null>{
+    const url = `${API_BASE_URL}/service-cateogries`;
+    const response = await fetchData<ApiResponse<ServiceCategory>>(url, true); // addLocale=true
+    if (Array.isArray(response.data)) {         
+      return response.data
+        .filter(item => item && item.name)
+        .map(item => ({
+          id: item.id,
+          name: item.name,
+          createdAt: item.createdAt,
+          updatedAt: item.updatedAt
+        }));
+    }
+    return [];
   },
 };
 

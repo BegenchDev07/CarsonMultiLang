@@ -87,6 +87,14 @@ const Navbar = () => {
             >
               {t('nav.blog')}
             </Link>
+            <Link
+              to="/services"
+              className={`text-sm font-medium transition-colors ${
+                isActive('/contacts') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
+              }`}
+            >
+              {t('nav.services')}
+            </Link>
             
             {/* Language Switcher */}
             <div className="relative">

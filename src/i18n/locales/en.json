@@ -8,7 +8,8 @@
     "radio-jam":"Radio Jamming",
     "accessories-gimbals":"Accessories & Gimbals",
     "blog":"Blog",
-    "all": "All"
+    "all": "All",
+    "services":"Services"
   },
   "hero": {
     "title1": "Fixed Wing and VTOL Series",
@@ -192,7 +193,8 @@
     "privacyPolicy": "Privacy Policy",
     "termsOfService": "Terms of Service",
     "cookiePolicy": "Cookie Policy",
-    "noUseCases": "No use cases available"
+    "noUseCases": "No use cases available",
+    "paymentMethod":"Purchase Policy"
   },
   "products": {
     "searchPlaceholder": "Search products...",

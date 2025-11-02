@@ -8,7 +8,8 @@
     "radio-jam":"جهاز تشويش",
     "accessories-gimbals": "الملحقات وحوامل التثبيت",
     "blog": "مدونة",
-    "all": "الكل"
+    "all": "الكل",
+    "services": "الخدمات"
   },
   "hero": {
     "title1": "تكنولوجيا الطائرات المسيرة من الجيل القادم",
@@ -192,7 +193,8 @@
     "privacyPolicy": "سياسة الخصوصية",
     "termsOfService": "شروط الخدمة",
     "cookiePolicy": "سياسة ملفات تعريف الارتباط",
-    "noUseCases": "لا توجد حالات استخدام متاحة"
+    "noUseCases": "لا توجد حالات استخدام متاحة",
+    "paymentMethod": "سياسة الشراء"
   },
   "products": {
     "searchPlaceholder": "البحث في الدرونز...",

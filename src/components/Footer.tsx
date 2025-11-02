@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Zap, Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { productsApi, Category, Feature } from '../services/api';
 
@@ -88,10 +89,13 @@ const Footer = () => {
 
           {/* Contact */}
           <div className="lg:col-span-2">
-            <h3 className="text-lg font-semibold mb-6">{t('footer.contact')}</h3>
-            <button className='w-2/3 px-3 py-2 text-xl font-semibold bg-blue-600 rounded-lg'>
+            <h3 className="text-lg font-semibold mb-6">{t('footer.contact')}</h3>                        
+            <Link 
+            to='/contacts'
+            className='w-auto px-3 py-2 text-xl font-semibold bg-blue-600 rounded-lg'
+            >              
               {t('footerContact.button')}
-            </button>
+            </Link>
           </div>
         </div>
 
@@ -102,14 +106,17 @@ const Footer = () => {
               {t('footer.copyright')}
             </div>
             <div className="flex space-x-6 text-sm">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">
+              <a href="https://www.privacypolicies.com/live/fe916870-ab7b-43ce-ab1f-5bc4725707e8" className="text-gray-400 hover:text-white transition-colors duration-300">
                 {t('footer.privacyPolicy')}
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">
+              <a href="https://www.privacypolicies.com/live/03e2b396-f1cd-4227-aea7-49950ecd9aa8" className="text-gray-400 hover:text-white transition-colors duration-300">
                 {t('footer.termsOfService')}
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">
+              {/* <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">
                 {t('footer.cookiePolicy')}
+              </a> */}
+              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">
+                {t('footer.paymentMethod')}
               </a>
             </div>
           </div>

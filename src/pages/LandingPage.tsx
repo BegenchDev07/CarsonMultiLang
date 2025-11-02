@@ -14,7 +14,7 @@ const LandingPage = () => {
       {/* <UseCasesSection /> */}
       {/* <ProjectsSection /> */}
       {/* <AchievementsSection /> */}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
