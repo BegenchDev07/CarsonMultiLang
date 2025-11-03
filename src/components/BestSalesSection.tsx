@@ -89,7 +89,7 @@ const BestSalesSection = () => {
                 className="w-80 flex-shrink-0"
               >
                 <Link
-                  to={`/product/${product.documentId}`}
+                  to={`/drones/${product.documentId}`}
                   className="block bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group"
                 >
                   <div className="relative h-72 overflow-hidden">

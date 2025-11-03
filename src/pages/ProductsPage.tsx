@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { productsApi, Product, Category, Feature, getImageUrl } from '../services/api';
 import { useMediaQuery } from 'react-responsive';
+import { useNavigate } from 'react-router-dom';
+import GetQuoteModal from '../components/GetQuoteModal';
 
 const ProductsPage = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -15,10 +17,12 @@ const ProductsPage = () => {
   const [features, setFeatures] = useState<Feature[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
 
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === 'ar';
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
+  const navigator = useNavigate();
 
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
@@ -227,7 +231,7 @@ const ProductsPage = () => {
               <div className={`grid gap-6 ${
                 viewMode === 'grid'
                   ? isMobile ? 'grid-cols-2' : 'grid-cols-3'
-                  : 'grid-cols-1'
+                  : 'grid-cols-3'
               }`}>
                 {currentProducts.map((product,index) => (
                   <Fragment key={index}>
@@ -257,10 +261,22 @@ const ProductsPage = () => {
                       </div>
 
                       {viewMode === 'list' && (
-                        <div className="p-6">
-                          <p className="text-gray-600 text-sm line-clamp-3">
-                            {product.product_description.replace(/[#*]/g, '').substring(0, 150)}...
-                          </p>
+                        <div className='flex flex-col items-between justify-end gap-5'>
+                          <div className="p-6">
+                            <p className="text-gray-600 text-sm line-clamp-3">
+                              {product.product_description.replace(/[#*]/g, '').substring(0, 150)}...
+                            </p>
+                          </div>
+                          <div className='flex items-start justify-between p-6 gap-5'>
+                            <button
+                            onClick={_=>{`/drones/${product.documentId}`}}
+                             className='px-3 py-2 bg-blue-600 text-white rounded-lg'>Learn more</button>
+                            <button
+                            onClick={(e)=>{
+                              e.preventDefault()                    
+                              setIsQuoteModalOpen(true)}}
+                             className='px-3 py-2 rounded-lg border border-blue-500 text-blue-500'>Inquiry</button>
+                          </div>
                         </div>
                       )}
                     </Link>
@@ -314,6 +330,10 @@ const ProductsPage = () => {
           </div>
         </div>
       </div>
+      <GetQuoteModal 
+          isOpen={isQuoteModalOpen} 
+          onClose={() => setIsQuoteModalOpen(false)} 
+        />
     </div>
   );
 };

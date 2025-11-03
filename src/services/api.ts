@@ -50,6 +50,7 @@ export interface Product {
   product_description: string;
   display_image?: Image;
   secondary_images?: Image[];
+  phone_secondary_images?: Image[];
   category?: Category;
   feature?: Feature;
   specification?: string;
@@ -115,6 +116,7 @@ interface ApiProduct {
   // Relationships will be nested under 'data'
   display_image?: { data: ApiImage | null };
   secondary_images?: Array<any> | [] ;
+  phone_secondary_images?: Array<any> | [] ;
   category?: ApiCategory | null ;
   feature?: ApiFeature | null ;
   link?: string;
@@ -132,6 +134,7 @@ interface ApiJammer {
   // Relationships will be nested under 'data'
   display_image?: { data: ApiImage | null };
   secondary_images?: Array<any> | [] ;
+  phone_secondary_images?: Array<any> | [] ;
   jammer_category?: JammerCategory | null ;
   jammer_feature?: ApiFeature | null ;
   link?: string;
@@ -149,6 +152,7 @@ interface ApiAccessories {
   // Relationships will be nested under 'data'
   display_image?: { data: ApiImage | null };
   secondary_images?: Array<any> | [] ;
+  phone_secondary_images?: Array<any> | [] ;
   accessory_category?: JammerCategory | null ;
   accessory_feature?: ApiFeature | null ;
   link?: string;
@@ -177,6 +181,7 @@ export interface RadioJammer {
   product_description: string;
   display_image?: {data: ApiImage | null};
   secondary_images?: Array<any> | [];
+  phone_secondary_images?: Array<any> | [];
   specification?: string;
   link?: string; 
   presentation: string;
@@ -190,6 +195,7 @@ export interface AccessoriesType {
   product_description: string;
   display_image?: {data: ApiImage | null};
   secondary_images?: Array<any> | [];
+  phone_secondary_images?: Array<any> | [];
   specification?: string;
   link?: string; 
   presentation: string;
@@ -309,6 +315,7 @@ const mapApiProductToProduct = (apiProduct: ApiProduct): Product => {
     updatedAt: apiProduct.updatedAt,
     display_image: mapApiImageToImage(apiProduct?.display_image as any || null),
     secondary_images: apiProduct?.secondary_images?.map(mapApiImageToImage).filter((img:any): img is Image => img !== undefined) || [],
+    phone_secondary_images: apiProduct?.phone_secondary_images?.map(mapApiImageToImage).filter((img:any): img is Image => img !== undefined) || [],
     category: mapApiCategoryToCategory(apiProduct?.category || null),
     feature: mapApiFeatureToFeature(apiProduct?.feature || null),
     presentation: apiProduct.presentation,
@@ -323,6 +330,7 @@ const mapApiRadioJammerToJammer = (apiJammer: ApiJammer): RadioJammer => {
     product_description: apiJammer.product_description,
     display_image: apiJammer.display_image,
     secondary_images: apiJammer.secondary_images,
+    phone_secondary_images: apiJammer.phone_secondary_images,
     specification: apiJammer.specification,
     link: apiJammer.link || '',
     presentation: apiJammer.presentation,
@@ -338,6 +346,7 @@ const mapApiAccessoriesToAccessories = (apiAccessories: ApiAccessories): Accesso
     product_description: apiAccessories.product_description,
     display_image: apiAccessories.display_image,
     secondary_images: apiAccessories.secondary_images,
+    phone_secondary_images: apiAccessories.phone_secondary_images,
     specification: apiAccessories.specification,
     link: apiAccessories.link || '',
     presentation: apiAccessories.presentation,
@@ -621,8 +630,7 @@ export const productsApi = {
     const url = `${API_BASE_URL}/services/${id}`;
     try {
       const response = await fetchData<ApiResponse<ApiService>>(url, true, true); // addLocale=true, populate=true
-      if (response.data && !Array.isArray(response.data) && response.data.name) {
-        debugger;
+      if (response.data && !Array.isArray(response.data) && response.data.name) {        
         return mapServicesToServices(response.data);
       }
     } catch (error) {

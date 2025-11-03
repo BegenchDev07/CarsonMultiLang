@@ -58,7 +58,7 @@ const HeroSection = () => {
     
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 5000);
+    }, 10000);
     return () => clearInterval(timer);
   }, [slides.length, imagesLoaded]);
 
