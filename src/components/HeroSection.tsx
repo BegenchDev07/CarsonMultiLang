@@ -123,7 +123,7 @@ const HeroSection = () => {
                   {slide.subtitle}
                 </p> */}
                 <button 
-                  onClick={() => navigator('/products')}
+                  onClick={() => navigator('/drones')}
                   className="w-auto h-auto border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 flex items-center justify-center focus:outline-none focus:ring-4 focus:ring-white/50"
                   aria-label="Watch product demonstration video"
                 >                  
