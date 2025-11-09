@@ -604,8 +604,7 @@ export const productsApi = {
     const url = `${API_BASE_URL}/blogs/${id}`;
     try {
       const response = await fetchData<ApiResponse<ApiBlog>>(url, true, true); // addLocale=true, populate=true
-      if (response.data && !Array.isArray(response.data) && response.data.blog_title) {
-        debugger;
+      if (response.data && !Array.isArray(response.data) && response.data.blog_title) {        
         return mapApiBlogsToBlogs(response.data);
       }
     } catch (error) {

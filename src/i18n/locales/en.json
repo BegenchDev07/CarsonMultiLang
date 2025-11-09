@@ -23,10 +23,10 @@
     "watchDemo": "See more products"
   },
   "bestSales": {
-    "title": "Best Selling Drones",
-    "subtitle": "Discover our most popular drone solutions trusted by professionals worldwide.",
+    "title": "Best Sellers",
+    "subtitle": "Discover our most popular solutions trusted by professionals worldwide.",
     "availableNow": "Available Now",
-    "viewAll": "View All Drones"
+    "viewAll": "View All"
   },
   "projects": {
     "title": "Featured Projects",
@@ -221,6 +221,8 @@
     "backToProducts": "Back to Drones",
     "backToJammers": "Back to Radio Jammers",
     "backToAccessories": "Back to Accessories & Gimbals",
+    "backToBlog": "Back to Blog",
+    "backToServices":"Back to Services",
     "requestQuote": "Request Quote",
     "whatsIncluded": "What's Included",
     "overview": "Overview",
@@ -317,7 +319,7 @@
     "contactUs": "Contact Us",
     "home": "Home",
     "backToProducts": "Back to Drones",
-    "backToJammers": "Back to Radio Jammers",
+    "backToJammers": "Back to Radio Jammers",    
     "product": "Product",
     "allProducts": "All Drones",
     "noUseCasesAvailable": "No use cases available",

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Loader } from 'lucide-react';
@@ -60,10 +60,10 @@ const BlogDetailPage = () => {
         <div className="text-center">
           <p className="text-red-600 mb-4">{t('common.error')}: {error || t('productDetail.notFound')}</p>
           <Link 
-            to="/accessories"
+            to="/blog"
             className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
           >
-            {t('productDetail.backToJammers')}
+            {t('productDetail.backToBlogs')}
           </Link>
         </div>
       </div>

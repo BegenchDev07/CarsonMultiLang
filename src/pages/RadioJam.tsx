@@ -1,9 +1,10 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import { ArrowRight, Loader } from 'lucide-react';
+import { useState, useEffect, Fragment } from 'react';
+import { Search, Loader } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { productsApi, Feature, getImageUrl, JammerCategory, RadioJammer } from '../services/api';
 import { useMediaQuery } from 'react-responsive';
+import GetQuoteModal from '../components/GetQuoteModal';
 
 const RadioJam = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -15,6 +16,7 @@ const RadioJam = () => {
   const [features, setFeatures] = useState<Feature[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
 
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === 'ar';
@@ -170,7 +172,20 @@ const RadioJam = () => {
           {/* Main */}
           <div className="flex-1">
             {/* Search + View Mode */}            
-
+            <div className="w-full bg-white rounded-2xl p-6 shadow-lg mb-8">
+              <div className="w-full flex flex-col md:flex-row gap-4 items-center justify-between">
+                <div className="w-full relative flex-1 max-w-md">
+                  <Search className={`absolute top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5 ${isRTL ? 'right-3' : 'left-3'}`} />
+                  <input
+                    type="text"
+                    placeholder={t('products.searchPlaceholder')}
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className={`w-full py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${isRTL ? 'pr-10 pl-4' : 'pl-10 pr-4'}`}
+                  />
+                </div>                
+              </div>
+            </div>
             {/* Results Count */}
             <p className="text-gray-600 mb-6">
               {t('products.showing')} { totalPages !== currentPage ? currentProducts.length * currentPage : jammers.length} {t('products.of')} {filteredProducts.length} {t('products.products')}
@@ -200,40 +215,44 @@ const RadioJam = () => {
               }`}>
                 {currentProducts.map((product:any,index) => (
                   <Fragment key={index}>
-                    <Link
-                      key={product.documentId}
-                      to={`/radio-jam/${product.documentId}`}
-                      className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group hover:-translate-y-2"
-                    >
-                      <div className="relative overflow-hidden">
-                        {product.display_image ? (
+                  <div className='flex flex-col items-between justify-start gap-5 p-1'>
+                    <div>
+                      {product.display_image ? (
                           <img
                             src={getImageUrl(product.display_image, true)}
                             alt={product.product_name}
-                            className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                            className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500 rounded-lg"
                           />
                         ) : (
                           <div className="w-full h-48 bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
                             <span className="text-blue-600 font-semibold text-lg">{product.product_name}</span>
                           </div>
                         )}
-                        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-4 flex items-end justify-between">
-                          <h3 className="text-xl font-bold text-white">{product.product_name}</h3>
-                          <div className="bg-white/20 p-2 rounded-full text-white group-hover:bg-white/30 transition">
-                            <ArrowRight className="h-5 w-5" />
-                          </div>
-                        </div>
+                    </div>
+                    <div className='size-full flex flex-col items-center justify-between'>
+                      <div className="py-6 flex flex-col gap-3">
+                        <h3 className="text-xl font-bold text-black line-clamp-2">{product.product_name}</h3>
+                        <p className="text-gray-600 text-sm line-clamp-3">
+                          {product.product_description.replace(/[#*]/g, '').substring(0, 150)}...
+                        </p>
                       </div>
-
-                      {viewMode === 'list' && (
-                        <div className="p-6">
-                          <p className="text-gray-600 text-sm line-clamp-3">
-                            {product.product_description.replace(/[#*]/g, '').substring(0, 150)}...
-                          </p>
-                        </div>
-                      )}
-                    </Link>
-                  </Fragment>
+                      <div className='w-full flex flex-col items-start justify-between py-6 gap-5'>
+                        <Link
+                        to={`/radio-jam/${product.documentId}`}
+                          className='w-full px-3 py-2 bg-blue-600 text-white rounded-lg text-center'>
+                            Learn more
+                          </Link>
+                        <button
+                        onClick={(e)=>{
+                          e.preventDefault()                    
+                          setIsQuoteModalOpen(true)}}
+                          className='w-full px-3 py-2 rounded-lg border border-blue-500 text-blue-500'>
+                            Inquiry
+                          </button>
+                      </div>
+                    </div>
+                  </div>                    
+                </Fragment>
                 ))}
               </div>
             )}
@@ -283,6 +302,10 @@ const RadioJam = () => {
           </div>
         </div>
       </div>
+      <GetQuoteModal 
+        isOpen={isQuoteModalOpen} 
+        onClose={() => setIsQuoteModalOpen(false)} 
+      />
     </div>
   );
 };

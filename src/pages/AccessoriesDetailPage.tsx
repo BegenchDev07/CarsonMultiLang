@@ -9,6 +9,7 @@ import GetQuoteModal from '../components/GetQuoteModal';
 import ScaledModal from '../components/ScaledModal';
 import { productsApi, Product, getImageUrl } from '../services/api';
 import { useMediaQuery } from 'react-responsive'; // For mobile responsiveness
+import BestSalesSection from '../components/BestSalesSection';
 
 const AccessoriesDetailPage = () => {
   const { t, i18n } = useTranslation();
@@ -431,6 +432,7 @@ const AccessoriesDetailPage = () => {
           isOpen={isQuoteModalOpen} 
           onClose={() => setIsQuoteModalOpen(false)} 
         />
+        <BestSalesSection mode='accessories'/>
       </div>
     </>
   );

@@ -9,6 +9,7 @@ import GetQuoteModal from '../components/GetQuoteModal';
 import ScaledModal from '../components/ScaledModal';
 import { productsApi, Product, getImageUrl } from '../services/api';
 import { useMediaQuery } from 'react-responsive'; // For mobile responsiveness
+import BestSalesSection from '../components/BestSalesSection';
 
 const RadioJamDetail = () => {
   const { t, i18n } = useTranslation();
@@ -433,6 +434,7 @@ const RadioJamDetail = () => {
           isOpen={isQuoteModalOpen} 
           onClose={() => setIsQuoteModalOpen(false)} 
         />
+        <BestSalesSection mode='radio jammer'/>
       </div>
     </>
   );

@@ -9,6 +9,7 @@ import GetQuoteModal from '../components/GetQuoteModal';
 import ScaledModal from '../components/ScaledModal';
 import { productsApi, Product, getImageUrl } from '../services/api';
 import { useMediaQuery } from 'react-responsive'; // For mobile responsiveness
+import BestSalesSection from '../components/BestSalesSection';
 
 const ProductDetailPage = () => {
   const { t, i18n } = useTranslation();
@@ -190,7 +191,7 @@ const ProductDetailPage = () => {
         <div className="text-center">
           <p className="text-red-600 mb-4">{t('common.error')}: {error || t('productDetail.notFound')}</p>
           <Link 
-            to="/products"
+            to="/drones"
             className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
           >
             {t('productDetail.backToProducts')}
@@ -220,14 +221,14 @@ const ProductDetailPage = () => {
           <div className={`flex items-center text-sm text-gray-500 mb-4 ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
             <Link to="/" className="hover:text-blue-600 transition-colors duration-300">{t('common.home')}</Link>
             <span>/</span>
-            <Link to="/products" className="hover:text-blue-600 transition-colors duration-300">{t('nav.products')}</Link>
+            <Link to="drones" className="hover:text-blue-600 transition-colors duration-300">{t('nav.products')}</Link>
             <span>/</span>
             <span className="text-gray-900">{product.product_name}</span>
           </div>
 
           {/* Back Button */}
           <Link
-            to="/products"
+            to="/drones"
             className={`inline-flex items-center text-blue-600 hover:text-blue-700 transition-colors duration-300 mb-4 ${isRTL ? 'flex-row-reverse' : ''}`}
           >
             <ArrowLeft className={`h-5 w-5 ${isRTL ? 'ml-2 rotate-180' : 'mr-2'}`} />
@@ -469,6 +470,9 @@ const ProductDetailPage = () => {
           isOpen={isQuoteModalOpen} 
           onClose={() => setIsQuoteModalOpen(false)} 
         />
+        <div className='w-full bg-white'>
+          <BestSalesSection mode='best seller'/>
+        </div>
       </div>
     </>
   );

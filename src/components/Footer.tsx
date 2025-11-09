@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Zap, Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { productsApi, Category, Feature } from '../services/api';
+import GetQuoteModal from './GetQuoteModal';
 
 const Footer = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [features, setFeatures] = useState<Feature[]>([]);
   const [loading, setLoading] = useState(true);
   const { t, i18n } = useTranslation();
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const isRTL = i18n.language === 'ar';
+
 
   useEffect(() => {
     const fetchFooterData = async () => {
@@ -76,7 +78,7 @@ const Footer = () => {
                 {[...categories.slice(0, 3), ...features.slice(0, 2)].filter(item => item != null).map((item, index) => (
                   <li key={`${item.id}-${index}`}>
                     <a 
-                      href={`/products?${item.hasOwnProperty('cateogry_name') ? 'category' : 'feature'}=${item.hasOwnProperty('cateogry_name') ? (item as Category).cateogry_name.toLowerCase() : (item as Feature).feature_name.toLowerCase()}`} 
+                      href={`/drones?${item.hasOwnProperty('cateogry_name') ? 'category' : 'feature'}=${item.hasOwnProperty('cateogry_name') ? (item as Category).cateogry_name.toLowerCase() : (item as Feature).feature_name.toLowerCase()}`} 
                       className="text-gray-400 hover:text-white transition-colors duration-300 capitalize"
                     >
                       {item.hasOwnProperty('cateogry_name') ? (item as Category).cateogry_name : (item as Feature).feature_name}
@@ -90,12 +92,12 @@ const Footer = () => {
           {/* Contact */}
           <div className="lg:col-span-2">
             <h3 className="text-lg font-semibold mb-6">{t('footer.contact')}</h3>                        
-            <Link 
-            to='/contacts'
+            <button             
+            onClick={_=>{setIsQuoteModalOpen(!isQuoteModalOpen)}}
             className='w-auto px-3 py-2 text-xl font-semibold bg-blue-600 rounded-lg'
             >              
               {t('footerContact.button')}
-            </Link>
+            </button>
           </div>
         </div>
 
@@ -122,6 +124,10 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      <GetQuoteModal 
+        isOpen={isQuoteModalOpen} 
+        onClose={() => setIsQuoteModalOpen(false)} 
+      />
     </footer>
   );
 };

@@ -152,10 +152,10 @@ const ServicesDetailPage = () => {
         <div className="text-center">
           <p className="text-red-600 mb-4">{t('common.error')}: {error || t('productDetail.notFound')}</p>
           <Link 
-            to="/products"
+            to="/services"
             className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
           >
-            {t('productDetail.backToProducts')}
+            {t('productDetail.backToServices')}
           </Link>
         </div>
       </div>
@@ -177,11 +177,11 @@ const ServicesDetailPage = () => {
 
           {/* Back Button */}
           <Link
-            to="/products"
+            to="/services"
             className={`inline-flex items-center text-blue-600 hover:text-blue-700 transition-colors duration-300 mb-4 ${isRTL ? 'flex-row-reverse' : ''}`}
           >
             <ArrowLeft className={`h-5 w-5 ${isRTL ? 'ml-2 rotate-180' : 'mr-2'}`} />
-            {t('productDetail.backToProducts')}
+            {t('productDetail.backToServices')}
           </Link>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">

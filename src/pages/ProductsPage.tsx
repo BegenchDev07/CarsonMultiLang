@@ -1,11 +1,12 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import { Search, Grid, List, ArrowRight, Loader } from 'lucide-react';
+import { useState, useEffect, Fragment } from 'react';
+import { Search, Loader } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { productsApi, Product, Category, Feature, getImageUrl } from '../services/api';
 import { useMediaQuery } from 'react-responsive';
-import { useNavigate } from 'react-router-dom';
 import GetQuoteModal from '../components/GetQuoteModal';
+import { useSearchParams } from 'react-router-dom';
+
 
 const ProductsPage = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -18,17 +19,35 @@ const ProductsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+  const [searchParams] = useSearchParams();
 
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === 'ar';
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
-  const navigator = useNavigate();
+  const category:any = searchParams.get("category") || null;
+  const feature:any = searchParams.get("feature") || null;
+
 
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = isMobile ? 10 : 9;
 
+  const capitalizeWords = (str:any) =>{
+    return str.split(' ').map((word:any) => {
+      if (word.length === 0) {
+        return '';
+      }
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    }).join(' ');
+  }
+  
+
   useEffect(() => {
+    if(category !== null){
+      setSelectedCategory(category);      
+    } else if(feature !== null){           
+      setSelectedFeatures([capitalizeWords(feature)]);
+    }    
     const fetchData = async () => {
       try {
         setLoading(true);
@@ -82,7 +101,7 @@ const ProductsPage = () => {
 
   // Reset to first page when filters/search change
   useEffect(() => {
-    setCurrentPage(1);
+    setCurrentPage(1);    
   }, [searchTerm, selectedCategory, selectedFeatures, isMobile]);
 
   // Category counts
@@ -176,9 +195,9 @@ const ProductsPage = () => {
           {/* Main */}
           <div className="flex-1">
             {/* Search + View Mode */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg mb-8">
-              <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
-                <div className="relative flex-1 max-w-md">
+            <div className="w-full bg-white rounded-2xl p-6 shadow-lg mb-8">
+              <div className="w-full flex flex-col md:flex-row gap-4 items-center justify-between">
+                <div className="w-full relative flex-1 max-w-md">
                   <Search className={`absolute top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5 ${isRTL ? 'right-3' : 'left-3'}`} />
                   <input
                     type="text"
@@ -187,22 +206,7 @@ const ProductsPage = () => {
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className={`w-full py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${isRTL ? 'pr-10 pl-4' : 'pl-10 pr-4'}`}
                   />
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={() => setViewMode('grid')}
-                    className={`p-2 rounded-lg ${viewMode === 'grid' ? 'bg-blue-100 text-blue-600' : 'text-gray-400 hover:text-gray-600'}`}
-                  >
-                    <Grid className="h-5 w-5" />
-                  </button>
-                  <button
-                    onClick={() => setViewMode('list')}
-                    className={`p-2 rounded-lg ${viewMode === 'list' ? 'bg-blue-100 text-blue-600' : 'text-gray-400 hover:text-gray-600'}`}
-                  >
-                    <List className="h-5 w-5" />
-                  </button>
-                </div>
+                </div>                
               </div>
             </div>
 
@@ -235,51 +239,43 @@ const ProductsPage = () => {
               }`}>
                 {currentProducts.map((product,index) => (
                   <Fragment key={index}>
-                    <Link
-                      key={product.documentId}
-                      to={`/drones/${product.documentId}`}
-                      className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group hover:-translate-y-2"
-                    >
-                      <div className="relative overflow-hidden">
+                    <div className='flex flex-col items-between justify-start gap-5 p-1'>
+                      <div>
                         {product.display_image ? (
-                          <img
-                            src={getImageUrl(product.display_image, true)}
-                            alt={product.product_name}
-                            className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-                          />
-                        ) : (
-                          <div className="w-full h-48 bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
-                            <span className="text-blue-600 font-semibold text-lg">{product.product_name}</span>
-                          </div>
-                        )}
-                        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-4 flex items-end justify-between">
-                          <h3 className="text-xl font-bold text-white">{product.product_name}</h3>
-                          <div className="bg-white/20 p-2 rounded-full text-white group-hover:bg-white/30 transition">
-                            <ArrowRight className="h-5 w-5" />
-                          </div>
+                            <img
+                              src={getImageUrl(product.display_image, true)}
+                              alt={product.product_name}
+                              className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500 rounded-lg"
+                            />
+                          ) : (
+                            <div className="w-full h-48 bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
+                              <span className="text-blue-600 font-semibold text-lg">{product.product_name}</span>
+                            </div>
+                          )}
+                      </div>
+                      <div className='size-full flex flex-col items-center justify-between'>
+                        <div className="py-6 flex flex-col gap-3">
+                          <h3 className="text-xl font-bold text-black line-clamp-2">{product.product_name}</h3>
+                          <p className="text-gray-600 text-sm line-clamp-3">
+                            {product.product_description.replace(/[#*]/g, '').substring(0, 150)}...
+                          </p>
+                        </div>
+                        <div className='w-full flex flex-col items-start justify-between py-6 gap-5'>
+                          <Link
+                          to={`/drones/${product.documentId}`}
+                            className='w-full px-3 py-2 bg-blue-600 text-white rounded-lg text-center'>
+                              Learn more
+                            </Link>
+                          <button
+                          onClick={(e)=>{
+                            e.preventDefault()                    
+                            setIsQuoteModalOpen(true)}}
+                            className='w-full px-3 py-2 rounded-lg border border-blue-500 text-blue-500'>
+                              Inquiry
+                            </button>
                         </div>
                       </div>
-
-                      {viewMode === 'list' && (
-                        <div className='flex flex-col items-between justify-end gap-5'>
-                          <div className="p-6">
-                            <p className="text-gray-600 text-sm line-clamp-3">
-                              {product.product_description.replace(/[#*]/g, '').substring(0, 150)}...
-                            </p>
-                          </div>
-                          <div className='flex items-start justify-between p-6 gap-5'>
-                            <button
-                            onClick={_=>{`/drones/${product.documentId}`}}
-                             className='px-3 py-2 bg-blue-600 text-white rounded-lg'>Learn more</button>
-                            <button
-                            onClick={(e)=>{
-                              e.preventDefault()                    
-                              setIsQuoteModalOpen(true)}}
-                             className='px-3 py-2 rounded-lg border border-blue-500 text-blue-500'>Inquiry</button>
-                          </div>
-                        </div>
-                      )}
-                    </Link>
+                    </div>                    
                   </Fragment>
                 ))}
               </div>

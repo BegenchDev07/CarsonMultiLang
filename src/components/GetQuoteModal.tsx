@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Send, User, Mail, Building, Phone, MessageSquare } from 'lucide-react';
+import { X, Send, User, Mail, MessageSquare } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 interface GetQuoteModalProps {
@@ -13,8 +13,7 @@ const GetQuoteModal: React.FC<GetQuoteModalProps> = ({ isOpen, onClose }) => {
 
   const [formData, setFormData] = useState({
     name: '',
-    email: '',    
-    phone: '',    
+    email: '',         
     message: ''
   });
 
@@ -43,8 +42,7 @@ const GetQuoteModal: React.FC<GetQuoteModalProps> = ({ isOpen, onClose }) => {
     // Reset form and close modal
     setFormData({
       name: '',
-      email: '',    
-      phone: '',    
+      email: '',             
       message: ''
     });
     onClose();
@@ -108,23 +106,7 @@ const GetQuoteModal: React.FC<GetQuoteModalProps> = ({ isOpen, onClose }) => {
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder={t('contact.emailAddress')}
               />
-            </div>
-            <div>
-              <label htmlFor="phone" className={`block text-sm font-medium text-gray-700 mb-2 ${isRTL ? 'text-right' : 'text-left'}`}>
-                <Phone className={`h-4 w-4 inline ${isRTL ? 'ml-2' : 'mr-2'}`} />
-                {t('contact.phone')} {t('contact.required')}
-              </label>
-              <input
-                type="number"
-                id="phone"
-                name="phone"
-                required
-                value={formData.phone}
-                onChange={handleInputChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder={t('contact.phone')}
-              />
-            </div>
+            </div>            
           </div>
                     
           
