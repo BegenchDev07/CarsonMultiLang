@@ -38,42 +38,42 @@ const offices = [
     email: "john@skyelectronicshk.com",
     whatsapp: "https://wa.link/9sgo22",
   },
-  {
-    id: "tim",
-    name: t('offices.team.tim.name'),
-    position: t('offices.team.tim.position'),
-    languages: t('offices.team.tim.languages'),
-    phone: "+77479888860",
-    email: "timagr@skyelectronicshk.com",
-    whatsapp: "https://wa.link/z4a4wh",
-  },  
-  {
-    id: "jack",
-    name: t('offices.team.jack.name'),
-    position: t('offices.team.jack.position'),
-    languages: t('offices.team.jack.languages'),
-    phone: "+852 6235 2890",
-    email: "smith@skyelectronicshk.com",
-    whatsapp: "https://wa.link/htnjz9"
-  },
-  {
-    id: "David",
-    name: t('offices.team.diamond.name'),
-    position: t('offices.team.diamond.position'),
-    languages: t('offices.team.diamond.languages'),
-    phone: "+85261574997",
-    email: "david@skyelectronicshk.com",
-    whatsapp: "https://wa.link/9dh2wp"
-  },
-  {
-    id: "Frank",
-    name: t('offices.team.ray.name'),
-    position: t('offices.team.ray.position'),
-    languages: t('offices.team.ray.languages'),
-    phone: "+85261545880",
-    email: "frank@skyelectronicshk.com",
-    whatsapp: "https://wa.link/9dh2wp"
-  }
+  // {
+  //   id: "tim",
+  //   name: t('offices.team.tim.name'),
+  //   position: t('offices.team.tim.position'),
+  //   languages: t('offices.team.tim.languages'),
+  //   phone: "+77479888860",
+  //   email: "timagr@skyelectronicshk.com",
+  //   whatsapp: "https://wa.link/z4a4wh",
+  // },  
+  // {
+  //   id: "jack",
+  //   name: t('offices.team.jack.name'),
+  //   position: t('offices.team.jack.position'),
+  //   languages: t('offices.team.jack.languages'),
+  //   phone: "+852 6235 2890",
+  //   email: "smith@skyelectronicshk.com",
+  //   whatsapp: "https://wa.link/htnjz9"
+  // },
+  // {
+  //   id: "David",
+  //   name: t('offices.team.diamond.name'),
+  //   position: t('offices.team.diamond.position'),
+  //   languages: t('offices.team.diamond.languages'),
+  //   phone: "+85261574997",
+  //   email: "david@skyelectronicshk.com",
+  //   whatsapp: "https://wa.link/9dh2wp"
+  // },
+  // {
+  //   id: "Frank",
+  //   name: t('offices.team.ray.name'),
+  //   position: t('offices.team.ray.position'),
+  //   languages: t('offices.team.ray.languages'),
+  //   phone: "+85261545880",
+  //   email: "frank@skyelectronicshk.com",
+  //   whatsapp: "https://wa.link/9dh2wp"
+  // }
 ];
 
   return (

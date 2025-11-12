@@ -392,7 +392,7 @@ export const productsApi = {
 
 
   async getProducts(): Promise<Product[]> {
-    const url = `${API_BASE_URL}/products`;
+    const url = `${API_BASE_URL}/products?pagination[limit]=50`;
     const response = await fetchData<ApiResponse<ApiProduct>>(url, true, true); // addLocale=true, populate=true    
     if (Array.isArray(response.data)) {      
       return response.data
