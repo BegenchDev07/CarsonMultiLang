@@ -61,6 +61,14 @@ export interface Product {
   link:string;
 }
 
+export interface UseCase{
+  documentId: string;
+  display_image?: { data: ApiImage | null };
+  title: string;
+  description: string;
+  content: string;
+}
+
 export interface Project {
   id: number;
   project_name: string;
@@ -71,6 +79,14 @@ export interface Project {
 }
 
 // New interfaces for API response structure (assuming Strapi-like)
+interface ApiUseCase{
+  Title: string;
+  documentId: string;
+  display_image?: { data: ApiImage | null };
+  description: string;
+  content: string;
+}
+
 interface ApiImage {
   id: number;
   url: string;
@@ -376,6 +392,16 @@ const mapServicesToServices = (apiService: ApiService): ServiceType => {
   }
 }
 
+const mapUseCasesToUseCases = (apiService: ApiUseCase): UseCase => {
+  return {
+    documentId: apiService.documentId,
+    title: apiService.Title,
+    description: apiService.description,    
+    display_image: apiService.display_image,
+    content: apiService.content
+  }
+}
+
 // API service methods
 export const productsApi = {
   async getBestSellers(): Promise<Product[]> {
@@ -654,6 +680,33 @@ export const productsApi = {
     }
     return [];
   },
+
+
+  async getUseCase(id: string): Promise<UseCase | null> {
+    const url = `${API_BASE_URL}/use-case/${id}`;
+    try {
+      const response = await fetchData<ApiResponse<ApiUseCase>>(url, true, true); // addLocale=true, populate=true
+      if (response.data && !Array.isArray(response.data) && response.data.Title) {        
+        return mapUseCasesToUseCases(response.data);
+      }
+    } catch (error) {
+      console.error(`Error fetching use-case ${id}:`, error);
+    }
+    return null;
+  },
+
+
+  async getUseCases(): Promise<UseCase[] | null>{
+    const url = `${API_BASE_URL}/use-cases`;
+    const response = await fetchData<ApiResponse<ApiUseCase>>(url, true, true); // addLocale=true, populate=true
+    if (Array.isArray(response.data)) {      
+      return response.data
+      .filter(item => item && item.Title)
+      .map(mapUseCasesToUseCases);      
+    }
+    return []; // Should return an array for getProducts
+  },
+
 };
 
 // Utility function to get image URL

@@ -1,53 +1,51 @@
-import React from 'react';
-import { Camera, Shield, Truck, Zap, MapPin, Wrench } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Loader } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { productsApi } from '../services/api';
 
 const UseCasesSection = () => {
+  const [useCasesDyno, setUseCases] = useState<any[]>([]);  
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const { t, i18n } = useTranslation();
-  // const isRTL = i18n.language === 'ar';
+  const isRTL = i18n.language === 'ar'
   const useCases = [
-    {
-      icon: Camera,
+    {      
       title: t('useCases.camera.title'),
       description:t('useCases.camera.description') ,
       features: ["4K/8K Video Recording", "Gimbal Stabilization", "RAW Photo Capture"],
       size: "large", // Takes 2 columns
       image: "https://images.pexels.com/photos/442587/pexels-photo-442587.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=1"
     },
-    {
-      icon: Shield,
+    {      
       title: t('useCases.shield.title'),
       description:t('useCases.shield.description') ,
       features: ["Night Vision", "Real-time Streaming", "AI Object Detection"],
       size: "medium",
       image: "https://images.pexels.com/photos/1105766/pexels-photo-1105766.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1"
     },
-    {
-      icon: Truck,
+    {      
       title: t('useCases.truck.title'),
       description:t('useCases.truck.description'),
       features: ["Payload up to 10kg", "GPS Navigation", "Weather Resistant"],
       size: "medium",
       image: "https://images.pexels.com/photos/1670187/pexels-photo-1670187.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1"
     },
-    {
-      icon: Zap,
+    {      
       title: t('useCases.zap.title'),
       description:t('useCases.zap.description') ,
       features: ["Thermal Imaging", "LiDAR Mapping", "Defect Detection"],
       size: "large",
       image: "https://images.pexels.com/photos/433308/pexels-photo-433308.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=1"
     },
-    {
-      icon: MapPin,
+    {      
       title: t('useCases.mapPin.title'),
       description:t('useCases.mapPin.description') ,
       features: ["Centimeter Accuracy", "3D Modeling", "GIS Integration"],
       size: "medium",
       image: "https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1"
     },
-    {
-      icon: Wrench,
+    {    
       title: t('useCases.wrench.title'),
       description:t('useCases.wrench.description') ,
       features: ["Emergency Beacon", "Extended Flight Time", "All-Weather Operation"],
@@ -55,6 +53,56 @@ const UseCasesSection = () => {
       image: "https://images.pexels.com/photos/1108701/pexels-photo-1108701.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1"
     }
   ];
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const [useCase]:any = await Promise.all([
+          productsApi.getUseCases(),          
+        ]);                
+        const some = useCase.slice(0,6)
+        const sizing = ['large','medium']
+        some.map((item:any) => item.size = sizing[Math.floor(Math.random() * sizing.length)])          
+        setUseCases(some);        
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to fetch data');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+  if (loading) {
+    return (
+      <div className={`pt-20 min-h-screen bg-gray-50 flex items-center justify-center ${isRTL ? 'rtl' : 'ltr'}`}>
+        <div className="text-center">
+          <Loader className="h-12 w-12 text-blue-600 animate-spin mx-auto mb-4" />
+          <p className="text-gray-600">{t('products.loading')}</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className={`pt-20 min-h-screen bg-gray-50 flex items-center justify-center ${isRTL ? 'rtl' : 'ltr'}`}>
+        <div className="text-center">
+          <p className="text-red-600 mb-4">{t('common.error')}: {error}</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            {t('common.retry')}
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <section className="py-24 bg-gray-50" aria-labelledby="use-cases-heading">
@@ -70,7 +118,7 @@ const UseCasesSection = () => {
 
         {/* Bento Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-fr">
-          {useCases.map((useCase, index) => (
+          {useCases.map((useCase:any, index) => (
             <div
               key={index}
               className={`relative overflow-hidden rounded-3xl group cursor-pointer transition-all duration-500 ${
@@ -86,6 +134,7 @@ const UseCasesSection = () => {
               {/* Background Image */}
               <div className="absolute inset-0">
                 <img
+                  // src={"https://api.skyelectronica.com"+useCase.display_image.url}
                   src={useCase.image}
                   alt={useCase.title}
                   loading="lazy"
@@ -98,17 +147,14 @@ const UseCasesSection = () => {
               </div>
 
               {/* Content */}
-              <div className="relative h-full p-8 flex flex-col justify-end text-white">
-                <div className="bg-white/10 backdrop-blur-sm w-14 h-14 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-white/20 transition-all duration-300">
-                  <useCase.icon className="h-7 w-7 text-white" />
-                </div>
+              <div className="relative h-full p-8 flex flex-col justify-end text-white">                
                 
                 <h3 id={`use-case-${index}`} className={`font-bold text-white mb-3 text-xl`}>
-                  {useCase.title}
+                  {useCasesDyno[index].title}
                 </h3>
                 
                 <p className="text-gray-200 text-sm mb-3 opacity-1000 transition-opacity duration-300">
-                  {useCase.description}
+                  {/* {useCase.description?.replace(/[#*]/g, '').substring(0, 100)} */}
                 </p>
                 
                 {/* Hover Overlay */}
@@ -117,6 +163,9 @@ const UseCasesSection = () => {
             </div>
           ))}
         </div>
+        <div className='w-full flex items-center justify-center mt-10'>
+          <a href='/use-cases' className='px-6 py-4 bg-blue-600 text-white font-semibold rounded-xl'>View All Use Cases</a>
+        </div>        
       </div>
     </section>
   );

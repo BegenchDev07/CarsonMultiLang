@@ -1,41 +1,23 @@
-import { useState, useEffect, Fragment } from 'react';
-import { Loader } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import {useEffect, useState} from 'react';
 import { useTranslation } from 'react-i18next';
-import { productsApi, getImageUrl, ServiceType } from '../services/api';
 import { useMediaQuery } from 'react-responsive';
+import GetQuoteModal from '../components/GetQuoteModal';
 
-const ServicesPage = () => {
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');    
-  const [services, setServices] = useState<ServiceType[]>([]);  
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
+const ServicesPage = () => {  
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === 'ar';
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
   // Pagination states
 
+  const technical :any = t('servicesContent.technicalServices.content.bulletList',{returnObjects: true})
+  const afterSale :any = t('servicesContent.afterSalesMaintenance.content.bulletList',{returnObjects: true})
+  const projectOperation :any = t('servicesContent.projectOperationalSupport.content.bulletList',{returnObjects: true})
+  const businessPartner :any = t('servicesContent.businessPartnershipSupport.content.bulletList',{returnObjects: true})  
+  const valueAdded :any = t('servicesContent.valueAddedContinuousServices.content.bulletList',{returnObjects: true})  
 
-  useEffect(() => {    
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const [servicesData]:any = await Promise.all([
-          productsApi.getServices(),          
-        ]);
-        
-        setServices(servicesData);        
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to fetch data');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
+  
   
 
     
@@ -46,104 +28,285 @@ const ServicesPage = () => {
 
   // Category counts    
 
-  if (loading) {
-    return (
-      <div className={`pt-20 min-h-screen bg-gray-50 flex items-center justify-center ${isRTL ? 'rtl' : 'ltr'}`}>
-        <div className="text-center">
-          <Loader className="h-12 w-12 text-blue-600 animate-spin mx-auto mb-4" />
-          <p className="text-gray-600">{t('products.loading')}</p>
-        </div>
-      </div>
-    );
-  }
 
-  if (error) {
-    return (
-      <div className={`pt-20 min-h-screen bg-gray-50 flex items-center justify-center ${isRTL ? 'rtl' : 'ltr'}`}>
-        <div className="text-center">
-          <p className="text-red-600 mb-4">{t('common.error')}: {error}</p>
-          <button
-            onClick={() => window.location.reload()}
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            {t('common.retry')}
-          </button>
-        </div>
-      </div>
-    );
-  }
 
   return (
-    <div className={`pt-20 min-h-screen bg-gray-50 ${isRTL ? 'rtl' : 'ltr'}`}>
-      <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 ${isRTL ? 'text-right' : 'text-left'}`}>
-        <div className="flex flex-col lg:flex-row gap-8">                    
-
-          {/* Main */}
-          <div className="flex-1">
-            {/* Search + View Mode */}                                    
-
-            {/* Products Grid */}
-            {services.length === 0 ? (
-              <div className="text-center py-12">
-                <p className="text-gray-500 text-lg">{t('products.noProducts')}</p>
-                <button
-                  onClick={() => {
-                    // setSearchTerm('');
-                    // setSelectedCategory('all');
-                    // setSelectedFeatures([]);
-                  }}
-                  className="mt-4 text-blue-600 hover:text-blue-700 font-medium"
-                >
-                  {t('products.clearFilters')}
-                </button>
-              </div>
-            ) : (
-              <div className={`grid gap-6 ${
-                viewMode === 'grid'
-                  ? isMobile ? 'grid-cols-2' : 'grid-cols-3'
-                  : 'grid-cols-1'
-              }`}>
-                {services.map((product:any,index) => (
-                  <Fragment key={index}>
-                  <div className='flex flex-col items-between justify-start gap-5 p-1'>
-                    <div>
-                      {product.display_image ? (
-                          <img
-                            src={getImageUrl(product.display_image, true)}
-                            alt={product.product_name}
-                            className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500 rounded-lg"
-                          />
-                        ) : (
-                          <div className="w-full h-48 bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
-                            <span className="text-blue-600 font-semibold text-lg">{product.name}</span>
-                          </div>
-                        )}
-                    </div>
-                    <div className='size-full flex flex-col items-center justify-between'>
-                      <div className="py-6 flex flex-col gap-3">
-                        <h3 className="text-xl font-bold text-black line-clamp-2">{product.name}</h3>
-                        <p className="text-gray-600 text-sm line-clamp-3">
-                          {product.description.replace(/[#*]/g, '').substring(0, 150)}...
-                        </p>
-                      </div>
-                      <div className='w-full flex flex-col items-start justify-between py-6 gap-5'>
-                        <Link
-                        to={`/services/${product.documentId}`}
-                          className='w-full px-3 py-2 bg-blue-600 text-white rounded-lg text-center'>
-                            Learn more
-                          </Link>                        
-                      </div>
-                    </div>
-                  </div>                    
-                </Fragment>
-                ))}
-              </div>
-            )}
-            
-
+    <div className={`pt-20 min-h-screen bg-white ${isRTL ? 'rtl' : 'ltr'}`}>
+      {/* Hero Section */}
+      <section className="py-24 max-w-7xl gap-5 mx-auto flex lg:flex-row flex-col items-center justify-center">
+        <div className={`max-w-7xl lg:w-1/2 w-full mx-auto sm:px-6 lg:px-8 ${isRTL ? 'text-right' : 'text-left'}`}>
+          <div className="lg:text-start text-center w-full flex flex-col lg:items-start items-center justify-center gap-10">
+            <h1 className="text-3xl md:text-4xl font-bold">
+              {t('servicesContent.intro.title')}
+            </h1>
+            <p className="text-xl max-w-3xl leading-relaxed">
+              {t('servicesContent.intro.content')}
+            </p>
+            <h1 className="text-3xl md:text-4xl font-bold">
+              {t('servicesContent.hook.title')}
+            </h1>
+            <p className="text-xl lg:text-start text-center max-w-3xl leading-relaxed">
+              {t('servicesContent.hook.content')}
+            </p>
           </div>
         </div>
-      </div>
+        <div className='lg:w-1/2 lg:p-0 px-4 w-full flex items-center justify-center'>
+            <img
+              src="https://images.pexels.com/photos/442587/pexels-photo-442587.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1"
+              alt="SkyElectronica facility and drone technology development"
+              loading="lazy"
+              decoding="async"
+              width="800"
+              height="600"
+              className="rounded-3xl shadow-2xl"
+            />
+        </div>
+      </section>
+
+      {/* Mission & Vision */}
+      <section className="py-24">
+        <div className={`max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center justify-center gap-10 sm:px-6 lg:px-8 ${isRTL ? 'text-right' : 'text-left'}`}>
+          <div className="w-full flex flex-col items-center lg:items-start justify-center gap-3">
+            <h1 className="text-3xl md:text-4xl font-bold mb-2">
+              {t('servicesContent.technicalServices.title')}
+            </h1>
+            <p className="text-xl max-w-3xl leading-relaxed lg:text-start text-center">
+              {t('servicesContent.technicalServices.content.exp')}
+            </p>
+            <ul className="list-disc list-inside text-lg lg:text-start text-center">
+              {technical.map((bullet:any, index:any) => (
+                <li key={index}>
+                  {bullet}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="w-full">
+            <img
+              src="https://images.pexels.com/photos/442587/pexels-photo-442587.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1"
+              alt="SkyElectronica facility and drone technology development"
+              loading="lazy"
+              decoding="async"
+              className="rounded-3xl shadow-2xl w-full h-auto"
+            />
+          </div>
+        </div>
+      </section>
+
+
+      <section className="py-24 bg-gray-50">
+        {
+        isMobile
+        ?
+        <div className={`max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center justify-center gap-10 sm:px-6 lg:px-8 ${isRTL ? 'text-right' : 'text-left'}`}>
+          <div className="w-full flex flex-col items-center lg:items-start justify-center gap-3">
+            <h1 className="text-3xl md:text-4xl font-bold mb-2">
+              {t('servicesContent.afterSalesMaintenance.title')}
+            </h1>
+            <p className="text-xl max-w-3xl leading-relaxed lg:text-start text-center">
+              {t('servicesContent.afterSalesMaintenance.content.exp')}
+            </p>
+            <ul className="list-disc list-inside text-lg lg:text-start text-center">
+              {afterSale.map((bullet:any, index:any) => (
+                <li key={index}>
+                  {bullet}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="w-full">
+            <img
+              src="https://images.pexels.com/photos/442587/pexels-photo-442587.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1"
+              alt="SkyElectronica facility and drone technology development"
+              loading="lazy"
+              decoding="async"
+              className="rounded-3xl shadow-2xl w-full h-auto"
+            />
+          </div>
+        </div>
+        :
+        <div className={`max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center justify-center gap-10 sm:px-6 lg:px-8 ${isRTL ? 'text-right' : 'text-left'}`}>
+          <div className="w-full">
+            <img
+              src="https://images.pexels.com/photos/442587/pexels-photo-442587.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1"
+              alt="SkyElectronica facility and drone technology development"
+              loading="lazy"
+              decoding="async"
+              className="rounded-3xl shadow-2xl w-full h-auto"
+            />
+          </div>
+          <div className="w-full flex flex-col items-center lg:items-start justify-center gap-3">
+            <h1 className="text-3xl md:text-4xl font-bold mb-2">
+              {t('servicesContent.afterSalesMaintenance.title')}
+            </h1>
+            <p className="text-xl max-w-3xl leading-relaxed lg:text-start text-center">
+              {t('servicesContent.afterSalesMaintenance.content.exp')}
+            </p>
+            <ul className="list-disc list-inside text-lg lg:text-start text-center">
+              {afterSale.map((bullet:any, index:any) => (
+                <li key={index}>
+                  {bullet}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        }
+      </section>
+
+      <section className="py-24 bg-gray-50">
+        <div className={`max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center justify-center gap-10 sm:px-6 lg:px-8 ${isRTL ? 'text-right' : 'text-left'}`}>
+          <div className="w-full flex flex-col items-center lg:items-start justify-center gap-3">
+            <h1 className="text-3xl md:text-4xl font-bold mb-2">
+              {t('servicesContent.projectOperationalSupport.title')}
+            </h1>
+            <p className="text-xl max-w-3xl leading-relaxed lg:text-start text-center">
+              {t('servicesContent.projectOperationalSupport.content.exp')}
+            </p>
+            <ul className="list-disc list-inside text-lg lg:text-start text-center">
+              {projectOperation.map((bullet:any, index:any) => (
+                <li key={index}>
+                  {bullet}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="w-full">
+            <img
+              src="https://images.pexels.com/photos/442587/pexels-photo-442587.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1"
+              alt="SkyElectronica facility and drone technology development"
+              loading="lazy"
+              decoding="async"
+              className="rounded-3xl shadow-2xl w-full h-auto"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24">
+        {
+          isMobile
+          ?
+          <div className={`max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center justify-center gap-10 sm:px-6 lg:px-8 ${isRTL ? 'text-right' : 'text-left'}`}>            
+            <div className="w-full flex flex-col items-center lg:items-start justify-center gap-3">
+              <h1 className="text-3xl md:text-4xl font-bold mb-2">
+                {t('servicesContent.businessPartnershipSupport.title')}
+              </h1>
+              <p className="text-xl max-w-3xl leading-relaxed lg:text-start text-center">
+                {t('servicesContent.businessPartnershipSupport.content.exp')}
+              </p>
+              <ul className="list-disc list-inside text-lg lg:text-start text-center">
+                {businessPartner.map((bullet:any, index:any) => (
+                    <li key={index}>
+                    {bullet}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="w-full">
+              <img
+                src="https://images.pexels.com/photos/442587/pexels-photo-442587.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1"
+                alt="SkyElectronica facility and drone technology development"
+                loading="lazy"
+                decoding="async"
+                className="rounded-3xl shadow-2xl w-full h-auto"
+              />
+            </div>
+          </div>
+          :
+          <div className={`max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center justify-center gap-10 sm:px-6 lg:px-8 ${isRTL ? 'text-right' : 'text-left'}`}>
+            <div className="w-full">
+              <img
+                src="https://images.pexels.com/photos/442587/pexels-photo-442587.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1"
+                alt="SkyElectronica facility and drone technology development"
+                loading="lazy"
+                decoding="async"
+                className="rounded-3xl shadow-2xl w-full h-auto"
+              />
+            </div>
+            <div className="w-full flex flex-col items-center lg:items-start justify-center gap-3">
+      <h1 className="text-3xl md:text-4xl font-bold mb-2">
+        {t('servicesContent.businessPartnershipSupport.title')}
+      </h1>
+      <p className="text-xl max-w-3xl leading-relaxed lg:text-start text-center">
+        {t('servicesContent.businessPartnershipSupport.content.exp')}
+      </p>
+      <ul className="list-disc list-inside text-lg lg:text-start text-center">
+        {businessPartner.map((bullet:any, index:any) => (
+                    <li key={index}>
+                    {bullet}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+        }
+      </section>
+
+      <section className="py-24 bg-gray-50">
+        <div className={`max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center justify-center gap-10 sm:px-6 lg:px-8 ${isRTL ? 'text-right' : 'text-left'}`}>
+          <div className="w-full flex flex-col items-center lg:items-start justify-center gap-3">
+            <h1 className="text-3xl md:text-4xl font-bold mb-2">
+              {t('servicesContent.valueAddedContinuousServices.title')}
+            </h1>
+            <p className="text-xl max-w-3xl leading-relaxed lg:text-start text-center">
+              {t('servicesContent.valueAddedContinuousServices.content.exp')}
+            </p>
+            <ul className="list-disc list-inside text-lg lg:text-start text-center">
+              {valueAdded.map((bullet:any, index:any) => (
+                <li key={index}>
+                  {bullet}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="w-full">
+            <img
+              src="https://images.pexels.com/photos/442587/pexels-photo-442587.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1"
+              alt="SkyElectronica facility and drone technology development"
+              loading="lazy"
+              decoding="async"
+              className="rounded-3xl shadow-2xl w-full h-auto"
+            />
+          </div>
+        </div>
+      </section>
+
+
+
+
+      {/* Company Story */}
+      <section className="py-24 bg-white">
+        <div className={`max-w-7xl mx-auto px-4 flex flex-col items-center justify-center gap-10 sm:px-6 lg:px-8 ${isRTL ? 'text-right' : 'text-left'}`}>
+          <h1 className='w-gull text-center text-8xl font-bold'>{t('servicesContent.cta.title')}</h1>
+          <button 
+          onClick={_=>{setIsQuoteModalOpen(!isQuoteModalOpen)}}
+          className='px-6 py-4 bg-blue-700 rounded-lg text-white text-3xl font-semibold'
+          >{t('nav.getQuote')}</button>
+        </div>
+      </section>
+
+
+      {/* Values */}
+      {/* <section className="py-24 bg-gray-50">
+        <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${isRTL ? 'text-right' : 'text-left'}`}>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">{t('about.values')}</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              {t('about.valuesSubtitle')}
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">            
+          </div>
+        </div>
+      </section>       */}
+      <GetQuoteModal 
+        isOpen={isQuoteModalOpen} 
+        onClose={() => setIsQuoteModalOpen(false)} 
+      />
+ 
     </div>
   );
 };

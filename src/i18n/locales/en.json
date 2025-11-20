@@ -39,10 +39,10 @@
   },
   "projectsDetails":{
     "main":{
-      "title": "Featured Projects",
+      "title": "What we do ?",
       "description": "Discover how our cutting-edge drone technology is transforming industries and solving complex challenges around the world."
     },
-    "button":"View All Projects",
+    "button":"View All Services",
     "smartCitySurveillance": {
       "title": "Smart City Surveillance Network",
       "location": "Dubai, UAE",
@@ -82,7 +82,7 @@
   },
   "useCases":{
     "main":{
-      "title": "Versatile Applications",
+      "title": "Use Cases",
       "description": "Our drone solutions are engineered to excel across diverse industries, delivering precision, reliability, and innovation where it matters most."
     },
     "camera":{
@@ -353,5 +353,79 @@
   },
   "footerContact":{
     "button":"Contact Us"
+  },  
+
+  "servicesContent": {
+    "intro":{
+      "title":"Skyelectronica",
+      "content":"Empowering Every Mission with Complete UAV Support — from Technical Expertise and After-Sales Care to Project Execution, Global Partnerships, and Continuous Innovation."
+    },
+    "hook":{
+      "title":"Ready to Elevate Your Operations?",
+      "content":"Let's design your next UAV solution — tailored, scalable, and mission-ready."
+    },
+    "technicalServices": {
+      "title": "1. Technical Services",
+      "content": {
+        "exp": "Tailored UAV Solutions for Complex Missions, delivering end-to-end technical services — from custom integration to AI-powered analytics.",
+        "bulletList": [
+          "System Integration & Custom Design",
+          "Software & Data Processing",
+          "Remote Technical Support",
+          "Professional Training"
+        ]
+      }
+    },
+    "afterSalesMaintenance": {
+      "title": "2. After-Sales & Maintenance",
+      "content": {
+        "exp": "Reliability That Extends Beyond Delivery. Ensure continuous performance with our global after-sales and maintenance network.",
+        "bulletList": [
+          "Global Warranty & Spare Parts",
+          "Regular Inspection & Upgrades",
+          "Worldwide Support Network",
+          "24/7 Response Team"
+        ]
+      }
+    },
+    "projectOperationalSupport": {
+      "title": "3. Project & Operational Support",
+      "content": {
+        "exp": "End-to-End Project Support for Every Mission. From planning to on-site deployment, our team ensures seamless execution and integration.",
+        "bulletList": [
+          "Mission Planning Consultation",
+          "On-Site Deployment & Testing",
+          "Standard Operation Guides",
+          "Data & System Integration"
+        ]
+      }
+    },
+    "businessPartnershipSupport": {
+      "title": "4. Business & Partnership Support",
+      "content": {
+        "exp": "Building Long-Term Value with Global Partners. Expand your UAV business with trusted OEM, distribution, and compliance support.",
+        "bulletList": [
+          "OEM/ODM Services",
+          "Distributor & Channel Support",
+          "Tender & Certification Assistance",
+          "Trade & Logistics Coordination"
+        ]
+      }
+    },
+    "valueAddedContinuousServices": {
+      "title": "5. Value-Added & Continuous Services",
+      "content": {
+        "exp": "Continuous Innovation to Empower Your Future Missions. Beyond products, we deliver ongoing upgrades, consulting, and secure operations.",
+        "bulletList": [
+          "Software & Hardware Upgrades",
+          "Application Consulting",
+          "Data Security & Compliance",
+          "Customer Success Program"
+        ]
+      }
+    },
+    "cta":{
+      "title":"Want to work with Us?"
+    }
   }
 }

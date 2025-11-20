@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Globe } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useMediaQuery } from 'react-responsive'; // For mobile responsiveness
 import GetQuoteModal from './GetQuoteModal';
 
 const Navbar = () => {
@@ -10,7 +11,7 @@ const Navbar = () => {
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const locationHook = useLocation();
   const { t, i18n } = useTranslation();
-
+  const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
   const isActive = (path: string) => locationHook.pathname === path;
 
   const changeLanguage = (lng: string) => {
@@ -30,7 +31,7 @@ const Navbar = () => {
             <span className="text-xl font-bold text-gray-900">SkyElectronica</span>
           </Link>
 
-          <div className="hidden md:flex items-center gap-8">
+          <div className={`${isMobile ? 'hidden' : 'flex'} items-center gap-8`}>
             <Link
               to="/"
               className={`text-sm font-medium transition-colors ${
@@ -139,7 +140,7 @@ const Navbar = () => {
 
           <button
             aria-label="Toggle mobile menu"
-            className="md:hidden"
+            className={`${!isMobile  && 'hidden'}`}
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
