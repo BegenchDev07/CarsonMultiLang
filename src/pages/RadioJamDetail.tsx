@@ -133,7 +133,7 @@ const RadioJamDetail = () => {
         <div className="text-center">
           <p className="text-red-600 mb-4">{t('common.error')}: {error || t('productDetail.notFound')}</p>
           <Link 
-            to="/radio-jam"
+            to="/signal-suite"
             className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
           >
             {t('productDetail.backToJammers')}
@@ -164,14 +164,14 @@ const RadioJamDetail = () => {
           <div className={`flex items-center text-sm text-gray-500 mb-4 ${isRTL ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
             <Link to="/" className="hover:text-blue-600 transition-colors duration-300">{t('common.home')}</Link>
             <span>/</span>
-            <Link to="/radio-jam" className="hover:text-blue-600 transition-colors duration-300">{t('nav.radio-jam')}</Link>
+            <Link to="/signal-suite" className="hover:text-blue-600 transition-colors duration-300">{t('nav.radio-jam')}</Link>
             <span>/</span>
             <span className="text-gray-900">{product.product_name}</span>
           </div>
 
           {/* Back Button */}
           <Link
-            to="/radio-jam"
+            to="/signal-suite"
             className={`inline-flex items-center text-blue-600 hover:text-blue-700 transition-colors duration-300 mb-4 ${isRTL ? 'flex-row-reverse' : ''}`}
           >
             <ArrowLeft className={`h-5 w-5 ${isRTL ? 'ml-2 rotate-180' : 'mr-2'}`} />

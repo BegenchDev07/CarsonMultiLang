@@ -683,9 +683,9 @@ export const productsApi = {
 
 
   async getUseCase(id: string): Promise<UseCase | null> {
-    const url = `${API_BASE_URL}/use-case/${id}`;
+    const url = `${API_BASE_URL}/use-cases/${id}`;
     try {
-      const response = await fetchData<ApiResponse<ApiUseCase>>(url, true, true); // addLocale=true, populate=true
+      const response = await fetchData<ApiResponse<ApiUseCase>>(url, true, true); // addLocale=true, populate=true      
       if (response.data && !Array.isArray(response.data) && response.data.Title) {        
         return mapUseCasesToUseCases(response.data);
       }

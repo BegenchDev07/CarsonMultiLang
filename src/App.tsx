@@ -21,6 +21,7 @@ const BlogDetailPage = lazy(() => import('./pages/BlogDetailPage'))
 const ServicesPage = lazy(() => import('./pages/ServicesPage'));
 const ServicesDetailPage = lazy(() => import('./pages/ServicesDetailPage'));
 const UseCasePage = lazy(() => import('./pages/UseCasePage'));
+const UseCaseDetailPage = lazy(() => import('./pages/UseCaseDetailPage'))
 
 // Error Boundary
 class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
@@ -79,8 +80,8 @@ function App() {
                   <Route path="/drones/:id" element={<ProductDetailPage />} />
                   <Route path="/about" element={<AboutPage />} />
                   <Route path="/contacts" element={<ContactsPage />} />
-                  <Route path="/radio-jam" element={<RadioJam />} />
-                  <Route path="/radio-jam/:id" element={<RadioJamDetail />} />
+                  <Route path="/signal-suite" element={<RadioJam />} />
+                  <Route path="/signal-suite/:id" element={<RadioJamDetail />} />
                   <Route path="/accessories" element={<AccessoriesPage />} />
                   <Route path="/accessories/:id" element={<AccessorieDetailPage />} />
                   <Route path="/blog" element={<BlogPage />} />
@@ -88,6 +89,7 @@ function App() {
                   <Route path="/services" element={<ServicesPage />} />
                   <Route path="/services/:id" element={<ServicesDetailPage />} />
                   <Route path="/use-cases" element={<UseCasePage />} />
+                  <Route path="/use-cases/:id" element={<UseCaseDetailPage />} />
                 </Routes>
               </Suspense>
             </main>

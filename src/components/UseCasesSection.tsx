@@ -62,9 +62,9 @@ const UseCasesSection = () => {
         const [useCase]:any = await Promise.all([
           productsApi.getUseCases(),          
         ]);                
-        const some = useCase.slice(0,6)
-        const sizing = ['large','medium']
-        some.map((item:any) => item.size = sizing[Math.floor(Math.random() * sizing.length)])          
+        const some = useCase.slice(0,6)                
+        // some.map((item:any) => item.size = sizing[Math.floor(Math.random() * sizing.length)])                  
+        some.map((item:any,index:number) => item.size = useCases[index].size)
         setUseCases(some);        
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to fetch data');
@@ -118,7 +118,7 @@ const UseCasesSection = () => {
 
         {/* Bento Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-fr">
-          {useCases.map((useCase:any, index) => (
+          {useCasesDyno.map((useCase:any, index) => (
             <div
               key={index}
               className={`relative overflow-hidden rounded-3xl group cursor-pointer transition-all duration-500 ${
@@ -135,12 +135,12 @@ const UseCasesSection = () => {
               <div className="absolute inset-0">
                 <img
                   // src={"https://api.skyelectronica.com"+useCase.display_image.url}
-                  src={useCase.image}
+                  src={"https://api.skyelectronica.com"+useCasesDyno[index].display_image.url}
                   alt={useCase.title}
                   loading="lazy"
                   decoding="async"
-                  width={useCase.size === 'large' ? "600" : "400"}
-                  height={useCase.size === 'large' ? "400" : "300"}
+                  width={useCases[index].size === 'large' ? "600" : "400"}
+                  height={useCases[index].size === 'large' ? "400" : "300"}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
@@ -150,7 +150,7 @@ const UseCasesSection = () => {
               <div className="relative h-full p-8 flex flex-col justify-end text-white">                
                 
                 <h3 id={`use-case-${index}`} className={`font-bold text-white mb-3 text-xl`}>
-                  {useCasesDyno[index].title}
+                  {useCase.title}
                 </h3>
                 
                 <p className="text-gray-200 text-sm mb-3 opacity-1000 transition-opacity duration-300">

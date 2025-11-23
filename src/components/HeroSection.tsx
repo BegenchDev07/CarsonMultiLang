@@ -26,18 +26,18 @@ const HeroSection = () => {
       image: "https://api.skyelectronica.com/uploads/Wechat_IMG_1408_7837fd2e19.jpg",
       cta: t('common.learnMore')
     },
-    {
-      title: t('hero.title3'),
-      subtitle: t('hero.subtitle3'),
-      image: "https://api.skyelectronica.com/uploads/7_c28da0890d.png",
-      cta: t('common.getStarted')
-    },
-    {
-      title: t('hero.title4'),
-      subtitle: t('hero.subtitle4'),
-      image: 'https://www.autelrobotics.com/wp-content/uploads/2024/10/EVO-Lite-PC-banner.webp',
-      cta: t('common.getStarted')
-    },    
+    // {
+    //   title: t('hero.title3'),
+    //   subtitle: t('hero.subtitle3'),
+    //   image: "https://api.skyelectronica.com/uploads/7_c28da0890d.png",
+    //   cta: t('common.getStarted')
+    // },
+    // {
+    //   title: t('hero.title4'),
+    //   subtitle: t('hero.subtitle4'),
+    //   image: 'https://www.autelrobotics.com/wp-content/uploads/2024/10/EVO-Lite-PC-banner.webp',
+    //   cta: t('common.getStarted')
+    // },    
   ];
 
   useEffect(() => {
@@ -115,20 +115,29 @@ const HeroSection = () => {
           />
           <div className="absolute inset-0 z-20 flex items-center">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-end pb-16">
-              <div className="max-w-3xl">
-                <h1 className="text-3xl md:text-7xl font-bold text-white mb-6 leading-tight">
+              <div className="size-full flex flex-col items-center justify-evenly">
+                <h1 className="w-full text-center text-3xl md:text-7xl font-bold text-white mb-6 leading-tight">
                   {slide.title}
                 </h1>
                 {/* <p className="text-xl md:text-2xl text-blue-200 mb-8 leading-relaxed">
                   {slide.subtitle}
                 </p> */}
-                <button 
-                  onClick={() => navigator('/drones')}
-                  className="w-auto h-auto border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 flex items-center justify-center focus:outline-none focus:ring-4 focus:ring-white/50"
-                  aria-label="Watch product demonstration video"
-                >                  
-                  {t('hero.watchDemo')}
-                </button>
+                <div className='w-full flex items-center justify-evenly'>
+                  <button 
+                    onClick={() => navigator('/drones')}
+                    className="w-auto h-auto border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 flex items-center justify-center focus:outline-none focus:ring-4 focus:ring-white/50"
+                    aria-label="Watch product demonstration video"
+                  >                  
+                    {t('hero.watchDemo')}
+                  </button>
+                  <button 
+                    onClick={() => setIsQuoteModalOpen(!isQuoteModalOpen)}
+                    className="w-auto h-auto border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 flex items-center justify-center focus:outline-none focus:ring-4 focus:ring-white/50"
+                    aria-label="Watch product demonstration video"
+                  >                  
+                    {t('nav.getQuote')}
+                  </button>
+                </div>
               </div>
             </div>
           </div>

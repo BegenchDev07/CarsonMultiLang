@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useState, Fragment} from 'react';
 import { useTranslation } from 'react-i18next';
 import { useMediaQuery } from 'react-responsive';
 import GetQuoteModal from '../components/GetQuoteModal';
@@ -16,7 +16,6 @@ const ServicesPage = () => {
   const projectOperation :any = t('servicesContent.projectOperationalSupport.content.bulletList',{returnObjects: true})
   const businessPartner :any = t('servicesContent.businessPartnershipSupport.content.bulletList',{returnObjects: true})  
   const valueAdded :any = t('servicesContent.valueAddedContinuousServices.content.bulletList',{returnObjects: true})  
-
   
   
 
@@ -52,8 +51,8 @@ const ServicesPage = () => {
         </div>
         <div className='lg:w-1/2 lg:p-0 px-4 w-full flex items-center justify-center'>
             <img
-              src="https://images.pexels.com/photos/442587/pexels-photo-442587.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1"
-              alt="SkyElectronica facility and drone technology development"
+              src={t('servicesContent.intro.image')}
+              alt="UAV Value-Added & Continuous Services | Software Upgrades, Consulting & Compliance"
               loading="lazy"
               decoding="async"
               width="800"
@@ -73,18 +72,23 @@ const ServicesPage = () => {
             <p className="text-xl max-w-3xl leading-relaxed lg:text-start text-center">
               {t('servicesContent.technicalServices.content.exp')}
             </p>
-            <ul className="list-disc list-inside text-lg lg:text-start text-center">
+            <div className='w-full flex flex-col lg:text-start text-center leading-relaxed'>
               {technical.map((bullet:any, index:any) => (
-                <li key={index}>
-                  {bullet}
-                </li>
+                <Fragment key={index}>
+                  <h1>
+                    {bullet.title}
+                  </h1>
+                  <p>
+                    {bullet.content}
+                  </p>
+                </Fragment>
               ))}
-            </ul>
+            </div>
           </div>
           <div className="w-full">
             <img
-              src="https://images.pexels.com/photos/442587/pexels-photo-442587.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1"
-              alt="SkyElectronica facility and drone technology development"
+              src={t('servicesContent.technicalServices.content.image')}
+              alt="Skyelectronica UAV Solutions | End-to-End Drone Support & Mission-Ready Tech"
               loading="lazy"
               decoding="async"
               className="rounded-3xl shadow-2xl w-full h-auto"
@@ -106,18 +110,23 @@ const ServicesPage = () => {
             <p className="text-xl max-w-3xl leading-relaxed lg:text-start text-center">
               {t('servicesContent.afterSalesMaintenance.content.exp')}
             </p>
-            <ul className="list-disc list-inside text-lg lg:text-start text-center">
-              {afterSale.map((bullet:any, index:any) => (
-                <li key={index}>
-                  {bullet}
-                </li>
-              ))}
-            </ul>
+            <div className='w-full flex flex-col lg:text-start text-center leading-relaxed'>
+            {afterSale.map((bullet:any, index:any) => (
+                <Fragment key={index}>
+                  <h1>
+                    {bullet.title}
+                  </h1>
+                  <p>
+                    {bullet.content}
+                  </p>
+                </Fragment>
+            ))}
+            </div>
           </div>
           <div className="w-full">
             <img
-              src="https://images.pexels.com/photos/442587/pexels-photo-442587.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1"
-              alt="SkyElectronica facility and drone technology development"
+              src={t('servicesContent.afterSalesMaintenance.content.image')}
+              alt="Technical UAV Services | Custom Drone Integration, AI Analytics & Training"
               loading="lazy"
               decoding="async"
               className="rounded-3xl shadow-2xl w-full h-auto"
@@ -128,8 +137,8 @@ const ServicesPage = () => {
         <div className={`max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center justify-center gap-10 sm:px-6 lg:px-8 ${isRTL ? 'text-right' : 'text-left'}`}>
           <div className="w-full">
             <img
-              src="https://images.pexels.com/photos/442587/pexels-photo-442587.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1"
-              alt="SkyElectronica facility and drone technology development"
+              src={t('servicesContent.afterSalesMaintenance.content.image')}
+              alt="Technical UAV Services | Custom Drone Integration, AI Analytics & Training"
               loading="lazy"
               decoding="async"
               className="rounded-3xl shadow-2xl w-full h-auto"
@@ -142,13 +151,18 @@ const ServicesPage = () => {
             <p className="text-xl max-w-3xl leading-relaxed lg:text-start text-center">
               {t('servicesContent.afterSalesMaintenance.content.exp')}
             </p>
-            <ul className="list-disc list-inside text-lg lg:text-start text-center">
-              {afterSale.map((bullet:any, index:any) => (
-                <li key={index}>
-                  {bullet}
-                </li>
-              ))}
-            </ul>
+            <div className='w-full flex flex-col lg:text-start text-center leading-relaxed'>
+            {afterSale.map((bullet:any, index:any) => (
+                <Fragment key={index}>
+                  <h1>
+                    {bullet.title}
+                  </h1>
+                  <p>
+                    {bullet.content}
+                  </p>
+                </Fragment>
+            ))}
+            </div>
           </div>
         </div>
         }
@@ -163,18 +177,23 @@ const ServicesPage = () => {
             <p className="text-xl max-w-3xl leading-relaxed lg:text-start text-center">
               {t('servicesContent.projectOperationalSupport.content.exp')}
             </p>
-            <ul className="list-disc list-inside text-lg lg:text-start text-center">
-              {projectOperation.map((bullet:any, index:any) => (
-                <li key={index}>
-                  {bullet}
-                </li>
-              ))}
-            </ul>
+            <div className='w-full flex flex-col lg:text-start text-center leading-relaxed'>
+            {projectOperation.map((bullet:any, index:any) => (
+                <Fragment key={index}>
+                  <h1>
+                    {bullet.title}
+                  </h1>
+                  <p>
+                    {bullet.content}
+                  </p>
+                </Fragment>
+            ))}
+            </div>
           </div>
           <div className="w-full">
             <img
-              src="https://images.pexels.com/photos/442587/pexels-photo-442587.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1"
-              alt="SkyElectronica facility and drone technology development"
+              src={t('servicesContent.projectOperationalSupport.content.image')}
+              alt="UAV After-Sales & Maintenance | Global Support, Repairs & Upgrades"
               loading="lazy"
               decoding="async"
               className="rounded-3xl shadow-2xl w-full h-auto"
@@ -195,18 +214,23 @@ const ServicesPage = () => {
               <p className="text-xl max-w-3xl leading-relaxed lg:text-start text-center">
                 {t('servicesContent.businessPartnershipSupport.content.exp')}
               </p>
-              <ul className="list-disc list-inside text-lg lg:text-start text-center">
+              <div className='w-full flex flex-col lg:text-start text-center leading-relaxed'>
                 {businessPartner.map((bullet:any, index:any) => (
-                    <li key={index}>
-                    {bullet}
-                  </li>
+                    <Fragment key={index}>
+                      <h1>
+                        {bullet.title}
+                      </h1>
+                      <p>
+                        {bullet.content}
+                      </p>
+                    </Fragment>
                 ))}
-              </ul>
+              </div>
             </div>
             <div className="w-full">
               <img
-                src="https://images.pexels.com/photos/442587/pexels-photo-442587.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1"
-                alt="SkyElectronica facility and drone technology development"
+                src={t('servicesContent.businessPartnershipSupport.content.image')}
+                alt="Project & Operational UAV Support | Mission Planning, On-Site Testing"
                 loading="lazy"
                 decoding="async"
                 className="rounded-3xl shadow-2xl w-full h-auto"
@@ -217,8 +241,8 @@ const ServicesPage = () => {
           <div className={`max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center justify-center gap-10 sm:px-6 lg:px-8 ${isRTL ? 'text-right' : 'text-left'}`}>
             <div className="w-full">
               <img
-                src="https://images.pexels.com/photos/442587/pexels-photo-442587.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1"
-                alt="SkyElectronica facility and drone technology development"
+                src={t('servicesContent.businessPartnershipSupport.content.image')}
+                alt="Project & Operational UAV Support | Mission Planning, On-Site Testing"
                 loading="lazy"
                 decoding="async"
                 className="rounded-3xl shadow-2xl w-full h-auto"
@@ -231,13 +255,18 @@ const ServicesPage = () => {
       <p className="text-xl max-w-3xl leading-relaxed lg:text-start text-center">
         {t('servicesContent.businessPartnershipSupport.content.exp')}
       </p>
-      <ul className="list-disc list-inside text-lg lg:text-start text-center">
+      <div className='w-full flex flex-col lg:text-start text-center leading-relaxed'>
         {businessPartner.map((bullet:any, index:any) => (
-                    <li key={index}>
-                    {bullet}
-                  </li>
-                ))}
-              </ul>
+            <Fragment key={index}>
+              <h1>
+                {bullet.title}
+              </h1>
+              <p>
+                {bullet.content}
+              </p>
+            </Fragment>
+        ))}
+      </div>
             </div>
           </div>
 
@@ -253,18 +282,23 @@ const ServicesPage = () => {
             <p className="text-xl max-w-3xl leading-relaxed lg:text-start text-center">
               {t('servicesContent.valueAddedContinuousServices.content.exp')}
             </p>
-            <ul className="list-disc list-inside text-lg lg:text-start text-center">
-              {valueAdded.map((bullet:any, index:any) => (
-                <li key={index}>
-                  {bullet}
-                </li>
-              ))}
-            </ul>
+            <div className='w-full flex flex-col lg:text-start text-center leading-relaxed'>
+                {valueAdded.map((bullet:any, index:any) => (
+                    <Fragment key={index}>
+                      <h1>
+                        {bullet.title}
+                      </h1>
+                      <p>
+                        {bullet.content}
+                      </p>
+                    </Fragment>
+                ))}
+              </div>
           </div>
           <div className="w-full">
             <img
-              src="https://images.pexels.com/photos/442587/pexels-photo-442587.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1"
-              alt="SkyElectronica facility and drone technology development"
+              src={t('servicesContent.valueAddedContinuousServices.content.image')}
+              alt="UAV Business & Partnership Support | OEM, Distribution & Global Compliance"
               loading="lazy"
               decoding="async"
               className="rounded-3xl shadow-2xl w-full h-auto"
@@ -272,8 +306,7 @@ const ServicesPage = () => {
           </div>
         </div>
       </section>
-
-
+      
 
 
       {/* Company Story */}

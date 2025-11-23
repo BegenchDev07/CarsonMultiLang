@@ -5,16 +5,16 @@
     "about": "About",
     "contact": "Contact",
     "getQuote": "Get Quote",
-    "radio-jam":"Radio Jamming",
+    "radio-jam":"Signal Suites",
     "accessories-gimbals":"Accessories & Gimbals",
     "blog":"Blog",
     "all": "All",
     "services":"Services"
   },
   "hero": {
-    "title1": "Fixed Wing and VTOL Series",
+    "title1": "Engineered For High-Performance Industrial Missions",
     "subtitle1": "Advanced autonomous flight systems for professional applications",
-    "title2": "All DJI Series",
+    "title2": "Integrated UAV Solutions That Power Your Mission Success",
     "subtitle2": "Cutting-edge electronics and drone technology solutions",
     "title3": "FPV 10-15 inch and Fiber Optic",    
     "subtitle3": "Reliable drone solutions for commercial and industrial use",
@@ -219,7 +219,7 @@
   },
   "productDetail": {
     "backToProducts": "Back to Drones",
-    "backToJammers": "Back to Radio Jammers",
+    "backToJammers": "Back to Signal Suites",
     "backToAccessories": "Back to Accessories & Gimbals",
     "backToBlog": "Back to Blog",
     "backToServices":"Back to Services",
@@ -358,72 +358,134 @@
   "servicesContent": {
     "intro":{
       "title":"Skyelectronica",
-      "content":"Empowering Every Mission with Complete UAV Support — from Technical Expertise and After-Sales Care to Project Execution, Global Partnerships, and Continuous Innovation."
+      "content":"Empowering Every Mission with Complete UAV Support — from Technical Expertise and After-Sales Care to Project Execution, Global Partnerships, and Continuous Innovation.",
+      "image":"https://api.skyelectronica.com/uploads/UAV_Value_Added_and_Continuous_Services_Software_Upgrades_Consulting_and_Compliance_534fc8884c.jpg"
     },
     "hook":{
       "title":"Ready to Elevate Your Operations?",
       "content":"Let's design your next UAV solution — tailored, scalable, and mission-ready."
     },
     "technicalServices": {
-      "title": "1. Technical Services",
+      "title": "1. Technical UAV Services:",
       "content": {
-        "exp": "Tailored UAV Solutions for Complex Missions, delivering end-to-end technical services — from custom integration to AI-powered analytics.",
+        "image":"https://api.skyelectronica.com/uploads/Skyelectronica_UAV_Solutions_End_to_End_Drone_Support_and_Mission_Ready_Tech_d02454f86f.jpg",
+        "exp": "Tailored Solutions for Complex Missions End-to-end UAV technical services, from custom system integration to AI-powered data analytics, ensuring scalable, mission-ready drone operations.",
         "bulletList": [
-          "System Integration & Custom Design",
-          "Software & Data Processing",
-          "Remote Technical Support",
-          "Professional Training"
+          {
+            "title":"System Integration & Custom Design",
+            "content":"Custom UAV system design and integration for optimized performance, reliability, and mission-specific requirements."
+          },
+          {
+            "title":"Software & Data Processing",
+            "content":"AI-powered software and data analytics to transform flight data into actionable insights for critical decision-making.Global real-time support from UAV experts, ensuring uninterrupted operations and effective troubleshooting."
+          },          
+          {
+            "title":"Professional Training",
+            "content":"Operator and engineer training programs covering UAV operation, safety, mission planning, and data analysis."
+          }          
         ]
       }
     },
     "afterSalesMaintenance": {
-      "title": "2. After-Sales & Maintenance",
+      "title": "2. After-Sales & UAV Maintenance",
       "content": {
-        "exp": "Reliability That Extends Beyond Delivery. Ensure continuous performance with our global after-sales and maintenance network.",
+        "image":"https://api.skyelectronica.com/uploads/Technical_UAV_Services_Custom_Drone_Integration_AI_Analytics_and_Training_ea6a9285ce.jpg",
+        "exp": "Reliable Support Beyond Delivery Ensure continuous UAV performance with our global after-sales and maintenance network, offering scalable, mission-ready support worldwide.",
         "bulletList": [
-          "Global Warranty & Spare Parts",
-          "Regular Inspection & Upgrades",
-          "Worldwide Support Network",
-          "24/7 Response Team"
+          {
+            "title":"Global Warranty & Spare Parts",
+            "content":"Comprehensive global warranty and access to genuine spare parts, ensuring your UAV fleet remains operational and reliable."
+          },
+          {
+            "title":"Regular Inspection & Upgrades",
+            "content":"Scheduled inspections and system upgrades to maintain peak performance and extend the lifespan of your UAV systems."
+          },
+          {
+            "title":"Worldwide Support Network",
+            "content":"A global network of experts providing technical guidance, logistics, and maintenance services wherever your UAVs operate."
+          },
+          {
+            "title":"24/7 Response Team",
+            "content":"Round-the-clock support to quickly resolve issues, minimize downtime, and ensure mission-critical operations continue uninterrupted. Maximize UAV uptime with our expert after-sales and maintenance services — reliable, scalable, and mission-ready. Contact us today."
+          }
         ]
       }
     },
     "projectOperationalSupport": {
-      "title": "3. Project & Operational Support",
+      "title": "3. Project & Operational UAV Support:",      
       "content": {
-        "exp": "End-to-End Project Support for Every Mission. From planning to on-site deployment, our team ensures seamless execution and integration.",
+        "image":"https://api.skyelectronica.com/uploads/UAV_After_Sales_and_Maintenance_Global_Support_Repairs_and_Upgrades_011b7f173a.jpg",
+        "exp": "Seamless Execution for Every Mission",
         "bulletList": [
-          "Mission Planning Consultation",
-          "On-Site Deployment & Testing",
-          "Standard Operation Guides",
-          "Data & System Integration"
+          {
+            "title":"Mission Planning Consultation",
+            "content":"Expert consultation to design mission strategies, optimize flight plans, and ensure operational efficiency for complex UAV missions."
+          },
+          {
+            "title":"On-Site Deployment & Testing",
+            "content":"Professional on-site deployment and system testing to validate UAV readiness and ensure smooth mission execution."
+          },
+          {
+            "title":"Standard Operation Guides",
+            "content":"Customized operation manuals and SOPs to streamline UAV usage, enhance safety, and standardize team workflows."
+          },
+          {
+            "title":"Data & System Integration",
+            "content":"Seamless integration of UAV systems and collected data into existing operational platforms, enabling real-time analytics and mission insight. Ensure mission success with our comprehensive project and operational UAV support — tailored, scalable, and mission-ready. Contact us today."
+          }
         ]
       }
     },
     "businessPartnershipSupport": {
       "title": "4. Business & Partnership Support",
       "content": {
+        "image":"https://api.skyelectronica.com/uploads/Project_and_Operational_UAV_Support_Mission_Planning_On_Site_Testing_9c11c489b5.jpg",
         "exp": "Building Long-Term Value with Global Partners. Expand your UAV business with trusted OEM, distribution, and compliance support.",
         "bulletList": [
-          "OEM/ODM Services",
-          "Distributor & Channel Support",
-          "Tender & Certification Assistance",
-          "Trade & Logistics Coordination"
+          {
+            "title":"OEM/ODM Services",
+            "content":"Custom-designed UAV platforms, payload integrations, and communication modules tailored to your mission requirements. From industrial design to full-system assembly, we help you build your own brand."
+          },
+          {
+            "title":"Distributor & Channel Support",
+            "content":"End-to-end partner enablement: regional market onboarding, pricing strategy, marketing assets, and dedicated post-sales engineering support to accelerate your growth."
+          },
+          {
+            "title":"Tender & Certification Assistance",
+            "content":"Guidance on regional standards, documentation preparation, performance reporting, and compliance consulting—helping you confidently enter government, enterprise, and large-scale tenders."
+          },
+          {
+            "title":"Trade & Logistics Coordination",
+            "content":"Global shipping coordination, export documentation, device labeling, regulatory checks, and safe-packaging solutions for UAV systems and LiPo batteries."
+          }          
         ]
       }
     },
     "valueAddedContinuousServices": {
       "title": "5. Value-Added & Continuous Services",
       "content": {
-        "exp": "Continuous Innovation to Empower Your Future Missions. Beyond products, we deliver ongoing upgrades, consulting, and secure operations.",
+        "image":"https://api.skyelectronica.com/uploads/UAV_Business_and_Partnership_Support_OEM_Distribution_and_Global_Compliance_e5a84c091f.jpg",
+        "exp": "Continuous Innovation for Evolving Mission Needs. More than hardware — we ensure your UAV operations stay modern, secure, and optimized.",
         "bulletList": [
-          "Software & Hardware Upgrades",
-          "Application Consulting",
-          "Data Security & Compliance",
-          "Customer Success Program"
+          {
+            "title":"Software & Hardware Upgrades",
+            "content":"Regular firmware enhancements, module upgrades, and system optimization to keep your fleet at peak performance."
+          },
+          {
+            "title":"Application Consulting",
+            "content":"Scenario-based consulting for industrial, security, and infrastructure applications—helping you match the right UAV solution to every mission."
+          },
+          {
+            "title":"Data Security & Compliance",
+            "content":"Robust protection for communication, storage, and cloud workflows. Compliance guidance aligned with regional data and aviation standards."
+          },
+          {
+            "title":"Customer Success Program",
+            "content":"Dedicated lifecycle support, performance monitoring, onboarding, and mission-readiness planning to ensure long-term operational success."
+          }
         ]
       }
-    },
+    },    
     "cta":{
       "title":"Want to work with Us?"
     }

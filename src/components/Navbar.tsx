@@ -41,9 +41,9 @@ const Navbar = () => {
               {t('nav.home')}
             </Link>
             <Link
-              to="/radio-jam"
+              to="/signal-suite"
               className={`text-sm font-medium transition-colors ${
-                isActive('/radio-jam') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
+                isActive('/signal-suite') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
               }`}
             >
               {t('nav.radio-jam')}
@@ -158,7 +158,7 @@ const Navbar = () => {
                 {t('nav.home')}
               </Link>
               <Link
-              to="/radio-jam"
+              to="/signal-suite"
               className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600"
             >
               {t('nav.radio-jam')}
