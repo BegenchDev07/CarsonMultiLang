@@ -22,6 +22,8 @@ const ServicesPage = lazy(() => import('./pages/ServicesPage'));
 const ServicesDetailPage = lazy(() => import('./pages/ServicesDetailPage'));
 const UseCasePage = lazy(() => import('./pages/UseCasePage'));
 const UseCaseDetailPage = lazy(() => import('./pages/UseCaseDetailPage'))
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const ToS = lazy(() => import('./pages/ToS'));
 
 // Error Boundary
 class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
@@ -90,6 +92,8 @@ function App() {
                   <Route path="/services/:id" element={<ServicesDetailPage />} />
                   <Route path="/use-cases" element={<UseCasePage />} />
                   <Route path="/use-cases/:id" element={<UseCaseDetailPage />} />
+                  <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                  <Route path="/terms-of-service" element={<ToS />} />
                 </Routes>
               </Suspense>
             </main>
