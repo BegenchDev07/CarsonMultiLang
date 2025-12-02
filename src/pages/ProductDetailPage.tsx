@@ -10,6 +10,8 @@ import ScaledModal from '../components/ScaledModal';
 import { productsApi, Product, getImageUrl } from '../services/api';
 import { useMediaQuery } from 'react-responsive'; // For mobile responsiveness
 import BestSalesSection from '../components/BestSalesSection';
+import { unslugify } from '../services/helper';
+
 
 const ProductDetailPage = () => {
   const { t, i18n } = useTranslation();
@@ -35,8 +37,9 @@ const ProductDetailPage = () => {
       }
 
       try {
-        setLoading(true);
+        setLoading(true);        
         const productData = await productsApi.getProduct(id);        
+        // ;
         setProduct(productData);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to fetch product');

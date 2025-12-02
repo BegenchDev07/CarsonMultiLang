@@ -164,7 +164,7 @@ const UseCasesSection = () => {
           ))}
         </div>
         <div className='w-full flex items-center justify-center mt-10'>
-          <a href='/use-cases' className='px-6 py-4 bg-blue-600 text-white font-semibold rounded-xl'>View All Use Cases</a>
+          <a href='/use-cases' className='px-6 py-4 bg-red-600 text-white font-semibold rounded-xl'>View All Use Cases</a>
         </div>        
       </div>
     </section>

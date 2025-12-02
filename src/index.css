@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+/* @plugin "daisyui"; */
 /* RTL Support */
 .rtl {
   direction: rtl;
@@ -177,4 +177,10 @@ img {
 }
 .scrollbar-hide::-webkit-scrollbar {
   display: none;  /* Safari and Chrome */
+}
+
+@layer components {
+  .btn {
+    /* background-color: var(--primary); */
+  }  
 }

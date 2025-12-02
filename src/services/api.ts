@@ -59,6 +59,7 @@ export interface Product {
   updatedAt: string;
   presentation: any;
   link:string;
+  slug: string;
 }
 
 export interface UseCase{
@@ -136,6 +137,7 @@ interface ApiProduct {
   category?: ApiCategory | null ;
   feature?: ApiFeature | null ;
   link?: string;
+  slug: string;
 }
 
 interface ApiJammer {
@@ -336,6 +338,7 @@ const mapApiProductToProduct = (apiProduct: ApiProduct): Product => {
     feature: mapApiFeatureToFeature(apiProduct?.feature || null),
     presentation: apiProduct.presentation,
     link: apiProduct.link || '',
+    slug: apiProduct.slug
   };
 };
 
@@ -429,11 +432,12 @@ export const productsApi = {
   },
 
   async getProduct(id: string): Promise<Product | null> {
-    const url = `${API_BASE_URL}/products/${id}`;
+    const url = `${API_BASE_URL}/products?filters[slug][$eq]=${id}`;    
     try {
-      const response = await fetchData<ApiResponse<ApiProduct>>(url, true, true); // addLocale=true, populate=true
-      if (response.data && !Array.isArray(response.data) && response.data.product_name) {
-        return mapApiProductToProduct(response.data);
+      const response = await fetchData<ApiResponse<any>>(url, true, true); // addLocale=true, populate=true      
+      ;
+      if (response.data.at(0) && Array.isArray(response.data) && response.data[0].product_name) {
+        return mapApiProductToProduct(response.data[0]);
       }
     } catch (error) {
       console.error(`Error fetching product ${id}:`, error);
@@ -475,32 +479,9 @@ export const productsApi = {
 
   async getBestSellerProducts(): Promise<Product[]> {
     // Return first two products as best sellers
-    const products = await this.getBestSellers();     
+    const products = await this.getBestSellers(); 
+    ;    
     return products.filter(product => product && product.product_name).slice(0, 4);
-  },
-
-  async getProjects(): Promise<Project[]> {
-    // This still uses the mock data logic for projects, as the user only asked for products
-    // If api.skyelectronica.com has a /posts or /projects endpoint, this would need similar refactoring
-    const url = `https://jsonplaceholder.typicode.com/posts?_limit=6`; // Original mock URL
-    try {
-      const data = await fetchData<any[]>(url);
-      return data.map(item => ({
-        id: item.id,
-        project_name: item.title.charAt(0).toUpperCase() + item.title.slice(1),
-        description: item.body.substring(0, 120) + '...',
-        image: {
-          id: item.id,
-          url: `https://images.pexels.com/photos/${(item.id % 6) * 100000 + 442587}/pexels-photo-${(item.id % 6) * 100000 + 442587}.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=1`,
-          alternativeText: item.title
-        },
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      }));
-    } catch (error) {
-      console.warn("Error fetching projects, returning empty array:", error);
-      return [];
-    }
   },
 
   async getRadioJammers(): Promise<RadioJammer[]> {

@@ -17,13 +17,13 @@ const HeroSection = () => {
     {
       title: t('hero.title1'),
       subtitle: t('hero.subtitle1'),
-      image: "https://api.skyelectronica.com/uploads/y70_69183041d9.png",
+      image: "https://storage.skyelectronica.com/FPV1.png",
       cta: t('common.learnMore')
     },
     {
       title: t('hero.title2'),
       subtitle: t('hero.subtitle2'),
-      image: "https://api.skyelectronica.com/uploads/Wechat_IMG_1408_7837fd2e19.jpg",
+      image: "https://storage.skyelectronica.com/PIC2.jpg",
       cta: t('common.learnMore')
     },
     // {
@@ -70,6 +70,14 @@ const HeroSection = () => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
+  const getAlt = (index:number) => {
+    if(index === 0){
+      return 'SkyElectronica UAV fleet executing integrated industrial missions, capturing high-resolution visual and thermal data for inspection, mapping, and real-time asset monitoring to ensure operational efficiency.'
+    } else {
+      return 'SkyElectronica drone flying over industrial infrastructure, capturing high‑resolution visual and thermal data for precise inspection, mapping, and monitoring missions.'
+    }
+  }
+
   return (
     <>
  <section
@@ -100,40 +108,41 @@ const HeroSection = () => {
           className={`absolute inset-0 transition-opacity duration-1000 ${
             index === currentSlide && imagesLoaded ? 'opacity-100' : 'opacity-0'
           }`}
-          aria-hidden={index !== currentSlide}
+          // aria-hidden={index !== currentSlide}
         >
           <div className="absolute inset-0 bg-black/40 z-10" />
           <img
             src={slide.image}
-            alt={slide.title}
+            alt={getAlt(index)}            
             loading={index === 0 ? "eager" : "lazy"}
             decoding="async"
             width="800"
             height="600"
-            className={ isMobile ? ' w-full h-full bg-white object-cover' : ' w-full h-full object-cover'}            
+            className={ isMobile ? ' w-full h-full bg-white object-cover' : ' w-full h-full object-cover'} 
+            fetchpriority="high"          
             style={{ contentVisibility: index === currentSlide ? 'visible' : 'hidden' }}
           />
           <div className="absolute inset-0 z-20 flex items-center">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-end pb-16">
-              <div className="size-full flex flex-col items-center justify-evenly">
+              <div className="size-full flex flex-col items-center justify-between lg:pt-4">
                 <h1 className="w-full text-center text-3xl md:text-7xl font-bold text-white mb-6 leading-tight">
                   {slide.title}
                 </h1>
                 {/* <p className="text-xl md:text-2xl text-blue-200 mb-8 leading-relaxed">
                   {slide.subtitle}
                 </p> */}
-                <div className='w-full flex items-center justify-evenly'>
+                <div className='w-full flex lg:flex-row gap-4 flex-col items-center justify-between'>
                   <button 
                     onClick={() => navigator('/drones')}
-                    className="w-auto h-auto border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 flex items-center justify-center focus:outline-none focus:ring-4 focus:ring-white/50"
-                    aria-label="Watch product demonstration video"
+                    className="w-auto h-auto border-2 border-red-700 text-white bg-red-600 hover:bg-red-700 hover:text-gray-900 lg:px-8 px-4 lg:py-4 py-2 rounded-lg font-semibold text-lg transition-all duration-300 flex items-center justify-center focus:outline-none focus:ring-4 focus:ring-white/50"
+                    aria-label="See more products"
                   >                  
                     {t('hero.watchDemo')}
                   </button>
                   <button 
                     onClick={() => setIsQuoteModalOpen(!isQuoteModalOpen)}
-                    className="w-auto h-auto border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 flex items-center justify-center focus:outline-none focus:ring-4 focus:ring-white/50"
-                    aria-label="Watch product demonstration video"
+                    className="w-auto h-auto border-2 border-red-700 text-white bg-red-600 hover:bg-red-700 hover:text-gray-900 lg:px-8 px-4 lg:py-4 py-2 rounded-lg font-semibold text-lg transition-all duration-300 flex items-center justify-center focus:outline-none focus:ring-4 focus:ring-white/50"
+                    aria-label="Get Quote"
                   >                  
                     {t('nav.getQuote')}
                   </button>

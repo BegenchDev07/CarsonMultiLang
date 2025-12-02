@@ -24,18 +24,18 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="fixed top-4 left-1/2 transform -translate-x-1/2 w-full max-w-6xl bg-white/70 backdrop-blur-md z-50 rounded-2xl border border-gray-200/30 shadow-lg">
+      <nav className="sticky top-0 w-full bg-slate-800 backdrop-blur-md z-50 shadow-lg">
       <div className="px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center space-x-2">
-            <span className="text-xl font-bold text-gray-900">SkyElectronica</span>
+            <span className="text-xl font-bold text-white">SkyElectronica</span>
           </Link>
 
           <div className={`${isMobile ? 'hidden' : 'flex'} items-center gap-8`}>
             <Link
               to="/"
               className={`text-sm font-medium transition-colors ${
-                isActive('/') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
+                isActive('/') ? 'text-blue-400' : 'text-white hover:text-blue-400'
               }`}
             >
               {t('nav.home')}
@@ -43,7 +43,7 @@ const Navbar = () => {
             <Link
               to="/signal-suite"
               className={`text-sm font-medium transition-colors ${
-                isActive('/signal-suite') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
+                isActive('/signal-suite') ? 'text-blue-400' : 'text-white hover:text-blue-400'
               }`}
             >
               {t('nav.radio-jam')}
@@ -51,7 +51,7 @@ const Navbar = () => {
             <Link
               to="/drones"
               className={`text-sm font-medium transition-colors ${
-                isActive('/products') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
+                isActive('/products') ? 'text-blue-400' : 'text-white hover:text-blue-400'
               }`}
             >
               {t('nav.products')}
@@ -59,7 +59,7 @@ const Navbar = () => {
             <Link
               to="/accessories"
               className={`text-sm font-medium transition-colors ${
-                isActive('/accessories') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
+                isActive('/accessories') ? 'text-blue-400' : 'text-white hover:text-blue-400'
               }`}
             >
               {t('nav.accessories-gimbals')}
@@ -67,7 +67,7 @@ const Navbar = () => {
             <Link
               to="/about"
               className={`text-sm font-medium transition-colors ${
-                isActive('/about') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
+                isActive('/about') ? 'text-blue-400' : 'text-white hover:text-blue-400'
               }`}
             >
               {t('nav.about')}
@@ -75,7 +75,7 @@ const Navbar = () => {
             <Link
               to="/contacts"
               className={`text-sm font-medium transition-colors ${
-                isActive('/contacts') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
+                isActive('/contacts') ? 'text-blue-400' : 'text-white hover:text-blue-400'
               }`}
             >
               {t('nav.contact')}
@@ -83,15 +83,15 @@ const Navbar = () => {
             <Link
               to="/blog"
               className={`text-sm font-medium transition-colors ${
-                isActive('/contacts') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
+                isActive('/contacts') ? 'text-blue-400' : 'text-white hover:text-blue-400'
               }`}
             >
               {t('nav.blog')}
             </Link>
             <Link
-              to="/services"
+              to="/service"
               className={`text-sm font-medium transition-colors ${
-                isActive('/contacts') ? 'text-blue-600' : 'text-gray-700 hover:text-blue-600'
+                isActive('/service') ? 'text-blue-400' : 'text-white hover:text-blue-400'
               }`}
             >
               {t('nav.services')}
@@ -101,7 +101,7 @@ const Navbar = () => {
             <div className="relative">
               <button
                 onClick={() => setIsLanguageOpen(!isLanguageOpen)}
-                className="flex items-center space-x-1 text-gray-700 hover:text-blue-600 transition-colors"
+                className="flex items-center space-x-1 text-white hover:text-blue-400 transition-colors"
               >
                 <Globe className="h-4 w-4" />
                 <span className="text-sm font-medium">{i18n.language.toUpperCase()}</span>
@@ -112,7 +112,7 @@ const Navbar = () => {
                   <button
                     onClick={() => changeLanguage('en')}
                     className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 ${
-                      i18n.language === 'en' ? 'text-blue-600 font-medium' : 'text-gray-700'
+                      i18n.language === 'en' ? 'text-blue-400 font-medium' : 'text-white'
                     }`}
                   >
                     English
@@ -120,7 +120,7 @@ const Navbar = () => {
                   <button
                     onClick={() => changeLanguage('ar')}
                     className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 ${
-                      i18n.language === 'ar' ? 'text-blue-600 font-medium' : 'text-gray-700'
+                      i18n.language === 'ar' ? 'text-blue-400 font-medium' : 'text-white'
                     }`}
                   >
                     العربية
@@ -152,53 +152,59 @@ const Navbar = () => {
             <div className="px-2 pt-2 pb-3 space-y-1 bg-transparent border-t border-gray-100 rounded-b-2xl">
               <Link
                 to="/"
-                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600"
+                className="block px-3 py-2 text-base font-medium text-white hover:text-blue-400"
                 onClick={() => setIsOpen(false)}
               >
                 {t('nav.home')}
               </Link>
               <Link
               to="/signal-suite"
-              className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600"
+              className="block px-3 py-2 text-base font-medium text-white hover:text-blue-400"
             >
               {t('nav.radio-jam')}
             </Link>
             <Link
               to="/drones"
-              className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600"
+              className="block px-3 py-2 text-base font-medium text-white hover:text-blue-400"
               onClick={() => setIsOpen(false)}
             >
               {t('nav.products')}
             </Link>
             <Link
             to="/accessories"
-            className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600"
+            className="block px-3 py-2 text-base font-medium text-white hover:text-blue-400"
             onClick={() => setIsOpen(false)}
             >
               {t('nav.accessories-gimbals')}
             </Link>
               <Link
                 to="/about"
-                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600"
+                className="block px-3 py-2 text-base font-medium text-white hover:text-blue-400"
                 onClick={() => setIsOpen(false)}
               >
                 {t('nav.about')}
               </Link>
               <Link
                 to="/contacts"
-                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600"
+                className="block px-3 py-2 text-base font-medium text-white hover:text-blue-400"
                 onClick={() => setIsOpen(false)}
               >
                 {t('nav.contact')}
               </Link>
               <Link
                 to="/blog"
-                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600"
+                className="block px-3 py-2 text-base font-medium text-white hover:text-blue-400"
                 onClick={() => setIsOpen(false)}
               >
                 {t('nav.blog')}
               </Link>
-              
+              <Link
+                to="/service"
+                className="block px-3 py-2 text-base font-medium text-white hover:text-blue-400"
+                onClick={() => setIsOpen(false)}
+              >
+                {t('nav.services')}
+              </Link>
               {/* Mobile Language Switcher */}
               <div className="px-3 py-2">
                 <div className="flex space-x-2">
@@ -208,7 +214,7 @@ const Navbar = () => {
                       setIsOpen(false);
                     }}
                     className={`px-3 py-1 rounded text-sm ${
-                      i18n.language === 'en' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700'
+                      i18n.language === 'en' ? 'bg-blue-600 text-white' : 'bg-slate-400 text-white'
                     }`}
                   >
                     EN
@@ -219,7 +225,7 @@ const Navbar = () => {
                       setIsOpen(false);
                     }}
                     className={`px-3 py-1 rounded text-sm ${
-                      i18n.language === 'ar' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700'
+                      i18n.language === 'ar' ? 'bg-blue-600 text-white' : 'bg-slate-400 text-white'
                     }`}
                   >
                     AR

@@ -359,7 +359,7 @@ const AccessoriesDetailPage = () => {
                     className='w-full flex items-center justify-end p-4'
                     onClick={copySpecs}
                     >
-                    <Copy />
+                    <Copy/>
                     </button>   
                     <div className="prose prose-lg w-full text-gray-600 leading-relaxed overflow-x-auto">
                     <ReactMarkdown

@@ -185,7 +185,7 @@
   "footer": {
     "description": "Leading the future of autonomous flight with cutting-edge electronics and drone technology for professional and commercial applications worldwide.",
     "useCases": "Use Cases",
-    "contact": "Contact",
+    "contact": "Address",
     "address": "123 Innovation Drive\nTech Valley, CA 94025\nUnited States",
     "phone": "+1 (555) 123-4567",
     "email": "info@skyelectronica.com",
@@ -415,7 +415,7 @@
       "title": "3. Project & Operational UAV Support:",      
       "content": {
         "image":"https://api.skyelectronica.com/uploads/UAV_After_Sales_and_Maintenance_Global_Support_Repairs_and_Upgrades_011b7f173a.jpg",
-        "exp": "Seamless Execution for Every Mission",
+        "exp": "Our comprehensive suite of UAV services is designed to ensure the success of your aerial missions, providing expert guidance, technical support, and operational efficiency. Below are the key offerings that can enhance your UAV operations:",
         "bulletList": [
           {
             "title":"Mission Planning Consultation",
