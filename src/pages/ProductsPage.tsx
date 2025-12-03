@@ -262,7 +262,7 @@ const ProductsPage = () => {
                         </div>
                         <div className='w-full flex flex-col items-start justify-between py-6 gap-5'>
                           <Link
-                          to={`/drones/${product.documentId}`}
+                          to={`/drones/${product.slug}`}
                             className='w-full px-3 py-2 bg-blue-600 text-white rounded-lg text-center'>
                               Learn more
                             </Link>

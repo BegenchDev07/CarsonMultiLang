@@ -70,7 +70,7 @@ const UseCasePage = () => {
   }
 
   return (
-    <div className={` min-h-screen bg-gray-50 ${isRTL ? 'rtl' : 'ltr'}`}>
+    <div className={` text-black min-h-screen bg-gray-50 ${isRTL ? 'rtl' : 'ltr'}`}>
         <div className='w-full h-full relative'>
             <img 
             className='w-screen h-screen object-cover'

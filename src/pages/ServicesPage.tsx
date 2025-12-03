@@ -35,16 +35,16 @@ const ServicesPage = () => {
       <section className="py-24 max-w-7xl gap-5 mx-auto flex lg:flex-row flex-col items-center justify-center">
         <div className={`max-w-7xl lg:w-1/2 w-full mx-auto sm:px-6 lg:px-8 ${isRTL ? 'text-right' : 'text-left'}`}>
           <div className="lg:text-start text-center w-full flex flex-col lg:items-start items-center justify-center gap-10">
-            <h1 className="text-3xl md:text-4xl font-bold">
+            <h1 className="text-3xl md:text-4xl font-bold text-black">
               {t('servicesContent.intro.title')}
             </h1>
-            <p className="text-xl max-w-3xl leading-relaxed">
+            <p className="text-xl max-w-3xl leading-relaxed text-black">
               {t('servicesContent.intro.content')}
             </p>
-            <h1 className="text-3xl md:text-4xl font-bold">
+            <h1 className="text-3xl md:text-4xl font-bold text-black">
               {t('servicesContent.hook.title')}
             </h1>
-            <p className="text-xl lg:text-start text-center max-w-3xl leading-relaxed">
+            <p className="text-xl lg:text-start text-center max-w-3xl leading-relaxed text-black">
               {t('servicesContent.hook.content')}
             </p>
           </div>
@@ -66,13 +66,13 @@ const ServicesPage = () => {
       <section className="py-24">
         <div className={`max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center justify-center gap-10 sm:px-6 lg:px-8 ${isRTL ? 'text-right' : 'text-left'}`}>
           <div className="w-full flex flex-col items-center lg:items-start justify-center gap-3">
-            <h1 className="text-3xl md:text-4xl font-bold mb-2">
+            <h1 className="text-3xl md:text-4xl font-bold mb-2 text-black">
               {t('servicesContent.technicalServices.title')}
             </h1>
-            <p className="text-xl max-w-3xl leading-relaxed lg:text-start text-center">
+            <p className="text-xl max-w-3xl leading-relaxed lg:text-start text-center text-black">
               {t('servicesContent.technicalServices.content.exp')}
             </p>
-            <div className='w-full flex flex-col lg:text-start text-center leading-relaxed'>
+            <div className='w-full flex flex-col lg:text-start text-center leading-relaxed text-black'>
               {technical.map((bullet:any, index:any) => (
                 <Fragment key={index}>
                   <h1>
@@ -104,13 +104,13 @@ const ServicesPage = () => {
         ?
         <div className={`max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center justify-center gap-10 sm:px-6 lg:px-8 ${isRTL ? 'text-right' : 'text-left'}`}>
           <div className="w-full flex flex-col items-center lg:items-start justify-center gap-3">
-            <h1 className="text-3xl md:text-4xl font-bold mb-2">
+            <h1 className="text-3xl md:text-4xl font-bold mb-2 text-black">
               {t('servicesContent.afterSalesMaintenance.title')}
             </h1>
-            <p className="text-xl max-w-3xl leading-relaxed lg:text-start text-center">
+            <p className="text-xl max-w-3xl leading-relaxed lg:text-start text-center text-black">
               {t('servicesContent.afterSalesMaintenance.content.exp')}
             </p>
-            <div className='w-full flex flex-col lg:text-start text-center leading-relaxed'>
+            <div className='w-full flex flex-col lg:text-start text-center leading-relaxed text-black'>
             {afterSale.map((bullet:any, index:any) => (
                 <Fragment key={index}>
                   <h1>
@@ -145,13 +145,13 @@ const ServicesPage = () => {
             />
           </div>
           <div className="w-full flex flex-col items-center lg:items-start justify-center gap-3">
-            <h1 className="text-3xl md:text-4xl font-bold mb-2">
+            <h1 className="text-3xl md:text-4xl font-bold mb-2 text-black">
               {t('servicesContent.afterSalesMaintenance.title')}
             </h1>
-            <p className="text-xl max-w-3xl leading-relaxed lg:text-start text-center">
+            <p className="text-xl max-w-3xl leading-relaxed lg:text-start text-center text-black">
               {t('servicesContent.afterSalesMaintenance.content.exp')}
             </p>
-            <div className='w-full flex flex-col lg:text-start text-center leading-relaxed'>
+            <div className='w-full flex flex-col lg:text-start text-center leading-relaxed text-black'>
             {afterSale.map((bullet:any, index:any) => (
                 <Fragment key={index}>
                   <h1>
@@ -171,13 +171,13 @@ const ServicesPage = () => {
       <section className="py-24 bg-gray-50">
         <div className={`max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center justify-center gap-10 sm:px-6 lg:px-8 ${isRTL ? 'text-right' : 'text-left'}`}>
           <div className="w-full flex flex-col items-center lg:items-start justify-center gap-3">
-            <h1 className="text-3xl md:text-4xl font-bold mb-2">
+            <h1 className="text-3xl md:text-4xl font-bold mb-2 text-black">
               {t('servicesContent.projectOperationalSupport.title')}
             </h1>
-            <p className="text-xl max-w-3xl leading-relaxed lg:text-start text-center">
+            <p className="text-xl max-w-3xl leading-relaxed lg:text-start text-center text-black">
               {t('servicesContent.projectOperationalSupport.content.exp')}
             </p>
-            <div className='w-full flex flex-col lg:text-start text-center leading-relaxed'>
+            <div className='w-full flex flex-col lg:text-start text-center leading-relaxed text-black'>
             {projectOperation.map((bullet:any, index:any) => (
                 <Fragment key={index}>
                   <h1>
@@ -208,13 +208,13 @@ const ServicesPage = () => {
           ?
           <div className={`max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center justify-center gap-10 sm:px-6 lg:px-8 ${isRTL ? 'text-right' : 'text-left'}`}>            
             <div className="w-full flex flex-col items-center lg:items-start justify-center gap-3">
-              <h1 className="text-3xl md:text-4xl font-bold mb-2">
+              <h1 className="text-3xl md:text-4xl font-bold mb-2 text-black">
                 {t('servicesContent.businessPartnershipSupport.title')}
               </h1>
-              <p className="text-xl max-w-3xl leading-relaxed lg:text-start text-center">
+              <p className="text-xl max-w-3xl leading-relaxed lg:text-start text-center text-black">
                 {t('servicesContent.businessPartnershipSupport.content.exp')}
               </p>
-              <div className='w-full flex flex-col lg:text-start text-center leading-relaxed'>
+              <div className='w-full flex flex-col lg:text-start text-center leading-relaxed text-black'>
                 {businessPartner.map((bullet:any, index:any) => (
                     <Fragment key={index}>
                       <h1>
@@ -249,13 +249,13 @@ const ServicesPage = () => {
               />
             </div>
             <div className="w-full flex flex-col items-center lg:items-start justify-center gap-3">
-      <h1 className="text-3xl md:text-4xl font-bold mb-2">
+      <h1 className="text-3xl md:text-4xl font-bold mb-2 text-black">
         {t('servicesContent.businessPartnershipSupport.title')}
       </h1>
-      <p className="text-xl max-w-3xl leading-relaxed lg:text-start text-center">
+      <p className="text-xl max-w-3xl leading-relaxed lg:text-start text-center text-black">
         {t('servicesContent.businessPartnershipSupport.content.exp')}
       </p>
-      <div className='w-full flex flex-col lg:text-start text-center leading-relaxed'>
+      <div className='w-full flex flex-col lg:text-start text-center leading-relaxed text-black'>
         {businessPartner.map((bullet:any, index:any) => (
             <Fragment key={index}>
               <h1>
@@ -276,13 +276,13 @@ const ServicesPage = () => {
       <section className="py-24 bg-gray-50">
         <div className={`max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center justify-center gap-10 sm:px-6 lg:px-8 ${isRTL ? 'text-right' : 'text-left'}`}>
           <div className="w-full flex flex-col items-center lg:items-start justify-center gap-3">
-            <h1 className="text-3xl md:text-4xl font-bold mb-2">
+            <h1 className="text-3xl md:text-4xl font-bold mb-2 text-black">
               {t('servicesContent.valueAddedContinuousServices.title')}
             </h1>
-            <p className="text-xl max-w-3xl leading-relaxed lg:text-start text-center">
+            <p className="text-xl max-w-3xl leading-relaxed lg:text-start text-center text-black">
               {t('servicesContent.valueAddedContinuousServices.content.exp')}
             </p>
-            <div className='w-full flex flex-col lg:text-start text-center leading-relaxed'>
+            <div className='w-full flex flex-col lg:text-start text-center leading-relaxed text-black'>
                 {valueAdded.map((bullet:any, index:any) => (
                     <Fragment key={index}>
                       <h1>
@@ -312,7 +312,7 @@ const ServicesPage = () => {
       {/* Company Story */}
       <section className="py-24 bg-white">
         <div className={`max-w-7xl mx-auto px-4 flex flex-col items-center justify-center gap-10 sm:px-6 lg:px-8 ${isRTL ? 'text-right' : 'text-left'}`}>
-          <h1 className='w-gull text-center text-8xl font-bold'>{t('servicesContent.cta.title')}</h1>
+          <h1 className='w-gull text-center text-8xl font-bold text-black'>{t('servicesContent.cta.title')}</h1>
           <button 
           onClick={_=>{setIsQuoteModalOpen(!isQuoteModalOpen)}}
           className='px-6 py-4 bg-blue-700 rounded-lg text-white text-3xl font-semibold'

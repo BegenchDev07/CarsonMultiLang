@@ -89,9 +89,9 @@ const Navbar = () => {
               {t('nav.blog')}
             </Link>
             <Link
-              to="/service"
+              to="/services"
               className={`text-sm font-medium transition-colors ${
-                isActive('/service') ? 'text-blue-400' : 'text-white hover:text-blue-400'
+                isActive('/services') ? 'text-blue-400' : 'text-white hover:text-blue-400'
               }`}
             >
               {t('nav.services')}
@@ -199,7 +199,7 @@ const Navbar = () => {
                 {t('nav.blog')}
               </Link>
               <Link
-                to="/service"
+                to="/services"
                 className="block px-3 py-2 text-base font-medium text-white hover:text-blue-400"
                 onClick={() => setIsOpen(false)}
               >

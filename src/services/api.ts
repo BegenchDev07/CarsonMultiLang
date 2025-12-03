@@ -156,6 +156,7 @@ interface ApiJammer {
   jammer_category?: JammerCategory | null ;
   jammer_feature?: ApiFeature | null ;
   link?: string;
+  slug?: string;
 }
 
 interface ApiAccessories {
@@ -174,6 +175,7 @@ interface ApiAccessories {
   accessory_category?: JammerCategory | null ;
   accessory_feature?: ApiFeature | null ;
   link?: string;
+  slug: string
 }
 
 interface ApiBlog {
@@ -182,6 +184,7 @@ interface ApiBlog {
   content: string;
   createdAt: string;
   display_image?: {data: ApiImage | null};
+  slug: string;
 }
 
 interface ApiService {
@@ -205,6 +208,7 @@ export interface RadioJammer {
   presentation: string;
   jammer_category?: JammerCategory | null ;
   jammer_feature?: ApiFeature | null ;
+  slug: string;
 }
 
 export interface AccessoriesType {
@@ -219,6 +223,7 @@ export interface AccessoriesType {
   presentation: string;
   accessory_category?: JammerCategory | null ;
   accessory_feature?: ApiFeature | null ;
+  slug: string;
 }
 
 export interface BlogType {
@@ -227,6 +232,7 @@ export interface BlogType {
   content: string;
   createdAt: string;
   display_image?:{data: ApiImage | null}; 
+  slug: string;
 }
 
 export interface ServiceType {
@@ -355,6 +361,7 @@ const mapApiRadioJammerToJammer = (apiJammer: ApiJammer): RadioJammer => {
     presentation: apiJammer.presentation,
     jammer_category: apiJammer.jammer_category,
     jammer_feature: apiJammer.jammer_feature,
+    slug: apiJammer.slug || '',
   }
 }
 
@@ -371,6 +378,7 @@ const mapApiAccessoriesToAccessories = (apiAccessories: ApiAccessories): Accesso
     presentation: apiAccessories.presentation,
     accessory_category: apiAccessories.accessory_category,
     accessory_feature: apiAccessories.accessory_feature,
+    slug: apiAccessories.slug || '',
   }
 }
 
@@ -380,7 +388,8 @@ const mapApiBlogsToBlogs = (apiBlogs: ApiBlog): BlogType => {
     blog_title: apiBlogs.blog_title,
     content: apiBlogs.content,
     createdAt: apiBlogs.createdAt,
-    display_image: apiBlogs.display_image
+    display_image: apiBlogs.display_image,
+    slug: apiBlogs.slug
   }
 }
 
@@ -496,7 +505,7 @@ export const productsApi = {
   },
 
   async getRadioJammer(id: string): Promise<RadioJammer | null> {
-    const url = `${API_BASE_URL}/radio-jammings/${id}`;
+    const url = `${API_BASE_URL}/radio-jammings?filters[slug][$eq]=${id}`;
     try {
       const response = await fetchData<ApiResponse<ApiProduct>>(url, true, true); // addLocale=true, populate=true
       if (response.data && !Array.isArray(response.data) && response.data.product_name) {
@@ -541,7 +550,7 @@ export const productsApi = {
   },
 
   async getAccessory(id: string): Promise<RadioJammer | null> {
-    const url = `${API_BASE_URL}/gimbals-acessories/${id}`;
+    const url = `${API_BASE_URL}/gimbals-acessories?filters[slug][$eq]=${id}`;
     try {
       const response = await fetchData<ApiResponse<ApiProduct>>(url, true, true); // addLocale=true, populate=true
       if (response.data && !Array.isArray(response.data) && response.data.product_name) {
@@ -608,7 +617,7 @@ export const productsApi = {
   },
 
   async getBlog(id: string): Promise<BlogType | null> {
-    const url = `${API_BASE_URL}/blogs/${id}`;
+    const url = `${API_BASE_URL}/blogs?filters[slug][$eq]=${id}`;
     try {
       const response = await fetchData<ApiResponse<ApiBlog>>(url, true, true); // addLocale=true, populate=true
       if (response.data && !Array.isArray(response.data) && response.data.blog_title) {        

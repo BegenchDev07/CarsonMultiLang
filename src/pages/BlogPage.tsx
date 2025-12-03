@@ -128,7 +128,7 @@ const BlogPage = () => {
                 {currentProducts.map((product:any,index) => (
                   <Fragment key={index}>
                     <Link                      
-                      to={`/blog/${product.documentId}`}
+                      to={`/blog/${product.slug}`}
                       className="rounded-2xl overflow-hidden flex flex-col"
                     >
                       <div className="overflow-hidden">
