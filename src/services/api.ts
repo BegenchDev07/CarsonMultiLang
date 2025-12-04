@@ -507,9 +507,10 @@ export const productsApi = {
   async getRadioJammer(id: string): Promise<RadioJammer | null> {
     const url = `${API_BASE_URL}/radio-jammings?filters[slug][$eq]=${id}`;
     try {
-      const response = await fetchData<ApiResponse<ApiProduct>>(url, true, true); // addLocale=true, populate=true
-      if (response.data && !Array.isArray(response.data) && response.data.product_name) {
-        return mapApiRadioJammerToJammer(response.data);
+      const response = await fetchData<ApiResponse<any>>(url, true, true); // addLocale=true, populate=true
+      // debugger;
+      if (response.data[0] && Array.isArray(response.data) && response.data[0].product_name) {
+        return mapApiRadioJammerToJammer(response.data[0]);
       }
     } catch (error) {
       console.error(`Error fetching jammer ${id}:`, error);
@@ -552,9 +553,9 @@ export const productsApi = {
   async getAccessory(id: string): Promise<RadioJammer | null> {
     const url = `${API_BASE_URL}/gimbals-acessories?filters[slug][$eq]=${id}`;
     try {
-      const response = await fetchData<ApiResponse<ApiProduct>>(url, true, true); // addLocale=true, populate=true
-      if (response.data && !Array.isArray(response.data) && response.data.product_name) {
-        return mapApiAccessoriesToAccessories(response.data);
+      const response = await fetchData<ApiResponse<any>>(url, true, true); // addLocale=true, populate=true
+      if (response.data && Array.isArray(response.data) && response.data[0].product_name) {
+        return mapApiAccessoriesToAccessories(response.data[0]);
       }
     } catch (error) {
       console.error(`Error fetching jammer ${id}:`, error);
@@ -619,9 +620,9 @@ export const productsApi = {
   async getBlog(id: string): Promise<BlogType | null> {
     const url = `${API_BASE_URL}/blogs?filters[slug][$eq]=${id}`;
     try {
-      const response = await fetchData<ApiResponse<ApiBlog>>(url, true, true); // addLocale=true, populate=true
-      if (response.data && !Array.isArray(response.data) && response.data.blog_title) {        
-        return mapApiBlogsToBlogs(response.data);
+      const response = await fetchData<ApiResponse<any>>(url, true, true); // addLocale=true, populate=true
+      if (response.data && Array.isArray(response.data) && response.data[0].blog_title) {        
+        return mapApiBlogsToBlogs(response.data[0]);
       }
     } catch (error) {
       console.error(`Error fetching article ${id}:`, error);
