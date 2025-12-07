@@ -26,6 +26,7 @@ const UseCaseDetailPage = lazy(() => import('./pages/UseCaseDetailPage'))
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const ToS = lazy(() => import('./pages/ToS'));
 
+
 // Error Boundary
 class ErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
   state = { hasError: false };
@@ -60,7 +61,7 @@ function App() {
 
   return (
     <div className={isRTL ? 'rtl' : 'ltr'} dir={isRTL ? 'rtl' : 'ltr'}>
-      <ErrorBoundary>
+      <ErrorBoundary>        
         <Router>
           <Helmet>
             <html lang={i18n.language} />

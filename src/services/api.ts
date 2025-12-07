@@ -244,6 +244,7 @@ export interface ServiceType {
   service_cateogry?: ServiceCategory | null;
 }
 
+
 interface ApiResponse<T> {
   data: T | T[];
   meta?: any; // For pagination, etc.
@@ -413,6 +414,59 @@ const mapUseCasesToUseCases = (apiService: ApiUseCase): UseCase => {
     content: apiService.content
   }
 }
+
+
+const mapForDroneChildren = (data:Product[]) => {
+  return data.map((items) => {
+    return {
+      id: items.product_name,
+      children: items.product_name,
+      href: `https://skyeletronica.com/drones/${items.slug}`
+    }
+  })  
+}
+
+const mapForAccessoryChildren = (data:AccessoriesType[]) => {
+  return data.map((items) => {
+    return {
+      id: items.product_name,
+      children: items.product_name,
+      href: `https://skyeletronica.com/accessories/${items.slug}`
+    }
+  })  
+}
+
+const mapForRadioJamChildren = (data:RadioJammer[]) => {
+  return data.map((items) => {
+    return {
+      id: items.product_name,
+      children: items.product_name,
+      href: `https://skyeletronica.com/accessories/${items.slug}`
+    }
+  })  
+}
+
+const mapForBlogChildren = (data:BlogType[]) => {
+  return data.map((items) => {
+    return {
+      id: items.blog_title,
+      children: items.blog_title,
+      href: `https://skyeletronica.com/accessories/${items.slug}`
+    }
+  })  
+}
+
+const mapForUseCaseChildren = (data:any[]) => {
+  return data.map((items) => {
+    return {
+      id: items.title,
+      children: items.title,
+      href: `https://skyeletronica.com/accessories/${items.documentId}`
+    }
+  })  
+}
+
+
 
 // API service methods
 export const productsApi = {
@@ -697,6 +751,45 @@ export const productsApi = {
     }
     return []; // Should return an array for getProducts
   },
+
+  async fetchAll(): Promise<any|null>{
+    const drones = await this.getProducts();
+    const accessory = await this.getAccessories();
+    const radioJams = await this.getRadioJammers();
+    const blogs = await this.getBlogs();
+    const useCases:any = await this.getUseCases();
+    const result = 
+    [
+      {
+        heading: "Drones",
+        id: "drones",
+        items: mapForDroneChildren(drones)
+      },
+      {
+        heading: "Accessories & Gimbals",
+        id: "accessories",
+        items: mapForAccessoryChildren(accessory)
+      },
+      {
+        heading: "Signal Suites",
+        id: "radioJam",
+        items: mapForRadioJamChildren(radioJams)
+      },
+      {
+        heading: "Use Cases",
+        id: "use-cases",
+        items: mapForUseCaseChildren(useCases)
+      },
+      {
+        heading: "Blogs",
+        id: "blogs",
+        items: mapForBlogChildren(blogs)
+      },
+    ]
+    return result;
+  },
+
+  
 
 };
 

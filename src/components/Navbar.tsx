@@ -1,14 +1,20 @@
+import "react-cmdk/dist/cmdk.css";
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Globe } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useMediaQuery } from 'react-responsive'; // For mobile responsiveness
 import GetQuoteModal from './GetQuoteModal';
+import SearchBar from "./SearchBar";
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
+  const [page, setPage] = useState<"root" | "projects">("root");
+  const [open, setOpen] = useState<boolean>(true);
+  const [search, setSearch] = useState("");
   const locationHook = useLocation();
   const { t, i18n } = useTranslation();
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
@@ -23,7 +29,8 @@ const Navbar = () => {
   };
 
   return (
-    <>
+    <>     
+      <SearchBar isOpen={true}/> 
       <nav className="sticky top-0 w-full bg-slate-800 backdrop-blur-md z-50 shadow-lg">
       <div className="px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
@@ -96,6 +103,7 @@ const Navbar = () => {
             >
               {t('nav.services')}
             </Link>
+            
             
             {/* Language Switcher */}
             <div className="relative">
