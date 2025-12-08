@@ -5,7 +5,7 @@ import { Menu, X, Globe } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useMediaQuery } from 'react-responsive'; // For mobile responsiveness
 import GetQuoteModal from './GetQuoteModal';
-import SearchBar from "./SearchBar";
+// import SearchBar from "./SearchBar";
 
 
 const Navbar = () => {
@@ -30,7 +30,7 @@ const Navbar = () => {
 
   return (
     <>     
-      <SearchBar isOpen={true}/> 
+      {/* <SearchBar isOpen={true}/>  */}
       <nav className="sticky top-0 w-full bg-slate-800 backdrop-blur-md z-50 shadow-lg">
       <div className="px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
