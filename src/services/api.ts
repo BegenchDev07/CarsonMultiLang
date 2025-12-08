@@ -68,6 +68,7 @@ export interface UseCase{
   title: string;
   description: string;
   content: string;
+  slug: string;
 }
 
 export interface Project {
@@ -86,6 +87,7 @@ interface ApiUseCase{
   display_image?: { data: ApiImage | null };
   description: string;
   content: string;
+  slug: string;
 }
 
 interface ApiImage {
@@ -411,7 +413,8 @@ const mapUseCasesToUseCases = (apiService: ApiUseCase): UseCase => {
     title: apiService.Title,
     description: apiService.description,    
     display_image: apiService.display_image,
-    content: apiService.content
+    content: apiService.content,
+    slug: apiService.slug
   }
 }
 
@@ -728,11 +731,11 @@ export const productsApi = {
 
 
   async getUseCase(id: string): Promise<UseCase | null> {
-    const url = `${API_BASE_URL}/use-cases/${id}`;
+    const url = `${API_BASE_URL}/use-cases?filters[slug][$eq]=${id}`;
     try {
-      const response = await fetchData<ApiResponse<ApiUseCase>>(url, true, true); // addLocale=true, populate=true      
-      if (response.data && !Array.isArray(response.data) && response.data.Title) {        
-        return mapUseCasesToUseCases(response.data);
+      const response = await fetchData<ApiResponse<any>>(url, true, true); // addLocale=true, populate=true      
+      if (response.data[0] && Array.isArray(response.data) && response.data[0].Title) {        
+        return mapUseCasesToUseCases(response.data[0]);
       }
     } catch (error) {
       console.error(`Error fetching use-case ${id}:`, error);

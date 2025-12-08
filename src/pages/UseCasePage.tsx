@@ -130,7 +130,7 @@ const UseCasePage = () => {
                         <Link
                         className="w-full h-12 py-2 px-4 border border-blue-600 text-blue-600 rounded-full text-center flex items-center justify-center"  
                         data-discover="true"
-                        to={`/use-cases/${item.documentId}`}
+                        to={`/use-cases/${item.slug}`}
                         >
                         <p>Learn More</p>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-right ml-2 h-4 w-4"><path d="m9 18 6-6-6-6"></path>

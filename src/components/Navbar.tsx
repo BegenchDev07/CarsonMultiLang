@@ -1,4 +1,4 @@
-import "react-cmdk/dist/cmdk.css";
+// import "react-cmdk/dist/cmdk.css";
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Globe } from 'lucide-react';
@@ -11,10 +11,7 @@ import GetQuoteModal from './GetQuoteModal';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
-  const [isLanguageOpen, setIsLanguageOpen] = useState(false);
-  const [page, setPage] = useState<"root" | "projects">("root");
-  const [open, setOpen] = useState<boolean>(true);
-  const [search, setSearch] = useState("");
+  const [isLanguageOpen, setIsLanguageOpen] = useState(false);  
   const locationHook = useLocation();
   const { t, i18n } = useTranslation();
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
