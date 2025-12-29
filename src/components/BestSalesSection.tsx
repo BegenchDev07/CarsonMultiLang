@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Loader } from 'lucide-react';
+import { Loader, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { productsApi, Product, getImageUrl } from '../services/api';
+import { productsApi, getImageUrl } from '../services/api';
 import GetQuoteModal from './GetQuoteModal';
 
 interface BestSalesMode{
@@ -14,6 +14,9 @@ const BestSalesSection: React.FC<BestSalesMode> = ({mode}) => {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
 
   const fetchBestSeller = async() => {
@@ -41,7 +44,33 @@ const BestSalesSection: React.FC<BestSalesMode> = ({mode}) => {
     } else {
       return "drones"
     }
-  }  
+  }
+
+  const checkScrollButtons = () => {
+    if (scrollContainerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
+    }
+  };
+
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({
+        left: -400,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({
+        left: 400,
+        behavior: 'smooth'
+      });
+    }
+  };  
 
   useEffect(() => {
     const fetchBestSellers = async () => {
@@ -65,6 +94,19 @@ const BestSalesSection: React.FC<BestSalesMode> = ({mode}) => {
 
     fetchBestSellers();
   }, []);
+
+  useEffect(() => {
+    checkScrollButtons();
+    const container = scrollContainerRef.current;
+    if (container) {
+      container.addEventListener('scroll', checkScrollButtons);
+      window.addEventListener('resize', checkScrollButtons);
+      return () => {
+        container.removeEventListener('scroll', checkScrollButtons);
+        window.removeEventListener('resize', checkScrollButtons);
+      };
+    }
+  }, [products]);
 
   if (loading) {
     return (
@@ -120,10 +162,36 @@ const BestSalesSection: React.FC<BestSalesMode> = ({mode}) => {
           </p>
         </div>
 
-        {/* Gallery Container */}
-        <div className="overflow-x-auto scrollbar-hide">
-          <div className="flex gap-6 pb-4">
-            {products.map((product) => (
+        {/* Gallery Container with Scroll Buttons */}
+        <div className="relative">
+          {/* Left Scroll Button */}
+          {canScrollLeft && (
+            <button
+              onClick={scrollLeft}
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-600"
+              aria-label="Scroll left"
+            >
+              <ChevronLeft className="h-6 w-6 text-gray-700" />
+            </button>
+          )}
+
+          {/* Right Scroll Button */}
+          {canScrollRight && (
+            <button
+              onClick={scrollRight}
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-600"
+              aria-label="Scroll right"
+            >
+              <ChevronRight className="h-6 w-6 text-gray-700" />
+            </button>
+          )}
+
+          <div 
+            ref={scrollContainerRef}
+            className="overflow-x-auto scrollbar-hide"
+          >
+            <div className="flex gap-6 pb-4">
+              {products.map((product) => (
               <div
                 key={product.documentId}
                 className="flex flex-col items-center justify-center gap-5 bg-white w-full min-w-[400px] rounded-lg"
@@ -174,7 +242,8 @@ const BestSalesSection: React.FC<BestSalesMode> = ({mode}) => {
                   </div>
                 </div>             
               </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 

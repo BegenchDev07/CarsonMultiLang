@@ -1,7 +1,7 @@
 import "react-cmdk/dist/cmdk.css";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Globe } from 'lucide-react';
+import { Menu, X, Globe, Search } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useMediaQuery } from 'react-responsive'; // For mobile responsiveness
 import GetQuoteModal from './GetQuoteModal';
@@ -12,13 +12,31 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
-  const [page, setPage] = useState<"root" | "projects">("root");
-  const [open, setOpen] = useState<boolean>(true);
-  const [search, setSearch] = useState("");
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const locationHook = useLocation();
   const { t, i18n } = useTranslation();
+  const isRTL = i18n.language === 'ar';
   const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
   const isActive = (path: string) => locationHook.pathname === path;
+  
+  const isProductsActive = isActive('/drones') || isActive('/signal-suite') || isActive('/accessories');
+
+  // Keyboard shortcut to open search (Cmd+K / Ctrl+K)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setIsSearchOpen(true);
+      }
+      // Close search with Escape
+      if (e.key === 'Escape' && isSearchOpen) {
+        setIsSearchOpen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isSearchOpen]);
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
@@ -30,7 +48,7 @@ const Navbar = () => {
 
   return (
     <>     
-      <SearchBar isOpen={true}/> 
+      <SearchBar isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
       <nav className="sticky top-0 w-full bg-slate-800 backdrop-blur-md z-50 shadow-lg">
       <div className="px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
@@ -48,28 +66,20 @@ const Navbar = () => {
               {t('nav.home')}
             </Link>
             <Link
-              to="/signal-suite"
+              to="/products"
               className={`text-sm font-medium transition-colors ${
-                isActive('/signal-suite') ? 'text-blue-400' : 'text-white hover:text-blue-400'
-              }`}
-            >
-              {t('nav.radio-jam')}
-            </Link>
-            <Link
-              to="/drones"
-              className={`text-sm font-medium transition-colors ${
-                isActive('/products') ? 'text-blue-400' : 'text-white hover:text-blue-400'
+                isProductsActive ? 'text-blue-400' : 'text-white hover:text-blue-400'
               }`}
             >
               {t('nav.products')}
             </Link>
             <Link
-              to="/accessories"
+              to="/solutions"
               className={`text-sm font-medium transition-colors ${
-                isActive('/accessories') ? 'text-blue-400' : 'text-white hover:text-blue-400'
+                isProductsActive ? 'text-blue-400' : 'text-white hover:text-blue-400'
               }`}
             >
-              {t('nav.accessories-gimbals')}
+              {t('solutions.banner.title')}
             </Link>
             <Link
               to="/about"
@@ -105,6 +115,15 @@ const Navbar = () => {
             </Link>
             
             
+            {/* Search Button */}
+            <button
+              onClick={() => setIsSearchOpen(true)}
+              className="flex items-center space-x-1 text-white hover:text-blue-400 transition-colors"
+              aria-label="Search"
+            >
+              <Search className="h-5 w-5" />
+            </button>
+            
             {/* Language Switcher */}
             <div className="relative">
               <button
@@ -116,11 +135,11 @@ const Navbar = () => {
               </button>
               
               {isLanguageOpen && (
-                <div className="absolute top-full mt-2 right-0 bg-white rounded-lg shadow-lg border border-gray-200 py-2 min-w-[100px]">
+                <div className={`absolute top-full mt-2 ${isRTL ? 'left-0' : 'right-0'} bg-white rounded-lg shadow-lg border border-gray-200 py-2 min-w-[100px] z-50`}>
                   <button
                     onClick={() => changeLanguage('en')}
                     className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 ${
-                      i18n.language === 'en' ? 'text-blue-400 font-medium' : 'text-white'
+                      i18n.language === 'en' ? 'text-blue-400 font-medium' : 'text-gray-700'
                     }`}
                   >
                     English
@@ -128,7 +147,7 @@ const Navbar = () => {
                   <button
                     onClick={() => changeLanguage('ar')}
                     className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-50 ${
-                      i18n.language === 'ar' ? 'text-blue-400 font-medium' : 'text-white'
+                      i18n.language === 'ar' ? 'text-blue-400 font-medium' : 'text-gray-700'
                     }`}
                   >
                     العربية
@@ -166,25 +185,23 @@ const Navbar = () => {
                 {t('nav.home')}
               </Link>
               <Link
-              to="/signal-suite"
-              className="block px-3 py-2 text-base font-medium text-white hover:text-blue-400"
-            >
-              {t('nav.radio-jam')}
-            </Link>
-            <Link
-              to="/drones"
-              className="block px-3 py-2 text-base font-medium text-white hover:text-blue-400"
-              onClick={() => setIsOpen(false)}
-            >
-              {t('nav.products')}
-            </Link>
-            <Link
-            to="/accessories"
-            className="block px-3 py-2 text-base font-medium text-white hover:text-blue-400"
-            onClick={() => setIsOpen(false)}
-            >
-              {t('nav.accessories-gimbals')}
-            </Link>
+                to="/products"
+                className={`block px-3 py-2 text-base font-medium text-white hover:text-blue-400 ${
+                  isProductsActive ? 'text-blue-400' : ''
+                }`}
+                onClick={() => setIsOpen(false)}
+              >
+                {t('nav.products')}
+              </Link>
+              <Link
+                to="/solutions"
+                className={`block px-3 py-2 text-base font-medium text-white hover:text-blue-400 ${
+                  isProductsActive ? 'text-blue-400' : ''
+                }`}
+                onClick={() => setIsOpen(false)}
+              >
+                {t('solutions.banner.title')}
+              </Link>
               <Link
                 to="/about"
                 className="block px-3 py-2 text-base font-medium text-white hover:text-blue-400"
@@ -213,6 +230,17 @@ const Navbar = () => {
               >
                 {t('nav.services')}
               </Link>
+              {/* Mobile Search Button */}
+              <button
+              onClick={() => {
+                setIsOpen(false)
+                setIsSearchOpen(true)
+              }}
+              className="flex items-center space-x-1 text-white hover:text-blue-400 transition-colors"
+              aria-label="Search"
+            >
+              <Search className="h-5 w-5" />
+            </button>
               {/* Mobile Language Switcher */}
               <div className="px-3 py-2">
                 <div className="flex space-x-2">

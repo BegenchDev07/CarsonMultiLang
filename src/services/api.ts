@@ -196,6 +196,17 @@ interface ApiService {
   service_cateogry: ServiceCategory | null;
 }
 
+interface ApiSolution {
+  documentId: string;
+  title: string;
+  description: string;
+  content?: string;
+  createdAt: string;
+  updatedAt: string;
+  display_image?: {data: ApiImage | null};
+  slug?: string;
+}
+
 export interface RadioJammer {
   documentId: string;
   product_name: string;
@@ -242,6 +253,17 @@ export interface ServiceType {
   createdAt: string;
   display_image?:{data: ApiImage | null}; 
   service_cateogry?: ServiceCategory | null;
+}
+
+export interface Solution {
+  documentId: string;
+  title: string;
+  description: string;
+  content?: string;
+  createdAt: string;
+  updatedAt: string;
+  display_image?: {data: ApiImage | null};
+  slug?: string;
 }
 
 
@@ -415,6 +437,19 @@ const mapUseCasesToUseCases = (apiService: ApiUseCase): UseCase => {
   }
 }
 
+const mapApiSolutionToSolution = (apiSolution: ApiSolution): Solution => {
+  return {
+    documentId: apiSolution.documentId.toString(),
+    title: apiSolution.title,
+    description: apiSolution.description,
+    content: apiSolution.content,
+    createdAt: apiSolution.createdAt,
+    updatedAt: apiSolution.updatedAt,
+    display_image: apiSolution.display_image,
+    slug: apiSolution.slug
+  }
+}
+
 
 const mapForDroneChildren = (data:Product[]) => {
   return data.map((items) => {
@@ -451,7 +486,7 @@ const mapForBlogChildren = (data:BlogType[]) => {
     return {
       id: items.blog_title,
       children: items.blog_title,
-      href: `https://skyeletronica.com/accessories/${items.slug}`
+      href: `https://skyeletronica.com/blog/${items.slug}`
     }
   })  
 }
@@ -461,7 +496,7 @@ const mapForUseCaseChildren = (data:any[]) => {
     return {
       id: items.title,
       children: items.title,
-      href: `https://skyeletronica.com/accessories/${items.documentId}`
+      href: `https://skyeletronica.com/use-cases/${items.documentId}`
     }
   })  
 }
@@ -750,6 +785,44 @@ export const productsApi = {
       .map(mapUseCasesToUseCases);      
     }
     return []; // Should return an array for getProducts
+  },
+
+  async getSolutions(): Promise<Solution[]> {
+    const url = `${API_BASE_URL}/solutions`;
+    const response = await fetchData<ApiResponse<ApiSolution>>(url, true, true);
+    if (Array.isArray(response.data)) {
+      return response.data
+        .filter(item => item && item.title)
+        .map(mapApiSolutionToSolution)
+        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()); // Sort by time, last to first
+    }
+    return [];
+  },
+
+  async getSolution(id: string): Promise<Solution | null> {
+    const url = `${API_BASE_URL}/solutions/${id}`;
+    try {
+      const response = await fetchData<ApiResponse<ApiSolution>>(url, true, true);
+      if (response.data && !Array.isArray(response.data) && response.data.title) {
+        return mapApiSolutionToSolution(response.data);
+      }
+    } catch (error) {
+      console.error(`Error fetching solution ${id}:`, error);
+    }
+    return null;
+  },
+
+  async getSolutionBySlug(slug: string): Promise<Solution | null> {
+    const url = `${API_BASE_URL}/solutions?filters[slug][$eq]=${slug}`;
+    try {
+      const response = await fetchData<ApiResponse<ApiSolution>>(url, true, true);
+      if (response.data && Array.isArray(response.data) && response.data.length > 0 && response.data[0].title) {
+        return mapApiSolutionToSolution(response.data[0]);
+      }
+    } catch (error) {
+      console.error(`Error fetching solution by slug ${slug}:`, error);
+    }
+    return null;
   },
 
   async fetchAll(): Promise<any|null>{
