@@ -25,6 +25,8 @@ const UseCasePage = lazy(() => import('./pages/UseCasePage'));
 const UseCaseDetailPage = lazy(() => import('./pages/UseCaseDetailPage'))
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const ToS = lazy(() => import('./pages/ToS'));
+const SolutionsPage = lazy(() => import('./pages/SolutionsPage'));
+const SolutionDetailPage = lazy(() => import('./pages/SolutionDetailPage'));
 
 
 // Error Boundary
@@ -78,15 +80,15 @@ function App() {
               <Suspense fallback={<div className="text-center mt-10">Loading...</div>}>
                 <Routes>
                   <Route path="/" element={<LandingPage />} />
-                  <Route path="/drones" element={<ProductsPage />} />
+                  <Route path="/products" element={<ProductsPage />} />
                   <Route path="/drones?category=:id" element={<ProductsPage />} />
                   <Route path="/drones?feature=:id" element={<ProductsPage />} />
                   <Route path="/drones/:id" element={<ProductDetailPage />} />
                   <Route path="/about" element={<AboutPage />} />
                   <Route path="/contacts" element={<ContactsPage />} />
-                  <Route path="/signal-suite" element={<RadioJam />} />
+                  <Route path="/signal-suite" element={<ProductsPage />} />
                   <Route path="/signal-suite/:id" element={<RadioJamDetail />} />
-                  <Route path="/accessories" element={<AccessoriesPage />} />
+                  <Route path="/accessories" element={<ProductsPage />} />
                   <Route path="/accessories/:id" element={<AccessorieDetailPage />} />
                   <Route path="/blog" element={<BlogPage />} />
                   <Route path="/blog/:id" element={<BlogDetailPage />} />
@@ -94,6 +96,9 @@ function App() {
                   <Route path="/services/:id" element={<ServicesDetailPage />} />
                   <Route path="/use-cases" element={<UseCasePage />} />
                   <Route path="/use-cases/:id" element={<UseCaseDetailPage />} />
+                  <Route path="/solutions" element={<SolutionsPage />} />
+                  <Route path="/solutions/:slug" element={<SolutionDetailPage />} />
+                  <Route path="/solutions/:id" element={<SolutionsPage />} />
                   <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                   <Route path="/terms-of-service" element={<ToS />} />
                 </Routes>
@@ -113,7 +118,7 @@ function App() {
           </div>
         </Router>
       </ErrorBoundary>
-      <div className="fab">  
+      <div className="fab" dir="ltr">  
       <div aria-label='Contact Us' tabIndex={0} role="button" className="btn btn-lg btn-circle bg-blue-600"><UserPlus/></div>        
         <a aria-label="WhatsApp Link" href='https://wa.link/dunvqk' className="btn btn-lg btn-circle bg-green-600 flex items-center justify-center">
           <svg className='w-auto h-auto' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

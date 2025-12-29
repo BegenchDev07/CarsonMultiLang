@@ -54,51 +54,51 @@ const ProjectsSection = () => {
         </div>
 
         {/* Bento Grid Layout */}        
-          <div className="w-full flex lg:flex-row flex-col items-center justify-center gap-4 pb-4">    
+          <div className="w-full flex lg:flex-row flex-col items-stretch justify-center gap-4 pb-4">    
         
-    <div className="card bg-base-100 w-full lg:w-[30rem] shadow-sm">
-      <figure>
+    <div className="card bg-base-100 w-full lg:w-[30rem] shadow-sm h-full flex flex-col">
+      <figure className="flex-shrink-0">
         <img
           width={'100%'}
           height={'100%'}
           src={projects[0].image}
           alt={projects[0].title} />
       </figure>
-      <div className="card-body text-center">
+      <div className="card-body text-center flex-grow flex flex-col">
         <h2 className="w-full text-center text-2xl font-semibold">
         {projects[0].title}          
         </h2>
-        <p className='line-clamp-3'>{projects[0].description}</p>        
+        <p className='line-clamp-3 flex-grow'>{projects[0].description}</p>        
       </div>
     </div>
-    <div className="card bg-base-100 w-full lg:w-[30rem] shadow-sm">
-      <figure>
+    <div className="card bg-base-100 w-full lg:w-[30rem] shadow-sm h-full flex flex-col">
+      <figure className="flex-shrink-0">
         <img
           width={'100%'}
           height={'100%'}
           src={projects[1].image}
           alt={projects[1].title} />
       </figure>
-      <div className="card-body text-center">
+      <div className="card-body text-center flex-grow flex flex-col">
         <h2 className="w-full text-center text-2xl font-semibold">
         {projects[1].title}          
         </h2>
-        <p className='line-clamp-3'>{projects[1].description}</p>        
+        <p className='line-clamp-3 flex-grow'>{projects[1].description}</p>        
       </div>
     </div>
-    <div className="card bg-base-100 w-full lg:w-[30rem] shadow-sm">
-      <figure>
+    <div className="card bg-base-100 w-full lg:w-[30rem] shadow-sm h-full flex flex-col">
+      <figure className="flex-shrink-0">
         <img
           width={'100%'}
           height={'100%'}
           src={projects[2].image}
           alt={projects[2].title}/>
       </figure>
-      <div className="card-body text-center">
+      <div className="card-body text-center flex-grow flex flex-col">
         <h2 className="w-full text-center text-2xl font-semibold">
         {projects[2].title}          
         </h2>
-        <p className='line-clamp-3'>{projects[2].description}</p>        
+        <p className='line-clamp-3 flex-grow'>{projects[2].description}</p>        
       </div>
     </div>
 

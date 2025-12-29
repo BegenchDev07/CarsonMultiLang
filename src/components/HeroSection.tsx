@@ -90,7 +90,7 @@ const HeroSection = () => {
       {/* Skeleton loader while images load */}
       {!imagesLoaded && (
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900">
-          <div className="absolute inset-0 z-20 flex items-center">
+          <div className="absolute inset-0 z-10 flex items-center">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-end pb-16">
               <div className="max-w-3xl">
                 <div className="h-16 bg-white/20 rounded mb-6"></div>
@@ -122,7 +122,7 @@ const HeroSection = () => {
             fetchpriority="high"          
             style={{ contentVisibility: index === currentSlide ? 'visible' : 'hidden' }}
           />
-          <div className="absolute inset-0 z-20 flex items-center">
+          <div className="absolute inset-0 z-10 flex items-center">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex items-end pb-16">
               <div className="size-full flex flex-col items-center justify-between lg:pt-4">
                 <h1 className="w-full text-center text-3xl md:text-7xl font-bold text-white mb-6 leading-tight">
@@ -175,7 +175,7 @@ const HeroSection = () => {
 
       {/* Slide Indicators - Only show when images are loaded */}
       {imagesLoaded && (
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 flex space-x-3 items-center justify-center" role="tablist" aria-label="Slide navigation">
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 flex space-x-3 items-center justify-center" role="tablist" aria-label="Slide navigation">
           {slides.map((_, index) => (
             <button
               key={index}

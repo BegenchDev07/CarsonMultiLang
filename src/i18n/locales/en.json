@@ -1,7 +1,7 @@
 {
   "nav": {
     "home": "Home",
-    "products": "Drones",    
+    "products": "Products",    
     "about": "About",
     "contact": "Contact",
     "getQuote": "Get Quote",
@@ -212,10 +212,26 @@
     "categories": "Categories",
     "features": "Features",
     "allProducts": "All Drones",
+    "allCategories": "All Categories",
     "previous": "Previous",
     "next": "Next",
     "loading": "Loading products...",
-    "retry": "Retry"
+    "retry": "Retry",
+    "learnMore": "Learn more",
+    "inquiry": "Inquiry",
+    "banner": {
+      "title": "Our Products",
+      "subtitle": "Discover our comprehensive range of drones, signal suites, and accessories",
+      "image": "https://storage.skyelectronica.com/PIC2.jpg",
+      "alt": "SkyElectronica Products"
+    },
+    "productTypes": {
+      "title": "Product Types",
+      "all": "All Products",
+      "drones": "Drones",
+      "signalSuites": "Signal Suites",
+      "accessoriesGimbals": "Accessories & Gimbals"
+    }
   },
   "productDetail": {
     "backToProducts": "Back to Drones",
@@ -488,6 +504,87 @@
     },    
     "cta":{
       "title":"Want to work with Us?"
+    }
+  },
+  "solutions": {
+    "banner": {
+      "title": "Solutions",
+      "subtitle": "Comprehensive UAV solutions for industrial applications",
+      "image": "https://storage.skyelectronica.com/FPV1.png",
+      "alt": "Solutions banner"
+    },
+    "industries": {
+      "title": "Industries"
+    },
+    "latestUpdates": {
+      "title": "Latest Updates"
+    },
+    "learnMore": "Learn More",
+    "whyChooseUs": {
+      "title": "Why Choose Us",
+      "missionReady": {
+        "title": "Mission-Ready Platforms",
+        "content": "Industrial UAV's engineered for inspection, security, logistics, and rescue missions - built for harsh environments and non stop operations."
+      },
+      "integratedSolutions": {
+        "title": "Integrated Solutions",
+        "content": "Complete UAV ecosystems: aircraft, payloads, networking, and command systems — delivered as ready-to-deploy solutions."
+      },
+      "provenInField": {
+        "title": "Proven in the Field",
+        "content": "Deployed across grid inspection, energy surveillance, emergency response, and infrastructure monitoring worldwide."
+      },
+      "enterpriseSupport": {
+        "title": "Enterprise Support",
+        "content": "From solution design and training to lifecycle service — we support your operations long after delivery."
+      }
+    },
+    "contactForm": {
+      "title": "Contact Us",
+      "subtitle": "Request a product demo or evaluation — submit your contact details below and our team will get in touch shortly.",
+      "name": "Name",
+      "tel": "Phone",
+      "email": "Email",
+      "company": "Company",
+      "industry": "Industry",
+      "selectIndustry": "Select Industry",
+      "industries": {
+        "aerospace": "Aerospace",
+        "energy": "Energy",
+        "infrastructure": "Infrastructure",
+        "security": "Security",
+        "agriculture": "Agriculture",
+        "other": "Other"
+      },
+      "region": "Region",
+      "selectRegion": "Select Region",
+      "regions": {
+        "asia": "Asia",
+        "europe": "Europe",
+        "americas": "Americas",
+        "africa": "Africa",
+        "oceania": "Oceania"
+      },
+      "country": "Country",
+      "selectCountry": "Select Country",
+      "countries": {
+        "usa": "United States",
+        "uk": "United Kingdom",
+        "uae": "United Arab Emirates",
+        "china": "China",
+        "other": "Other"
+      },
+      "state": "State",
+      "selectState": "Select State",
+      "states": {
+        "california": "California",
+        "texas": "Texas",
+        "newyork": "New York",
+        "other": "Other"
+      },
+      "remark": "Remark",
+      "remarkPlaceholder": "Remark",
+      "submit": "Submit"
     }
   }
 }
