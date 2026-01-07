@@ -27,11 +27,11 @@ const GetQuoteModal: React.FC<GetQuoteModalProps> = ({ isOpen, onClose }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission
-    const form = new FormData();    
-    Object.entries(formData).forEach(([key, value]) => {
-      form.append(key, value);
-    });
-    fetch('https://script.google.com/macros/s/AKfycbxfpDP9Gi6T11i-LFU2rQZccrRIjl-6WVSh0EDvZd5mbS-so7Ml1DBJGaAkZyAEU3LEcQ/exec',{
+    const form = JSON.stringify(formData);    
+    // Object.entries(formData).forEach(([key, value]) => {
+    //   form.append(key, value);
+    // });
+    fetch('https://script.google.com/macros/s/AKfycbwrtDXiXZMIegKzw-q8wwvP3nOvv414OTQfj9jgF1hQxGnLRwrtY2VFF0z7ovnZBPBXmw/exec',{
       method: 'POST',
       body: form
     })    
