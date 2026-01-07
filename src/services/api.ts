@@ -480,18 +480,18 @@ const mapApiSolutionToSolution = (apiSolution: ApiSolution): Solution => {
   }
 }
 
-const mapApiSolutionToSolution = (apiSolution: ApiSolution): Solution => {
-  return {
-    documentId: apiSolution.documentId.toString(),
-    title: apiSolution.title,
-    description: apiSolution.description,
-    content: apiSolution.content,
-    createdAt: apiSolution.createdAt,
-    updatedAt: apiSolution.updatedAt,
-    display_image: apiSolution.display_image,
-    slug: apiSolution.slug
-  }
-}
+// const mapApiSolutionToSolution = (apiSolution: ApiSolution): Solution => {
+//   return {
+//     documentId: apiSolution.documentId.toString(),
+//     title: apiSolution.title,
+//     description: apiSolution.description,
+//     content: apiSolution.content,
+//     createdAt: apiSolution.createdAt,
+//     updatedAt: apiSolution.updatedAt,
+//     display_image: apiSolution.display_image,
+//     slug: apiSolution.slug
+//   }
+// }
 
 
 const mapForDroneChildren = (data:Product[]) => {
