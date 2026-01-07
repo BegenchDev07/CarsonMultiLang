@@ -44,6 +44,23 @@ export interface Feature {
   updatedAt: string;
 }
 
+export interface Item {
+  image: Image; 
+  title: string;
+  description: string;
+  imagePosition?: 'left'|'right';
+}
+
+export interface FeatureList {
+  title: string;
+  items: Item[];
+}
+export interface FeatureCardFirst {
+  title: string;
+  description: string;
+  cards_one: Item[];
+}
+
 export interface Product {
   documentId: string;
   product_name: string;
@@ -60,6 +77,9 @@ export interface Product {
   presentation: any;
   link:string;
   slug: string;
+  feature_list: FeatureList;
+  feature_card_first: FeatureCardFirst;
+  feature_card_second: FeatureCardFirst;
 }
 
 export interface UseCase{
@@ -138,6 +158,9 @@ interface ApiProduct {
   feature?: ApiFeature | null ;
   link?: string;
   slug: string;
+  feature_list: FeatureList;
+  feature_card_first: FeatureCardFirst;
+  feature_card_second: FeatureCardFirst;
 }
 
 interface ApiJammer {
@@ -367,7 +390,11 @@ const mapApiProductToProduct = (apiProduct: ApiProduct): Product => {
     feature: mapApiFeatureToFeature(apiProduct?.feature || null),
     presentation: apiProduct.presentation,
     link: apiProduct.link || '',
-    slug: apiProduct.slug
+    slug: apiProduct.slug,
+    feature_list: apiProduct.feature_list,
+    feature_card_first: apiProduct.feature_card_first,
+    feature_card_second: apiProduct.feature_card_second
+
   };
 };
 
@@ -530,9 +557,9 @@ export const productsApi = {
   },
 
   async getProduct(id: string): Promise<Product | null> {
-    const url = `${API_BASE_URL}/products?filters[slug][$eq]=${id}`;    
+    const url = `${API_BASE_URL}/products?filters[slug][$eq]=${id}&populate[display_image][populate]=%2A&populate[presentation][populate]=%2A&populate[category][populate]=%2A&populate[feature_list][populate][items][populate][0]=image&populate[feature_card_first][populate][cards_one][populate][0]=image&populate[feature_card_second][populate][cards_one][populate][0]=image`;    
     try {
-      const response = await fetchData<ApiResponse<any>>(url, true, true); // addLocale=true, populate=true      
+      const response = await fetchData<ApiResponse<any>>(url, true); // addLocale=true, populate=true      
       ;
       if (response.data.at(0) && Array.isArray(response.data) && response.data[0].product_name) {
         return mapApiProductToProduct(response.data[0]);
