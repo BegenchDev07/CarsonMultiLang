@@ -61,6 +61,40 @@ export interface FeatureCardFirst {
   cards_one: Item[];
 }
 
+export interface ProductBanner {
+  id: number;
+  title: string;
+  description: string;
+  image: Image;
+  phone_image?: Image | null;
+}
+
+export interface ServiceSupportItem {
+  id: number;
+  title: string;
+  image: Image;
+}
+
+export interface ServiceSupport {
+  id: number;
+  title: string;
+  description: string;
+  items: ServiceSupportItem[];
+}
+
+export interface ProductSolutionItem {
+  id: number;
+  title: string;
+  image: Image;
+  link?: string;
+}
+
+export interface ProductSolutions {
+  id: number;
+  title: string;
+  items: ProductSolutionItem[];
+}
+
 export interface Product {
   documentId: string;
   product_name: string;
@@ -81,6 +115,9 @@ export interface Product {
   feature_list: FeatureList;
   feature_card_first: FeatureCardFirst;
   feature_card_second: FeatureCardFirst;
+  product_banner?: ProductBanner;
+  service_support?: ServiceSupport;
+  product_solutions?: ProductSolutions;
 }
 
 export interface UseCase{
@@ -165,6 +202,9 @@ interface ApiProduct {
   feature_list: FeatureList;
   feature_card_first: FeatureCardFirst;
   feature_card_second: FeatureCardFirst;
+  product_banner?: ProductBanner;
+  service_support?: ServiceSupport;
+  product_solutions?: ProductSolutions;
 }
 
 interface ApiJammer {
@@ -185,6 +225,12 @@ interface ApiJammer {
   jammer_feature?: ApiFeature | null ;
   link?: string;
   slug?: string;
+  feature_list?: FeatureList;
+  feature_card_first?: FeatureCardFirst;
+  feature_card_second?: FeatureCardFirst;
+  product_banner?: ProductBanner;
+  service_support?: ServiceSupport;
+  product_solutions?: ProductSolutions;
 }
 
 interface ApiAccessories {
@@ -204,7 +250,13 @@ interface ApiAccessories {
   accessory_category?: JammerCategory | null ;
   accessory_feature?: ApiFeature | null ;
   link?: string;
-  slug: string
+  slug: string;
+  feature_list?: FeatureList;
+  feature_card_first?: FeatureCardFirst;
+  feature_card_second?: FeatureCardFirst;
+  product_banner?: ProductBanner;
+  service_support?: ServiceSupport;
+  product_solutions?: ProductSolutions;
 }
 
 interface ApiBlog {
@@ -251,6 +303,12 @@ export interface RadioJammer {
   jammer_category?: JammerCategory | null ;
   jammer_feature?: ApiFeature | null ;
   slug: string;
+  feature_list?: FeatureList;
+  feature_card_first?: FeatureCardFirst;
+  feature_card_second?: FeatureCardFirst;
+  product_banner?: ProductBanner;
+  service_support?: ServiceSupport;
+  product_solutions?: ProductSolutions;
 }
 
 export interface AccessoriesType {
@@ -267,6 +325,12 @@ export interface AccessoriesType {
   accessory_category?: JammerCategory | null ;
   accessory_feature?: ApiFeature | null ;
   slug: string;
+  feature_list?: FeatureList;
+  feature_card_first?: FeatureCardFirst;
+  feature_card_second?: FeatureCardFirst;
+  product_banner?: ProductBanner;
+  service_support?: ServiceSupport;
+  product_solutions?: ProductSolutions;
 }
 
 export interface BlogType {
@@ -404,8 +468,10 @@ const mapApiProductToProduct = (apiProduct: ApiProduct): Product => {
     slug: apiProduct.slug,
     feature_list: apiProduct.feature_list,
     feature_card_first: apiProduct.feature_card_first,
-    feature_card_second: apiProduct.feature_card_second
-
+    feature_card_second: apiProduct.feature_card_second,
+    product_banner: apiProduct.product_banner,
+    service_support: apiProduct.service_support,
+    product_solutions: apiProduct.product_solutions
   };
 };
 
@@ -424,6 +490,12 @@ const mapApiRadioJammerToJammer = (apiJammer: ApiJammer): RadioJammer => {
     jammer_category: apiJammer.jammer_category,
     jammer_feature: apiJammer.jammer_feature,
     slug: apiJammer.slug || '',
+    feature_list: apiJammer.feature_list,
+    feature_card_first: apiJammer.feature_card_first,
+    feature_card_second: apiJammer.feature_card_second,
+    product_banner: apiJammer.product_banner,
+    service_support: apiJammer.service_support,
+    product_solutions: apiJammer.product_solutions
   }
 }
 
@@ -442,6 +514,12 @@ const mapApiAccessoriesToAccessories = (apiAccessories: ApiAccessories): Accesso
     accessory_category: apiAccessories.accessory_category,
     accessory_feature: apiAccessories.accessory_feature,
     slug: apiAccessories.slug || '',
+    feature_list: apiAccessories.feature_list,
+    feature_card_first: apiAccessories.feature_card_first,
+    feature_card_second: apiAccessories.feature_card_second,
+    product_banner: apiAccessories.product_banner,
+    service_support: apiAccessories.service_support,
+    product_solutions: apiAccessories.product_solutions
   }
 }
 
@@ -585,10 +663,9 @@ export const productsApi = {
   },
 
   async getProduct(id: string): Promise<Product | null> {
-    const url = `${API_BASE_URL}/products?filters[slug][$eq]=${id}&populate[display_image][populate]=%2A&populate[presentation][populate]=%2A&populate[category][populate]=%2A&populate[feature_list][populate][items][populate][0]=image&populate[feature_card_first][populate][cards_one][populate][0]=image&populate[feature_card_second][populate][cards_one][populate][0]=image`;    
+    const url = `${API_BASE_URL}/products?filters[slug][$eq]=${id}&populate[display_image]=true&populate[secondary_images]=true&populate[presentation]=true&populate[category]=true&populate[product_banner][populate][image]=true&populate[product_banner][populate][phone_image]=true&populate[feature_list][populate][items][populate][image]=true&populate[feature_card_first][populate][cards_one][populate][image]=true&populate[feature_card_second][populate][cards_one][populate][image]=true&populate[product_solutions][populate][items][populate][image]=true&populate[service_support][populate][items][populate][image]=true`;    
     try {
-      const response = await fetchData<ApiResponse<any>>(url, true); // addLocale=true, populate=true      
-      ;
+      const response = await fetchData<ApiResponse<any>>(url, true); // addLocale=true
       if (response.data.at(0) && Array.isArray(response.data) && response.data[0].product_name) {
         return mapApiProductToProduct(response.data[0]);
       }
@@ -649,10 +726,9 @@ export const productsApi = {
   },
 
   async getRadioJammer(id: string): Promise<RadioJammer | null> {
-    const url = `${API_BASE_URL}/radio-jammings?filters[slug][$eq]=${id}`;
+    const url = `${API_BASE_URL}/radio-jammings?filters[slug][$eq]=${id}&populate[display_image]=true&populate[secondary_images]=true&populate[presentation]=true&populate[jammer_category]=true`;
     try {
-      const response = await fetchData<ApiResponse<any>>(url, true, true); // addLocale=true, populate=true
-      // debugger;
+      const response = await fetchData<ApiResponse<any>>(url, true); // addLocale=true
       if (response.data[0] && Array.isArray(response.data) && response.data[0].product_name) {
         return mapApiRadioJammerToJammer(response.data[0]);
       }
@@ -694,15 +770,15 @@ export const productsApi = {
     return [];
   },
 
-  async getAccessory(id: string): Promise<RadioJammer | null> {
-    const url = `${API_BASE_URL}/gimbals-acessories?filters[slug][$eq]=${id}`;
+  async getAccessory(id: string): Promise<AccessoriesType | null> {
+    const url = `${API_BASE_URL}/gimbals-acessories?filters[slug][$eq]=${id}&populate[display_image]=true&populate[secondary_images]=true&populate[presentation]=true&populate[accessory_category]=true`;
     try {
-      const response = await fetchData<ApiResponse<any>>(url, true, true); // addLocale=true, populate=true
+      const response = await fetchData<ApiResponse<any>>(url, true); // addLocale=true
       if (response.data && Array.isArray(response.data) && response.data[0].product_name) {
         return mapApiAccessoriesToAccessories(response.data[0]);
       }
     } catch (error) {
-      console.error(`Error fetching jammer ${id}:`, error);
+      console.error(`Error fetching accessory ${id}:`, error);
     }
     return null;
   },
