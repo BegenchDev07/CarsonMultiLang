@@ -100,7 +100,7 @@ const Navbar = () => {
             <Link
               to="/blog"
               className={`text-sm font-medium transition-colors ${
-                isActive('/contacts') ? 'text-blue-400' : 'text-white hover:text-blue-400'
+                isActive('/blog') ? 'text-blue-400' : 'text-white hover:text-blue-400'
               }`}
             >
               {t('nav.blog')}

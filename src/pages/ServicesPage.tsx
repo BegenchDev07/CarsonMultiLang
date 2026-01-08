@@ -2,6 +2,7 @@ import {useEffect, useState, Fragment} from 'react';
 import { useTranslation } from 'react-i18next';
 import { useMediaQuery } from 'react-responsive';
 import GetQuoteModal from '../components/GetQuoteModal';
+import { Link } from 'react-router-dom';
 
 const ServicesPage = () => {  
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
@@ -313,10 +314,10 @@ const ServicesPage = () => {
       <section className="py-24 bg-white">
         <div className={`max-w-7xl mx-auto px-4 flex flex-col items-center justify-center gap-10 sm:px-6 lg:px-8 ${isRTL ? 'text-right' : 'text-left'}`}>
           <h1 className='w-gull text-center text-8xl font-bold text-black'>{t('servicesContent.cta.title')}</h1>
-          <button 
-          onClick={_=>{setIsQuoteModalOpen(!isQuoteModalOpen)}}
+          <a 
+          href="mailto:service@skyelectronica.com"
           className='px-6 py-4 bg-blue-700 rounded-lg text-white text-3xl font-semibold'
-          >{t('nav.getQuote')}</button>
+          >{t('nav.getQuote')}</a>
         </div>
       </section>
 

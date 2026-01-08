@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
-import { Loader } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { Loader, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useMediaQuery } from 'react-responsive';
 import { productsApi } from '../services/api';
 
 const UseCasesSection = () => {
@@ -8,7 +9,11 @@ const UseCasesSection = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { t, i18n } = useTranslation();
-  const isRTL = i18n.language === 'ar'
+  const isRTL = i18n.language === 'ar';
+  const isDesktop = useMediaQuery({ query: '(min-width: 1024px)' });
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const useCases = [
     {      
       title: t('useCases.camera.title'),
@@ -76,6 +81,48 @@ const UseCasesSection = () => {
     fetchData();
   }, []);
 
+  const checkScrollButtons = () => {
+    if (scrollContainerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
+    }
+  };
+
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = window.outerWidth;
+      scrollContainerRef.current.scrollBy({
+        left: -scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = window.outerWidth;
+      scrollContainerRef.current.scrollBy({
+        left: scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (!isDesktop) {
+      checkScrollButtons();
+      const container = scrollContainerRef.current;
+      if (container) {
+        container.addEventListener('scroll', checkScrollButtons);
+        window.addEventListener('resize', checkScrollButtons);
+        return () => {
+          container.removeEventListener('scroll', checkScrollButtons);
+          window.removeEventListener('resize', checkScrollButtons);
+        };
+      }
+    }
+  }, [useCasesDyno, isDesktop]);
 
   if (loading) {
     return (
@@ -116,53 +163,123 @@ const UseCasesSection = () => {
           </p>
         </div>
 
-        {/* Bento Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-fr">
-          {useCasesDyno.map((useCase:any, index) => (
-            <div
-              key={index}
-              className={`relative overflow-hidden rounded-3xl group cursor-pointer transition-all duration-500 ${
-                useCase.size === 'large' 
-                  ? 'lg:col-span-2 lg:row-span-2' 
-                  : useCase.size === 'medium' 
-                  ? 'lg:col-span-1 lg:row-span-1' 
-                  : 'lg:col-span-1 lg:row-span-1'
-              } ${useCase.size === 'large' ? 'min-h-[400px]' : 'min-h-[300px]'}`}
-              role="article"
-              aria-labelledby={`use-case-${index}`}
-            >
-              {/* Background Image */}
-              <div className="absolute inset-0">
-                <img
-                  // src={"https://api.skyelectronica.com"+useCase.display_image.url}
-                  src={"https://api.skyelectronica.com"+useCasesDyno[index].display_image.url}
-                  alt={useCase.title}
-                  loading="lazy"
-                  decoding="async"
-                  width={useCases[index].size === 'large' ? "600" : "400"}
-                  height={useCases[index].size === 'large' ? "400" : "300"}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-              </div>
+        {/* Desktop: Grid Layout | Mobile/Tablet: Scrollable Carousel */}
+        {isDesktop ? (
+          /* Desktop Grid Layout */
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-fr">
+            {useCasesDyno.map((useCase:any, index) => (
+              <div
+                key={index}
+                className={`relative overflow-hidden rounded-3xl group cursor-pointer transition-all duration-500 ${
+                  useCase.size === 'large' 
+                    ? 'lg:col-span-2 lg:row-span-2' 
+                    : useCase.size === 'medium' 
+                    ? 'lg:col-span-1 lg:row-span-1' 
+                    : 'lg:col-span-1 lg:row-span-1'
+                } ${useCase.size === 'large' ? 'min-h-[400px]' : 'min-h-[300px]'}`}
+                role="article"
+                aria-labelledby={`use-case-${index}`}
+              >
+                {/* Background Image */}
+                <div className="absolute inset-0">
+                  <img
+                    src={"https://api.skyelectronica.com"+useCasesDyno[index].display_image.url}
+                    alt={useCase.title}
+                    loading="lazy"
+                    decoding="async"
+                    width={useCases[index].size === 'large' ? "600" : "400"}
+                    height={useCases[index].size === 'large' ? "400" : "300"}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                </div>
 
-              {/* Content */}
-              <div className="relative h-full p-8 flex flex-col justify-end text-white">                
-                
-                <h3 id={`use-case-${index}`} className={`font-bold text-white mb-3 text-xl`}>
-                  {useCase.title}
-                </h3>
-                
-                <p className="text-gray-200 text-sm mb-3 opacity-1000 transition-opacity duration-300">
-                  {/* {useCase.description?.replace(/[#*]/g, '').substring(0, 100)} */}
-                </p>
-                
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-blue-600/0 group-hover:bg-blue-600/10 transition-all duration-300" />
+                {/* Content */}
+                <div className="relative h-full p-8 flex flex-col justify-end text-white">                
+                  
+                  <h3 id={`use-case-${index}`} className={`font-bold text-white mb-3 text-xl`}>
+                    {useCase.title}
+                  </h3>
+                  
+                  <p className="text-gray-200 text-sm mb-3 opacity-1000 transition-opacity duration-300">
+                    {/* {useCase.description?.replace(/[#*]/g, '').substring(0, 100)} */}
+                  </p>
+                  
+                  {/* Hover Overlay */}
+                  <div className="absolute inset-0 bg-blue-600/0 group-hover:bg-blue-600/10 transition-all duration-300" />
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          /* Mobile/Tablet Scrollable Carousel */
+          <div className="relative">
+            {/* Left Scroll Button */}
+            {canScrollLeft && (
+              <button
+                onClick={scrollLeft}
+                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-600"
+                aria-label="Scroll left"
+              >
+                <ChevronLeft className="h-6 w-6 text-gray-700" />
+              </button>
+            )}
+
+            {/* Right Scroll Button */}
+            {canScrollRight && (
+              <button
+                onClick={scrollRight}
+                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-600"
+                aria-label="Scroll right"
+              >
+                <ChevronRight className="h-6 w-6 text-gray-700" />
+              </button>
+            )}
+
+            <div 
+              ref={scrollContainerRef}
+              className="overflow-x-auto scrollbar-hide"
+            >
+              <div className="flex gap-6 pb-4">
+                {useCasesDyno.map((useCase:any, index) => (
+                  <div
+                    key={index}
+                    className="relative overflow-hidden rounded-3xl group cursor-pointer transition-all duration-500 flex-shrink-0 w-[90vw] sm:w-[90vw] md:w-[90vw] min-h-[300px]"
+                    role="article"
+                    aria-labelledby={`use-case-${index}`}
+                  >
+                    {/* Background Image */}
+                    <div className="absolute inset-0">
+                      <img
+                        src={"https://api.skyelectronica.com"+useCasesDyno[index].display_image.url}
+                        alt={useCase.title}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    </div>
+
+                    {/* Content */}
+                    <div className="relative h-full p-8 flex flex-col justify-end text-white">                
+                      
+                      <h3 id={`use-case-${index}`} className={`font-bold text-white mb-3 text-xl`}>
+                        {useCase.title}
+                      </h3>
+                      
+                      <p className="text-gray-200 text-sm mb-3 opacity-1000 transition-opacity duration-300">
+                        {/* {useCase.description?.replace(/[#*]/g, '').substring(0, 100)} */}
+                      </p>
+                      
+                      {/* Hover Overlay */}
+                      <div className="absolute inset-0 bg-blue-600/0 group-hover:bg-blue-600/10 transition-all duration-300" />
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        )}
         <div className='w-full flex items-center justify-center mt-10'>
           <a href='/use-cases' className='px-6 py-4 bg-red-600 text-white font-semibold rounded-xl'>View All Use Cases</a>
         </div>        

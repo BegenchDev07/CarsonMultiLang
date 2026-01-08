@@ -27,6 +27,7 @@ const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const ToS = lazy(() => import('./pages/ToS'));
 const SolutionsPage = lazy(() => import('./pages/SolutionsPage'));
 const SolutionDetailPage = lazy(() => import('./pages/SolutionDetailPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 
 // Error Boundary
@@ -101,6 +102,7 @@ function App() {
                   <Route path="/solutions/:id" element={<SolutionsPage />} />
                   <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                   <Route path="/terms-of-service" element={<ToS />} />
+                  <Route path="*" element={<NotFoundPage />} />
                 </Routes>
               </Suspense>
             </main>

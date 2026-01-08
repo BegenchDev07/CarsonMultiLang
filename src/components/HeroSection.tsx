@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Play } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import GetQuoteModal from './GetQuoteModal';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 
 const HeroSection = () => {
@@ -134,18 +134,19 @@ const HeroSection = () => {
                 <div className='w-full flex lg:flex-row gap-4 flex-col items-center justify-between'>
                   <button 
                     onClick={() => navigator('/drones')}
-                    className="w-auto h-auto border-2 border-red-700 text-white bg-red-600 hover:bg-red-700 hover:text-gray-900 lg:px-8 px-4 lg:py-4 py-2 rounded-lg font-semibold text-lg transition-all duration-300 flex items-center justify-center focus:outline-none focus:ring-4 focus:ring-white/50"
+                    className="lg:min-w-[200px] w-full lg:w-auto border-2 border-red-700 text-white bg-red-600 hover:bg-red-700 hover:text-gray-900 lg:px-8 px-4 lg:py-4 py-2 rounded-lg font-semibold text-lg transition-all duration-300 flex items-center justify-center focus:outline-none focus:ring-4 focus:ring-white/50"
                     aria-label="See more products"
                   >                  
                     {t('hero.watchDemo')}
                   </button>
-                  <button 
-                    onClick={() => setIsQuoteModalOpen(!isQuoteModalOpen)}
-                    className="w-auto h-auto border-2 border-red-700 text-white bg-red-600 hover:bg-red-700 hover:text-gray-900 lg:px-8 px-4 lg:py-4 py-2 rounded-lg font-semibold text-lg transition-all duration-300 flex items-center justify-center focus:outline-none focus:ring-4 focus:ring-white/50"
+                  <a 
+                    href="mailto:service@skyelectronica.com"
+                    className="lg:min-w-[200px] w-full lg:w-auto border-2 border-red-700 text-white bg-red-600 hover:bg-red-700 hover:text-gray-900 lg:px-8 px-4 lg:py-4 py-2 rounded-lg font-semibold text-lg transition-all duration-300 flex items-center justify-center focus:outline-none focus:ring-4 focus:ring-white/50 cursor-pointer"
                     aria-label="Get Quote"
+                    onClick={() => console.log("clicked")}
                   >                  
                     {t('nav.getQuote')}
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>

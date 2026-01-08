@@ -3,6 +3,7 @@ import { Facebook, Twitter, Linkedin, Instagram, Youtube } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { productsApi, Category, Feature } from '../services/api';
 import GetQuoteModal from './GetQuoteModal';
+import { Link } from 'react-router-dom';
 import PinterestSVG from '../assets/pinterest.svg'
 import MediumSVG from '../assets/medium.svg';
 import TikTokSVG from '../assets/tiktok.svg';
@@ -79,12 +80,12 @@ const Footer = () => {
           <div className="lg:col-span-1">
             <h3 className="text-lg font-semibold mb-6">{t('footer.contact')}</h3>                        
             <p className='py-3'>UNIT 1510 SEAPOWER TOWER CONCORDIA PLAZA 1 SCIENCE MUSEUM RD TSIM SHA TSUI HONG KONG</p>
-            <button             
-            onClick={_=>{setIsQuoteModalOpen(!isQuoteModalOpen)}}
+            <a             
+            href="mailto:service@skyelectronica.com"
             className='w-auto px-3 py-2 text-xl font-semibold bg-blue-600 rounded-lg'
             >              
               {t('footerContact.button')}
-            </button>
+            </a>
           </div>
         </div>
 

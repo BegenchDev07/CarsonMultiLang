@@ -66,6 +66,7 @@ export interface Product {
   product_name: string;
   product_description: string;
   display_image?: Image;
+  best_seller_image?: Image;
   secondary_images?: Image[];
   phone_secondary_images?: Image[];
   category?: Category;
@@ -154,6 +155,7 @@ interface ApiProduct {
   presentation: string;
   // Relationships will be nested under 'data'
   display_image?: { data: ApiImage | null };
+  best_seller_image?: { data: ApiImage | null };
   secondary_images?: Array<any> | [] ;
   phone_secondary_images?: Array<any> | [] ;
   category?: ApiCategory | null ;
@@ -176,6 +178,7 @@ interface ApiJammer {
   presentation: string;
   // Relationships will be nested under 'data'
   display_image?: { data: ApiImage | null };
+  best_seller_image?: { data: ApiImage | null };
   secondary_images?: Array<any> | [] ;
   phone_secondary_images?: Array<any> | [] ;
   jammer_category?: JammerCategory | null ;
@@ -195,6 +198,7 @@ interface ApiAccessories {
   presentation: string;
   // Relationships will be nested under 'data'
   display_image?: { data: ApiImage | null };
+  best_seller_image?: { data: ApiImage | null };
   secondary_images?: Array<any> | [] ;
   phone_secondary_images?: Array<any> | [] ;
   accessory_category?: JammerCategory | null ;
@@ -225,6 +229,7 @@ interface ApiSolution {
   documentId: string;
   title: string;
   description: string;
+  short_description?: string;
   content?: string;
   createdAt: string;
   updatedAt: string;
@@ -237,6 +242,7 @@ export interface RadioJammer {
   product_name: string;
   product_description: string;
   display_image?: {data: ApiImage | null};
+  best_seller_image?: {data: ApiImage | null};
   secondary_images?: Array<any> | [];
   phone_secondary_images?: Array<any> | [];
   specification?: string;
@@ -252,6 +258,7 @@ export interface AccessoriesType {
   product_name: string;
   product_description: string;
   display_image?: {data: ApiImage | null};
+  best_seller_image?: {data: ApiImage | null};
   secondary_images?: Array<any> | [];
   phone_secondary_images?: Array<any> | [];
   specification?: string;
@@ -284,6 +291,7 @@ export interface Solution {
   documentId: string;
   title: string;
   description: string;
+  short_description?: string;
   content?: string;
   createdAt: string;
   updatedAt: string;
@@ -386,6 +394,7 @@ const mapApiProductToProduct = (apiProduct: ApiProduct): Product => {
     createdAt: apiProduct.createdAt,
     updatedAt: apiProduct.updatedAt,
     display_image: mapApiImageToImage(apiProduct?.display_image as any || null),
+    best_seller_image: mapApiImageToImage(apiProduct?.best_seller_image as any || null),
     secondary_images: apiProduct?.secondary_images?.map(mapApiImageToImage).filter((img:any): img is Image => img !== undefined) || [],
     phone_secondary_images: apiProduct?.phone_secondary_images?.map(mapApiImageToImage).filter((img:any): img is Image => img !== undefined) || [],
     category: mapApiCategoryToCategory(apiProduct?.category || null),
@@ -406,6 +415,7 @@ const mapApiRadioJammerToJammer = (apiJammer: ApiJammer): RadioJammer => {
     product_name: apiJammer.product_name,
     product_description: apiJammer.product_description,
     display_image: apiJammer.display_image,
+    best_seller_image: apiJammer.best_seller_image,
     secondary_images: apiJammer.secondary_images,
     phone_secondary_images: apiJammer.phone_secondary_images,
     specification: apiJammer.specification,
@@ -423,6 +433,7 @@ const mapApiAccessoriesToAccessories = (apiAccessories: ApiAccessories): Accesso
     product_name: apiAccessories.product_name,
     product_description: apiAccessories.product_description,
     display_image: apiAccessories.display_image,
+    best_seller_image: apiAccessories.best_seller_image,
     secondary_images: apiAccessories.secondary_images,
     phone_secondary_images: apiAccessories.phone_secondary_images,
     specification: apiAccessories.specification,
@@ -472,6 +483,7 @@ const mapApiSolutionToSolution = (apiSolution: ApiSolution): Solution => {
     documentId: apiSolution.documentId.toString(),
     title: apiSolution.title,
     description: apiSolution.description,
+    short_description: apiSolution.short_description,
     content: apiSolution.content,
     createdAt: apiSolution.createdAt,
     updatedAt: apiSolution.updatedAt,
@@ -622,7 +634,7 @@ export const productsApi = {
     // Return first two products as best sellers
     const products = await this.getBestSellers(); 
     ;    
-    return products.filter(product => product && product.product_name).slice(0, 4);
+    return products.filter(product => product && product.product_name);
   },
 
   async getRadioJammers(): Promise<RadioJammer[]> {

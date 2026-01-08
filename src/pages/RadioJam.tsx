@@ -242,13 +242,11 @@ const RadioJam = () => {
                           className='w-full px-3 py-2 bg-blue-600 text-white rounded-lg text-center'>
                             Learn more
                           </Link>
-                        <button
-                        onClick={(e)=>{
-                          e.preventDefault()                    
-                          setIsQuoteModalOpen(true)}}
-                          className='w-full px-3 py-2 rounded-lg border border-blue-500 text-blue-500'>
-                            Inquiry
-                          </button>
+                        <a
+                        href="mailto:service@skyelectronica.com"
+                        className='w-full px-3 py-2 rounded-lg border border-blue-500 text-blue-500 text-center'>
+                          Inquiry
+                        </a>
                       </div>
                     </div>
                   </div>                    

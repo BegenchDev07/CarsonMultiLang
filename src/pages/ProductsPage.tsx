@@ -14,6 +14,7 @@ interface UnifiedProduct {
   product_name: string;
   product_description: string;
   display_image?: any;
+  phone_display_image?: any;
   category?: any;
   feature?: any;
   slug: string;
@@ -102,6 +103,7 @@ const ProductsPage = () => {
             product_name: p.product_name,
             product_description: p.product_description,
             display_image: p.display_image,
+            phone_display_image: (p as any).phone_display_image,
             category: p.category,
             feature: p.feature,
             slug: p.slug,
@@ -113,6 +115,7 @@ const ProductsPage = () => {
             product_name: p.product_name,
             product_description: p.product_description,
             display_image: p.display_image, // Keep full structure {data: ApiImage | null}
+            phone_display_image: (p as any).phone_display_image, // Keep full structure {data: ApiImage | null}
             category: p.jammer_category,
             feature: p.jammer_feature,
             slug: p.slug,
@@ -124,6 +127,7 @@ const ProductsPage = () => {
             product_name: p.product_name,
             product_description: p.product_description,
             display_image: p.display_image, // Keep full structure {data: ApiImage | null}
+            phone_display_image: (p as any).phone_display_image, // Keep full structure {data: ApiImage | null}
             category: p.accessory_category,
             feature: p.accessory_feature,
             slug: p.slug,
@@ -264,27 +268,42 @@ const ProductsPage = () => {
     );
   }
 
-  const getImageUrlForProduct = (image: any): string => {
-    if (!image) return '';
+  const getImageUrlForProduct = (image: any, phoneImage: any = null): string => {
+    // Helper function to check if an image is valid
+    const isValidImage = (img: any): boolean => {
+      if (!img) return false;
+      // Check for direct Image type (from drones) - has url property directly
+      if (img.url && !img.data) return true;
+      // Check for nested data structure - {data: {url: ...}}
+      if (img.data?.url) return true;
+      // Check if it's already a full URL string
+      if (typeof img === 'string') return true;
+      return false;
+    };
+
+    // Prioritize phone_display_image if it's valid, otherwise fallback to display_image
+    const imageToUse = (phoneImage && isValidImage(phoneImage)) ? phoneImage : image;
+    
+    if (!imageToUse) return '';
     
     // Handle direct Image type (from drones) - has url property directly
-    if (image.url && !image.data) {
-      return getImageUrl(image, true);
+    if (imageToUse.url && !imageToUse.data) {
+      return getImageUrl(imageToUse, true);
     }
     
     // Handle nested data structure (from radio jammers and accessories) - {data: {url: ...}}
-    if (image.data?.url) {
-      return `https://api.skyelectronica.com/${image.data.url}`;
+    if (imageToUse.data?.url) {
+      return `https://api.skyelectronica.com/${imageToUse.data.url}`;
     }
     
     // Handle if data is null but structure exists
-    if (image.data === null) {
+    if (imageToUse.data === null) {
       return '';
     }
     
     // Handle if it's already a full URL
-    if (typeof image === 'string') {
-      return image;
+    if (typeof imageToUse === 'string') {
+      return imageToUse;
     }
     
     return '';
@@ -423,10 +442,10 @@ const ProductsPage = () => {
               </div>
             ) : (
               <div className={`grid gap-6 ${
-                isMobile ? 'grid-cols-2' : 'grid-cols-3'
+                isMobile ? 'grid-cols-1' : 'grid-cols-3'
               }`}>
                 {currentProducts.map((product,index) => {
-                  const imageUrl = getImageUrlForProduct(product.display_image);
+                  const imageUrl = getImageUrlForProduct(product.display_image, product.phone_display_image);
                   return (
                     <Fragment key={index}>
                       <div className='flex flex-col items-between justify-start gap-5 p-1 bg-white rounded-lg shadow-md'>
@@ -450,19 +469,17 @@ const ProductsPage = () => {
                               {product.product_description.replace(/[#*]/g, '').substring(0, 150)}...
                             </p>
                           </div>
-                          <div className='w-full flex flex-col items-start justify-between py-4 gap-3'>
+                          <div className='w-full flex flex-row md:flex-col items-start justify-between py-4 gap-3'>
                             <Link
                               to={product.linkPath}
-                              className='w-full px-3 py-2 bg-blue-600 text-white rounded-lg text-center hover:bg-blue-700 transition-colors'>
+                              className='flex-1 md:w-full px-3 py-2 bg-blue-600 text-white rounded-lg text-center hover:bg-blue-700 transition-colors'>
                               {t('products.learnMore')}
                             </Link>
-                            <button
-                              onClick={(e)=>{
-                                e.preventDefault()                    
-                                setIsQuoteModalOpen(true)}}
-                              className='w-full px-3 py-2 rounded-lg border border-blue-500 text-blue-500 hover:bg-blue-50 transition-colors'>
+                            <a
+                              href="mailto:service@skyelectronica.com"
+                              className='flex-1 md:w-full px-3 py-2 rounded-lg border border-blue-500 text-blue-500 hover:bg-blue-50 transition-colors text-center'>
                               {t('products.inquiry')}
-                            </button>
+                            </a>
                           </div>
                         </div>
                       </div>                    

@@ -258,24 +258,24 @@ const ServicesDetailPage = () => {
                   </div>
 
                   <div className="mb-6">
-                    <button 
-                      onClick={() => setIsQuoteModalOpen(true)}
+                    <a 
+                      href="mailto:service@skyelectronica.com"
                       className="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-lg font-semibold text-lg transition-colors duration-300 flex items-center justify-center"
                     >
                       {t('productDetail.requestQuote')}
-                    </button>
+                    </a>
                   </div>
 
                 </div>            
             </div>
             :
             <div className="fixed bottom-0 left-0 flex items-center justify-center gap-3 bg-white w-full p-4 z-50">
-              <button 
-                onClick={() => setIsQuoteModalOpen(true)}
+              <a 
+                href="mailto:service@skyelectronica.com"
                 className="w-full h-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-lg font-semibold text-lg transition-colors duration-300 flex items-center justify-center"
               >
                 {t('productDetail.requestQuote')}
-              </button>
+              </a>
               <a 
               href='https://wa.link/dunvqk'
               className="w-full h-full bg-green-600 hover:bg-green-700 text-white px-6 py-4 gap-3 rounded-lg font-semibold text-xl transition-colors duration-300 flex items-center justify-center">          

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Factory, Globe, Zap, Users, Award, TrendingUp } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import GetQuoteModal from './GetQuoteModal';
+import { Link } from 'react-router-dom';
 
 const AchievementsSection = () => {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
@@ -155,12 +156,12 @@ const AchievementsSection = () => {
               {t('achievements.readySubtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button 
-                onClick={() => setIsQuoteModalOpen(true)}
+              <a 
+                href="mailto:service@skyelectronica.com"
                 className="bg-white text-blue-900 px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold text-base md:text-lg hover:bg-blue-50 transition-colors duration-300 focus:outline-none focus:ring-4 focus:ring-white/50"
               >
                 {t('achievements.requestDemo')}
-              </button>
+              </a>
               <button className="border-2 border-white text-white hover:bg-white hover:text-blue-900 px-6 md:px-8 py-3 md:py-4 rounded-lg font-semibold text-base md:text-lg transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-white/50">
                 {t('achievements.downloadBrochure')}
               </button>
