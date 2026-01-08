@@ -679,9 +679,6 @@ const ProductDetailPage = () => {
           isOpen={isQuoteModalOpen} 
           onClose={() => setIsQuoteModalOpen(false)} 
         />
-        <div className='w-full bg-white'>
-          <BestSalesSection mode='best seller'/>
-        </div>
 
         {/* Order Form Section */}
         <section className="py-24 bg-gray-50">
@@ -869,6 +866,10 @@ const ProductDetailPage = () => {
             </div>
           </div>
         </section>
+        
+        <div className='w-full bg-white'>
+          <BestSalesSection mode='best seller'/>
+        </div>
       </div>
     </>
   );

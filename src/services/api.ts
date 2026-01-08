@@ -54,6 +54,7 @@ export interface Item {
 export interface FeatureList {
   title: string;
   items: Item[];
+  description: string;
 }
 export interface FeatureCardFirst {
   title: string;

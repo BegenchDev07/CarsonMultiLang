@@ -44,6 +44,20 @@ const ProductDetailPage = ({ featureData }: { featureData: FeatureZones|null }) 
     return arr.map((item, index)=>{
       return(
         <div className={`flex  ${isMobile ? 'flex-col-reverse w-full' : 'flex-col flex-1'}`} key={index}>
+          <div className={`w-full ${isMobile ? 'text-start' : 'text-center'}`}>
+            <div className={`text-3xl font-bold py-5 ${ arr.length === 1 ? 'text-center': '' } `}>{ item.title }</div>
+            <div className='text-xl whitespace-pre-wrap pb-5'>{ item.description }</div>
+          </div>
+          <div className={ `bg-white ${ arr.length === 1 ? 'w-[50%] m-auto': 'w-full' }` }><img className='w-full' src={getImageUrl(item.image)} alt="" /></div>
+        </div>
+      )
+    })
+  }
+
+    const featureCardSecond = (arr: Item[]) => {
+    return arr.map((item, index)=>{
+      return(
+        <div className={`flex  ${isMobile ? 'flex-col-reverse w-full' : 'flex-col flex-1'}`} key={index}>
           <div className={ `bg-white ${ arr.length === 1 ? 'w-[50%] m-auto': 'w-full' }` }><img className='w-full' src={getImageUrl(item.image)} alt="" /></div>
           <div className={`w-full ${isMobile ? 'text-start' : 'text-center'}`}>
             <div className={`text-3xl font-bold py-5 ${ arr.length === 1 ? 'text-center': '' } `}>{ item.title }</div>
@@ -60,7 +74,10 @@ const ProductDetailPage = ({ featureData }: { featureData: FeatureZones|null }) 
       {
         featureData.feature_list && (
           <div className="w-full">
-            <div className="text-5xl font-semibold py-8">{ featureData?.feature_list.title }</div>
+            <div className={ `w-full pb-5 ${ isMobile ? '' : 'text-center'}` }>
+              <div className="text-5xl font-semibold py-8">{ featureData?.feature_list.title }</div>
+              <div className="text-xl font-semibold">{ featureData?.feature_list.description }</div>
+            </div>
             <div className='space-y-6'>{featureData && featureListChild(featureData.feature_list.items)}</div>
           </div>
         )
@@ -85,9 +102,9 @@ const ProductDetailPage = ({ featureData }: { featureData: FeatureZones|null }) 
               <div className='w-full text-5xl flex justify-center pb-5'>{ featureData?.feature_card_second.title }</div>
               <div className='w-full text-2xl flex justify-center pb-5'>{ featureData?.feature_card_second.description }</div>
             </div>
-            <div className={`w-full grid  ${isMobile ? 'flex-col space-y-5 grid-cols-1' : 'flex-row space-x-5 grid-cols-2'}`}>
+            <div className={`w-full grid  ${isMobile ? 'flex-col space-y-5 grid-cols-1' : 'flex-row grid-cols-2 gap-5'}`}>
               {
-                featureData && featureCardFirst(featureData.feature_card_second.cards_one)
+                featureData && featureCardSecond(featureData.feature_card_second.cards_one)
               }
             </div>
           </div>
