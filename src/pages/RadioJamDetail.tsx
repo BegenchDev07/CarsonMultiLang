@@ -640,7 +640,6 @@ const RadioJamDetail = () => {
           isOpen={isQuoteModalOpen} 
           onClose={() => setIsQuoteModalOpen(false)} 
         />
-        <BestSalesSection mode='radio jammer'/>
 
         {/* Order Form Section */}
         <section className="py-24 bg-gray-50">
@@ -828,6 +827,9 @@ const RadioJamDetail = () => {
             </div>
           </div>
         </section>
+
+        
+        <BestSalesSection mode='radio jammer'/>
       </div>
     </>
   );
