@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Facebook, Twitter, Linkedin, Instagram, Youtube } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { productsApi, Category, Feature } from '../services/api';
 import GetQuoteModal from './GetQuoteModal';
-import { Link } from 'react-router-dom';
 import PinterestSVG from '../assets/pinterest.svg'
 import MediumSVG from '../assets/medium.svg';
 import TikTokSVG from '../assets/tiktok.svg';
@@ -11,35 +9,9 @@ import RedditSVG from '../assets/reddit.svg'
 
 
 const Footer = () => {
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [features, setFeatures] = useState<Feature[]>([]);
-  const [loading, setLoading] = useState(true);
   const { t, i18n } = useTranslation();
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const isRTL = i18n.language === 'ar';
-
-
-  useEffect(() => {
-    const fetchFooterData = async () => {
-      try {
-        setLoading(true);
-        const [categoriesData, featuresData] = await Promise.all([
-          productsApi.getCategories(),
-          productsApi.getFeatures(),
-        ]);
-        
-        setCategories(categoriesData);
-        setFeatures(featuresData);
-      } catch (err) {
-        console.error('Failed to fetch footer data:', err);
-        // Keep empty arrays as fallback
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchFooterData();
-  }, []);
 
   return (
     <footer className="bg-gray-900 text-white">
@@ -57,23 +29,23 @@ const Footer = () => {
           {/* Use Cases */}
           <div className="lg:col-span-1">
             <h3 className="text-lg font-semibold mb-6">{t('products.categories')}</h3>
-            {loading ? (
-              <div className="space-y-3">
-              </div>
-            ) : (
-              <ul className="space-y-3">
-                {[...categories.slice(0, 3), ...features.slice(0, 2)].filter(item => item != null).map((item, index) => (
-                  <li key={`${item.id}-${index}`}>
-                    <a 
-                      href={`/drones?${item.hasOwnProperty('cateogry_name') ? 'category' : 'feature'}=${item.hasOwnProperty('cateogry_name') ? (item as Category).cateogry_name.toLowerCase() : (item as Feature).feature_name.toLowerCase()}`} 
-                      className="text-gray-400 hover:text-white transition-colors duration-300 capitalize"
-                    >
-                      {item.hasOwnProperty('cateogry_name') ? (item as Category).cateogry_name : (item as Feature).feature_name}
-                    </a>
-                  </li>
-                ))}                
-              </ul>
-            )}
+            <ul className="space-y-3">
+              <li>
+                <a href="/products" className="text-gray-400 hover:text-white transition-colors duration-300 capitalize">Products</a>
+              </li>
+              <li>
+                <a href="/use-cases" className="text-gray-400 hover:text-white transition-colors duration-300 capitalize">Use Cases</a>
+              </li>
+              <li>
+                <a href="/blog" className="text-gray-400 hover:text-white transition-colors duration-300 capitalize">Blogs</a>
+              </li>
+              <li>
+                <a href="/services" className="text-gray-400 hover:text-white transition-colors duration-300 capitalize">Services</a>
+              </li>
+              <li>
+                <a href="/solutions" className="text-gray-400 hover:text-white transition-colors duration-300 capitalize">Solutions</a>
+              </li>           
+            </ul>
           </div>
 
           {/* Contact */}
